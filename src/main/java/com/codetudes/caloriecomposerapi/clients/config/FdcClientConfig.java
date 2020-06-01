@@ -11,17 +11,10 @@ public class FdcClientConfig {
     @Value("${foodDataCentral.apiKey}")
     private String apiKey;
 
-//    @Bean
-//    private Params fcdQueryParams() {
-//        Params params = new Params();
-//        params.setApiKey(apiKey);
-//        return params;
-//    }
-
     @Bean
     RequestInterceptor fdcClientRequestInterceptor() {
         return requestTemplate -> {
-            requestTemplate.query("apiKey", apiKey);
+            requestTemplate.query("api_key", apiKey);
         };
     }
 
