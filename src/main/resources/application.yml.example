@@ -1,0 +1,3 @@
+foodDataCentral:
+  apiEndpoint: https://api.nal.usda.gov/fdc/v1/
+  apiKey: <api key>
