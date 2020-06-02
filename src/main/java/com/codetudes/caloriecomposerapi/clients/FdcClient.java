@@ -1,6 +1,7 @@
 package com.codetudes.caloriecomposerapi.clients;
 
 import com.codetudes.caloriecomposerapi.clients.config.FdcClientConfig;
+import com.codetudes.caloriecomposerapi.contracts.fdc.FDCFood;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -9,5 +10,5 @@ import org.springframework.web.bind.annotation.PathVariable;
 public interface FdcClient {
 
     @GetMapping("/food/{fdcId}")
-    Object getFoodItemByFdcId(@PathVariable Long fdcId);
+    FDCFood getFoodItemByFdcId(@PathVariable Long fdcId);
 }
