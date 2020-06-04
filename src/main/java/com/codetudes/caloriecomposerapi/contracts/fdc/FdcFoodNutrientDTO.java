@@ -5,8 +5,10 @@ import lombok.Data;
 import java.math.BigDecimal;
 
 @Data
-public class FDCFoodNutrient {
-    private FDCNutrient nutrient;
+public class FdcFoodNutrientDTO {
+    private FdcNutrientDTO nutrient;
 
     private BigDecimal amount;
+
+//    private FdcFoodNutrientDerivationDTO foodNutrientDerivation;
 }

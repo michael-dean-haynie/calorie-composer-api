@@ -2,7 +2,7 @@ package com.codetudes.caloriecomposerapi.contracts.fdc.enums;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public enum FDCDataType {
+public enum FdcDataType {
     @JsonProperty("Branded")
     BRANDED,
     @JsonProperty("Foundation")

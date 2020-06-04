@@ -1,9 +1,10 @@
 package com.codetudes.caloriecomposerapi.controllers;
 
 import com.codetudes.caloriecomposerapi.clients.FdcClient;
-import com.codetudes.caloriecomposerapi.contracts.fdc.FDCFood;
+import com.codetudes.caloriecomposerapi.contracts.FoodDTO;
 import com.codetudes.caloriecomposerapi.db.repositories.FoodRepository;
 import com.codetudes.caloriecomposerapi.db.repositories.UserRepository;
+import com.codetudes.caloriecomposerapi.services.FdcService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -25,18 +26,23 @@ public class HelloWorldController {
     @Autowired
     private ObjectMapper objectMapper;
 
+    @Autowired
+    private FdcService fdcService;
+
     @Value("${foodDataCentral.apiEndpoint}")
     private String test;
 
     @GetMapping("/")
-    Object helloWorld() {
+    FoodDTO helloWorld() {
 
-        FDCFood branded = fcdClient.getFoodItemByFdcId(414207L);
-        FDCFood foundation = fcdClient.getFoodItemByFdcId(747444L);
-        FDCFood srLegacy = fcdClient.getFoodItemByFdcId(169049L);
-        FDCFood surveyFNDDS = fcdClient.getFoodItemByFdcId(784222L);
+//        Object branded = fcdClient.getFoodByFdcId(414207L);
+//        Object foundation = fcdClient.getFoodByFdcId(746782L);
+//        Object srLegacy = fcdClient.getFoodByFdcId(169049L);
+//        Object surveyFNDDS = fcdClient.getFoodByFdcId(784222L);
+
+        FoodDTO foodDTO = fdcService.getFoodByFdcId(414207L);
 
 
-        return "all done";
+        return foodDTO;
     }
 }

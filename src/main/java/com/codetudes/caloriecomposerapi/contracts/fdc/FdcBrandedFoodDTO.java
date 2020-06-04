@@ -6,9 +6,8 @@ import java.math.BigDecimal;
 import java.util.List;
 
 @Data
-public class FDCBrandedFood extends FDCFood{
-
-    private String brand;
+public class FdcBrandedFoodDTO extends FdcFoodDTO {
+    private String brandOwner;
 
     private String ingredients;
 
@@ -16,5 +15,7 @@ public class FDCBrandedFood extends FDCFood{
 
     private String servingSizeUnit;
 
-    private List<FDCFoodNutrient> nutrients;
+    private String householdServingFullText;
+
+    private List<FdcFoodNutrientDTO> foodNutrients;
 }
