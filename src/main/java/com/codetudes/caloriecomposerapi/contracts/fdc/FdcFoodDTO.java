@@ -5,6 +5,8 @@ import lombok.Data;
 
 @Data
 public class FdcFoodDTO {
+    private String fdcId;
+
     private FdcDataType dataType;
 
     private String description;

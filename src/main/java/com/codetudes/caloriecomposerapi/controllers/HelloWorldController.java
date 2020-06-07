@@ -40,7 +40,7 @@ public class HelloWorldController {
 //        Object srLegacy = fcdClient.getFoodByFdcId(169049L);
 //        Object surveyFNDDS = fcdClient.getFoodByFdcId(784222L);
 
-        FoodDTO foodDTO = fdcService.getFoodByFdcId(414207L);
+        FoodDTO foodDTO = fdcService.getFoodByFdcId("578012");
 
 
         return foodDTO;

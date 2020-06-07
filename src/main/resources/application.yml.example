@@ -9,3 +9,13 @@ spring:
 foodDataCentral:
   apiEndpoint: https://api.nal.usda.gov/fdc/v1/
   apiKey: <api key>
+
+---
+# Feign Client Logging
+logging.level.com.codetudes.caloriecomposerapi.clients.FdcClient: DEBUG
+
+feign:
+  client:
+    config:
+      default:
+        loggerLevel: basic
