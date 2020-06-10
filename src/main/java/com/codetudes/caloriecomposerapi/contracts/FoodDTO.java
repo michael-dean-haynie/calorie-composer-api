@@ -8,6 +8,8 @@ import java.util.List;
 @Data
 public class FoodDTO {
 
+    private String fdcId;
+
     private String description;
 
     private String brandOwner;
