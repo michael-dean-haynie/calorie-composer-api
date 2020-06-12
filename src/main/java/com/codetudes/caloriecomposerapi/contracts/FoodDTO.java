@@ -20,7 +20,7 @@ public class FoodDTO {
 
     private String servingSizeUnit;
 
-    private List<NutrientDTO> nutrients;
+    private String householdServingFullText;
 
-//    private List<FoodPortionDTO> foodPortions;
+    private List<NutrientDTO> nutrients;
 }
