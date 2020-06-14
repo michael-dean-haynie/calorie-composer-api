@@ -11,6 +11,7 @@ import java.util.List;
 
 @Data
 public class FoodDTO {
+    private Long id;
 
     @Size(max=10)
     private String fdcId;
