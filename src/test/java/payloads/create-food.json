@@ -1,0 +1,21 @@
+{
+  "fdcId": null,
+  "description": "Here is a description",
+  "brandOwner": "Here is a brand owner",
+  "ingredients": "Here are some ingredients",
+  "servingSize": 12.34,
+  "servingSizeUnit": "Here is a serving size Unit",
+  "householdServingFullText": "Here is a household serving full text",
+  "nutrients": [
+    {
+      "name": "Here is a name",
+      "unitName": "Here is a unit name",
+      "amount": "56.78"
+    },
+    {
+      "name": "Here is another name",
+      "unitName": "Here is another unit name",
+      "amount": "90.12"
+    }
+  ]
+}

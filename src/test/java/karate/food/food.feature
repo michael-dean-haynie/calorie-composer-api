@@ -1,12 +1,11 @@
 Feature: Tests crud operations for Food type
 
 Background:
-    # Empty for now
+    * def createFoodPayload = read('classpath:payloads/create-food.json')
 
 Scenario: Create a Food
-    * def food = {}
-    * url 'http://localhost:8080/'
-    * path 'food'
-    * request {}
-    * method post
-    * status 200
+    Given url 'http://localhost:8080/'
+    And path 'food'
+    And request createFoodPayload
+    When method post
+    Then status 200
