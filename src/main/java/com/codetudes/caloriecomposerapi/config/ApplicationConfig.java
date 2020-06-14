@@ -1,4 +1,4 @@
-package com.codetudes.caloriecomposerapi;
+package com.codetudes.caloriecomposerapi.config;
 
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
