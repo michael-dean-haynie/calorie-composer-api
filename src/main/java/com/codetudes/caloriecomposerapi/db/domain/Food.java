@@ -3,8 +3,12 @@ package com.codetudes.caloriecomposerapi.db.domain;
 import lombok.Data;
 
 import javax.persistence.*;
-import javax.validation.constraints.*;
+import javax.validation.constraints.DecimalMax;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.math.BigDecimal;
+import java.util.List;
 
 @Data
 @Entity
@@ -17,6 +21,10 @@ public class Food {
     @ManyToOne
     @JoinColumn(name="user_id")
     private User user;
+
+    @Size(max = 10)
+    @Column(name="fdc_id")
+    private String fdcId;
 
     @Size(max = 100)
     @NotBlank
@@ -42,4 +50,7 @@ public class Food {
     @Size(max=100)
     @Column(name="household_serving_full_text")
     private String householdServingFullText;
+
+    @OneToMany(mappedBy="food", cascade = CascadeType.ALL)
+    private List<Nutrient> nutrients;
 }
