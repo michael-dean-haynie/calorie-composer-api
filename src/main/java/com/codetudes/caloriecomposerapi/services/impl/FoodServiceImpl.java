@@ -40,4 +40,9 @@ public class FoodServiceImpl implements FoodService {
         Food savedFood = foodRepository.save(food);
         return modelMapper.map(savedFood, FoodDTO.class);
     }
+
+    @Override
+    public void delete(Long id){
+        foodRepository.deleteById(id);
+    }
 }
