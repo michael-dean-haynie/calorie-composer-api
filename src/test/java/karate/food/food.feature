@@ -9,3 +9,4 @@ Scenario: Create a Food
     And request createFoodPayload
     When method post
     Then status 200
+    And match response == schemas.food

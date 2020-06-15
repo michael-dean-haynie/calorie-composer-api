@@ -10,6 +10,8 @@ import java.math.BigDecimal;
 
 @Data
 public class NutrientDTO {
+    private Long id;
+
     @NotBlank
     @Size(max=45)
     private String name;
