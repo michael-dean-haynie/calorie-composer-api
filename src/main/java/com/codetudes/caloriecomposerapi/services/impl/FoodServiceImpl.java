@@ -42,7 +42,19 @@ public class FoodServiceImpl implements FoodService {
     }
 
     @Override
-    public void delete(Long id){
+    public FoodDTO read(Long id) {
+        Food food = foodRepository.findById(id).orElse(null);
+
+        if (food == null) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND,
+                    "Food not found.");
+        }
+
+        return modelMapper.map(food, FoodDTO.class);
+    }
+
+    @Override
+    public void delete(Long id) {
         foodRepository.deleteById(id);
     }
 }

@@ -1,7 +1,7 @@
 Feature: Callable feature that deletes a food item
 
   Scenario: Delete a food item
-    Given url 'http://localhost:8080/'
+    Given url baseUrl
     And path 'food', __arg.id
-    When method DELETE
+    When method delete
     Then status 200
