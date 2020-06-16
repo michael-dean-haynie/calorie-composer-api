@@ -37,6 +37,7 @@ public class FoodServiceImpl implements FoodService {
                 }
         );
 
+        // save and flush to get db generated id in response
         Food savedFood = foodRepository.save(food);
         return modelMapper.map(savedFood, FoodDTO.class);
     }
@@ -44,17 +45,36 @@ public class FoodServiceImpl implements FoodService {
     @Override
     public FoodDTO read(Long id) {
         Food food = foodRepository.findById(id).orElse(null);
-
-        if (food == null) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND,
-                    "Food not found.");
-        }
+        throw404IfNull(food);
 
         return modelMapper.map(food, FoodDTO.class);
     }
 
     @Override
+    public FoodDTO update(FoodDTO foodDTO) {
+        Food existingFood = foodRepository.findById(foodDTO.getId()).orElse(null);
+        throw404IfNull(existingFood);
+
+        // map new foodDTO onto existing Food
+        modelMapper.map(foodDTO, existingFood);
+
+        Food updatedFood = foodRepository.save(existingFood);
+
+        return modelMapper.map(updatedFood, FoodDTO.class);
+    }
+
+    @Override
     public void delete(Long id) {
-        foodRepository.deleteById(id);
+        Food food = foodRepository.findById(id).orElse(null);
+        throw404IfNull(food);
+
+        foodRepository.deleteById(food.getId());
+    }
+
+    private void throw404IfNull(Food existingFood){
+        if (existingFood == null) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND,
+                    "Food not found.");
+        }
     }
 }

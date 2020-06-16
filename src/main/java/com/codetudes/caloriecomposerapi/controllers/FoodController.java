@@ -23,7 +23,7 @@ public class FoodController {
     ResponseEntity<FoodDTO> create(@Validated @RequestBody FoodDTO foodDTO) {
         LOG.info("Received request to create food");
         FoodDTO createdFood = foodService.create(foodDTO);
-        LOG.info("Successfully created food with id {}", foodDTO.getId());
+        LOG.info("Successfully created food with id {}", createdFood.getId());
         return new ResponseEntity<>(createdFood, HttpStatus.CREATED);
     }
 
@@ -33,6 +33,14 @@ public class FoodController {
         FoodDTO foodDTO = foodService.read(id);
         LOG.info("Successfully read food with id {},", id);
         return new ResponseEntity(foodDTO, HttpStatus.OK);
+    }
+
+    @PutMapping
+    ResponseEntity read(@Validated @RequestBody FoodDTO foodDTO) {
+        LOG.info("Received request to update food with id {}", foodDTO.getId());
+        FoodDTO updatedFoodDTO = foodService.update(foodDTO);
+        LOG.info("Successfully updated food with id {},", updatedFoodDTO.getId());
+        return new ResponseEntity(updatedFoodDTO, HttpStatus.OK);
     }
 
     @DeleteMapping("/{id}")

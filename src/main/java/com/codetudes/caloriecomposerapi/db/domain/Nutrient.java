@@ -11,14 +11,11 @@ import java.math.BigDecimal;
 
 @Data
 @Entity
+@Table(name="nutrient")
 public class Nutrient {
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Long id;
-
-    @ManyToOne
-    @JoinColumn(name="food_id", nullable = false)
-    private Food food;
 
     @NotBlank
     @Size(max=45)

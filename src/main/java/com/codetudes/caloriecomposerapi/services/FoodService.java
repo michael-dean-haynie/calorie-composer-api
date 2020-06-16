@@ -7,5 +7,7 @@ public interface FoodService {
 
     FoodDTO read(Long id);
 
+    FoodDTO update(FoodDTO foodDTO);
+
     void delete(Long id);
 }

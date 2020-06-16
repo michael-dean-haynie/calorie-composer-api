@@ -12,6 +12,7 @@ import java.util.List;
 
 @Data
 @Entity
+@Table(name="food")
 public class Food {
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
@@ -51,6 +52,7 @@ public class Food {
     @Column(name="household_serving_full_text")
     private String householdServingFullText;
 
-    @OneToMany(mappedBy="food", cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "food_id")
     private List<Nutrient> nutrients;
 }
