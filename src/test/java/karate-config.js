@@ -9,5 +9,8 @@ function fn() {
     // prepare schemas
     config.schemas = karate.call('classpath:schemas.feature', config).schemas;
 
+    // prepare utilities
+    config.utils = karate.call('classpath:callable/utilities/utilities.feature', config).utils;
+
     return config;
 }

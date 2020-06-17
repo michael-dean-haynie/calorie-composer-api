@@ -1,5 +1,7 @@
 package com.codetudes.caloriecomposerapi.config;
 
+import com.codetudes.caloriecomposerapi.contracts.FoodDTO;
+import com.codetudes.caloriecomposerapi.db.domain.Food;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.modelmapper.ModelMapper;
@@ -29,5 +31,14 @@ public class ApplicationConfig implements WebMvcConfigurer {
     ModelMapper modelMapper() {
         return new ModelMapper();
     }
+
+    @Bean()
+    FoodPatchMapper foodPatchMapper() {
+        FoodPatchMapper patchMapper = new FoodPatchMapper();
+        patchMapper.typeMap(FoodDTO.class, Food.class).addMappings(mapper -> mapper.skip(Food::setNutrients));
+        return patchMapper;
+    }
+
+    public class FoodPatchMapper extends ModelMapper { }
 
 }

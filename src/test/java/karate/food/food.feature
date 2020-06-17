@@ -3,12 +3,9 @@ Feature: Tests crud operations for Food type
   Background:
     * def createFoodPayload = read('classpath:payloads/create-food.json')
 
-    # Util
-    * def utils = call read('classpath:callable/util/common.feature')
-
-#    ---------------------------------------------
-#    Create
-#    ---------------------------------------------
+  # ---------------------------------------------
+  # Create
+  # ---------------------------------------------
 
   Scenario: Create a food item
     Given url baseUrl
@@ -24,7 +21,6 @@ Feature: Tests crud operations for Food type
     # clean up
     * call read('classpath:callable/delete-food.feature') { id: '#(response.id)'}
 
-  @focus
   Scenario Outline: Create a food item and validate '<fieldName>' set appropriately
     Given def payload = createFoodPayload
     And set payload.<fieldName> = <fieldValue>
@@ -38,7 +34,7 @@ Feature: Tests crud operations for Food type
     # assert field value in create response
     Then match response.<fieldName> == payload.<fieldName>
 
-    # assert field value in read response
+    # assert field value in separate read response
     Given path 'food', response.id
     When method get
     Then status 200
@@ -48,14 +44,22 @@ Feature: Tests crud operations for Food type
     * call read('classpath:callable/delete-food.feature') { id: '#(response.id)'}
 
     Examples:
-      | fieldName   | fieldValue   |
-      | fdcId       | utils.rs(5)  |
-      | description | utils.rs(10) |
+      | fieldName                | fieldValue  |
+      | fdcId                    | utils.rs(5) |
+      | description              | utils.rs(5) |
+      | brandOwner               | utils.rs(5) |
+      | ingredients              | utils.rs(5) |
+      | servingSize              | utils.rd()  |
+      | servingSizeUnit          | utils.rs(5) |
+      | householdServingFullText | utils.rs(5) |
+      # nested nutrients
+      | nutrients[0].name        | utils.rs(5) |
+      | nutrients[0].unitName    | utils.rs(5) |
+      | nutrients[0].amount      | utils.rd()  |
 
-
-#    ---------------------------------------------
-#    Read
-#    ---------------------------------------------
+  # ---------------------------------------------
+  # Read
+  # ---------------------------------------------
 
   Scenario: Read a food item
     Given def createFoodResult = call read('classpath:callable/create-food.feature') { request: '#(createFoodPayload)'}
@@ -69,9 +73,81 @@ Feature: Tests crud operations for Food type
     # clean up
     * call read('classpath:callable/delete-food.feature') { id: '#(response.id)'}
 
-#    ---------------------------------------------
-#    Delete
-#    ---------------------------------------------
+  # ---------------------------------------------
+  # Update
+  # ---------------------------------------------
+
+  Scenario Outline: Update a food item and validate '<fieldName>' set appropriately
+    Given def createFoodResult = call read('classpath:callable/create-food.feature') { request: '#(createFoodPayload)'}
+
+    Given copy payload = createFoodResult.response
+    And set payload.<fieldName> = <fieldValue>
+
+    Given url baseUrl
+    And path 'food'
+    And request payload
+    When method put
+    Then status 200
+
+    # assert field value in create response
+    Then match response.<fieldName> == payload.<fieldName>
+
+    # assert field value in separate read response
+    Given path 'food', response.id
+    When method get
+    Then status 200
+    And match response.<fieldName> == payload.<fieldName>
+
+    # clean up
+    * call read('classpath:callable/delete-food.feature') { id: '#(response.id)'}
+
+    Examples:
+      | fieldName                | fieldValue  |
+      | fdcId                    | utils.rs(5) |
+      | description              | utils.rs(5) |
+      | brandOwner               | utils.rs(5) |
+      | ingredients              | utils.rs(5) |
+      | servingSize              | utils.rd()  |
+      | servingSizeUnit          | utils.rs(5) |
+      | householdServingFullText | utils.rs(5) |
+#      # nested nutrients
+      | nutrients[0].name        | utils.rs(5) |
+      | nutrients[0].unitName    | utils.rs(5) |
+      | nutrients[0].amount      | utils.rd()  |
+
+    @focus
+    Scenario: Update a food item by removing a nutrient
+      Given def createFoodResult = call read('classpath:callable/create-food.feature') { request: '#(createFoodPayload)'}
+
+      Given copy payload = createFoodResult.response
+      And remove payload $.nutrients[1]
+      And def remainingNutrientId = payload.nutrients[0].id
+
+      Given url baseUrl
+      And path 'food'
+      And request payload
+      When method put
+      Then status 200
+
+      # assert nutrient removed (array is length 1 and remaining nutrient id checks out)
+      Then match response.nutrients == '#[1]'
+      Then match response.nutrients[0].id == remainingNutrientId
+
+      # assert again against separate read response
+      Given path 'food', response.id
+      When method get
+      Then status 200
+
+      # assert nutrient removed (array is length 1 and remaining nutrient id checks out)
+      Then match response.nutrients == '#[1]'
+      Then match response.nutrients[0].id == remainingNutrientId
+
+      # clean up
+      * call read('classpath:callable/delete-food.feature') { id: '#(response.id)'}
+
+  # ---------------------------------------------
+  # Delete
+  # ---------------------------------------------
 
   Scenario: Delete a food item
     Given def createFoodResult = call read('classpath:callable/create-food.feature') { request: '#(createFoodPayload)'}

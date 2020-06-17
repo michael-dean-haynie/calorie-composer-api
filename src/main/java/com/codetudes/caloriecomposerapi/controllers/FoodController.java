@@ -35,8 +35,8 @@ public class FoodController {
         return new ResponseEntity(foodDTO, HttpStatus.OK);
     }
 
-    @PutMapping
-    ResponseEntity read(@Validated @RequestBody FoodDTO foodDTO) {
+    @PutMapping()
+    ResponseEntity update(@Validated @RequestBody FoodDTO foodDTO) {
         LOG.info("Received request to update food with id {}", foodDTO.getId());
         FoodDTO updatedFoodDTO = foodService.update(foodDTO);
         LOG.info("Successfully updated food with id {},", updatedFoodDTO.getId());

@@ -1,7 +1,10 @@
 package com.codetudes.caloriecomposerapi.services.impl;
 
+import com.codetudes.caloriecomposerapi.config.ApplicationConfig;
 import com.codetudes.caloriecomposerapi.contracts.FoodDTO;
+import com.codetudes.caloriecomposerapi.contracts.NutrientDTO;
 import com.codetudes.caloriecomposerapi.db.domain.Food;
+import com.codetudes.caloriecomposerapi.db.domain.Nutrient;
 import com.codetudes.caloriecomposerapi.db.repositories.FoodRepository;
 import com.codetudes.caloriecomposerapi.db.repositories.UserRepository;
 import com.codetudes.caloriecomposerapi.services.FoodService;
@@ -11,11 +14,17 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Service
 public class FoodServiceImpl implements FoodService {
 
     @Autowired
     ModelMapper modelMapper;
+
+    @Autowired
+    ApplicationConfig.FoodPatchMapper foodPatchMapper;
 
     @Autowired
     FoodRepository foodRepository;
@@ -55,8 +64,11 @@ public class FoodServiceImpl implements FoodService {
         Food existingFood = foodRepository.findById(foodDTO.getId()).orElse(null);
         throw404IfNull(existingFood);
 
-        // map new foodDTO onto existing Food
-        modelMapper.map(foodDTO, existingFood);
+        // map most fields from DTO onto entity
+        foodPatchMapper.map(foodDTO, existingFood);
+
+        // patch map nested nutrient entities
+        updateNestedNutrients(existingFood.getNutrients(), foodDTO.getNutrients());
 
         Food updatedFood = foodRepository.save(existingFood);
 
@@ -76,5 +88,36 @@ public class FoodServiceImpl implements FoodService {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND,
                     "Food not found.");
         }
+    }
+
+    // TODO: hide in shame
+    private List<Nutrient> updateNestedNutrients(List<Nutrient> existing, List<NutrientDTO> patch) {
+        // update and add
+        patch.forEach(pN -> {
+            boolean isExisting = existing.stream().anyMatch(eN -> eN.getId().equals(pN.getId()));
+            if (isExisting) {
+                existing.stream().filter(eN -> eN.getId().equals(pN.getId()))
+                        .forEach(eN -> modelMapper.map(pN, eN));
+            }
+
+            boolean isNew = !isExisting;
+            if (isNew) {
+                existing.add(modelMapper.map(pN, Nutrient.class));
+            }
+        });
+
+        // remove
+        List<Nutrient> nutrientsToRemove = new ArrayList();
+        existing.forEach(eN -> {
+            boolean isRemoved = !patch.stream().anyMatch(pN -> pN.getId().equals(eN.getId()));
+            if (isRemoved) {
+                nutrientsToRemove.add(eN);
+            }
+        });
+        nutrientsToRemove.forEach(nutrient -> {
+            existing.remove(nutrient);
+        });
+
+        return existing;
     }
 }
