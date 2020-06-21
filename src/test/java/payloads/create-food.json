@@ -1,20 +1,20 @@
 {
   "fdcId": null,
-  "description": "Here is a description",
-  "brandOwner": "Here is a brand owner",
-  "ingredients": "Here are some ingredients",
+  "description": "Food A",
+  "brandOwner": "Brand A",
+  "ingredients": "Ingredients A",
   "servingSize": 12.34,
-  "servingSizeUnit": "Here is a serving size Unit",
-  "householdServingFullText": "Here is a household serving full text",
+  "servingSizeUnit": "Serving Size Unit A",
+  "householdServingFullText": "Household Serving Full Text A",
   "nutrients": [
     {
-      "name": "Here is a name",
-      "unitName": "Here is a unit name",
+      "name": "Name A",
+      "unitName": "Unit Name A",
       "amount": "56.78"
     },
     {
-      "name": "Here is another name",
-      "unitName": "Here is another unit name",
+      "name": "Name B",
+      "unitName": "Unit Name B",
       "amount": "90.12"
     }
   ]

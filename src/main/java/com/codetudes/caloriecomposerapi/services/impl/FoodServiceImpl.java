@@ -1,8 +1,6 @@
 package com.codetudes.caloriecomposerapi.services.impl;
 
-import com.codetudes.caloriecomposerapi.config.ApplicationConfig;
 import com.codetudes.caloriecomposerapi.contracts.FoodDTO;
-import com.codetudes.caloriecomposerapi.contracts.NutrientDTO;
 import com.codetudes.caloriecomposerapi.db.domain.Food;
 import com.codetudes.caloriecomposerapi.db.domain.Nutrient;
 import com.codetudes.caloriecomposerapi.db.repositories.FoodRepository;
@@ -14,17 +12,13 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class FoodServiceImpl implements FoodService {
 
     @Autowired
     ModelMapper modelMapper;
-
-    @Autowired
-    ApplicationConfig.FoodPatchMapper foodPatchMapper;
 
     @Autowired
     FoodRepository foodRepository;
@@ -36,6 +30,9 @@ public class FoodServiceImpl implements FoodService {
     public FoodDTO create(FoodDTO foodDTO) {
         final Food food = modelMapper.map(foodDTO, Food.class);
 
+        // Nutrients logically and physically own the relationship. Set it here.
+        food.getNutrients().forEach(nutrient -> nutrient.setFood(food));
+
         // TODO: Don't hard code this
         userRepository.findById(1L).ifPresentOrElse(
                 user -> food.setUser(user),
@@ -46,7 +43,6 @@ public class FoodServiceImpl implements FoodService {
                 }
         );
 
-        // save and flush to get db generated id in response
         Food savedFood = foodRepository.save(food);
         return modelMapper.map(savedFood, FoodDTO.class);
     }
@@ -64,11 +60,16 @@ public class FoodServiceImpl implements FoodService {
         Food existingFood = foodRepository.findById(foodDTO.getId()).orElse(null);
         throw404IfNull(existingFood);
 
-        // map most fields from DTO onto entity
-        foodPatchMapper.map(foodDTO, existingFood);
+        modelMapper.map(foodDTO, existingFood);
 
-        // patch map nested nutrient entities
-        updateNestedNutrients(existingFood.getNutrients(), foodDTO.getNutrients());
+        // Clear and re-create nutrient entities
+        existingFood.getNutrients().clear();
+        existingFood.setNutrients(foodDTO.getNutrients().stream()
+                .map(nutrientDTO -> modelMapper.map(nutrientDTO, Nutrient.class))
+                .collect(Collectors.toList()));
+
+        // Nutrients logically and physically own the relationship. Set it here.
+        existingFood.getNutrients().forEach(nutrient -> nutrient.setFood(existingFood));
 
         Food updatedFood = foodRepository.save(existingFood);
 
@@ -83,41 +84,10 @@ public class FoodServiceImpl implements FoodService {
         foodRepository.deleteById(food.getId());
     }
 
-    private void throw404IfNull(Food existingFood){
+    private void throw404IfNull(Food existingFood) {
         if (existingFood == null) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND,
                     "Food not found.");
         }
-    }
-
-    // TODO: hide in shame
-    private List<Nutrient> updateNestedNutrients(List<Nutrient> existing, List<NutrientDTO> patch) {
-        // update and add
-        patch.forEach(pN -> {
-            boolean isExisting = existing.stream().anyMatch(eN -> eN.getId().equals(pN.getId()));
-            if (isExisting) {
-                existing.stream().filter(eN -> eN.getId().equals(pN.getId()))
-                        .forEach(eN -> modelMapper.map(pN, eN));
-            }
-
-            boolean isNew = !isExisting;
-            if (isNew) {
-                existing.add(modelMapper.map(pN, Nutrient.class));
-            }
-        });
-
-        // remove
-        List<Nutrient> nutrientsToRemove = new ArrayList();
-        existing.forEach(eN -> {
-            boolean isRemoved = !patch.stream().anyMatch(pN -> pN.getId().equals(eN.getId()));
-            if (isRemoved) {
-                nutrientsToRemove.add(eN);
-            }
-        });
-        nutrientsToRemove.forEach(nutrient -> {
-            existing.remove(nutrient);
-        });
-
-        return existing;
     }
 }

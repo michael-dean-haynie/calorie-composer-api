@@ -7,6 +7,7 @@ import javax.validation.constraints.DecimalMax;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 
 @Data
@@ -36,5 +37,5 @@ public class FoodDTO {
     private String householdServingFullText;
 
     @Valid
-    private List<NutrientDTO> nutrients;
+    private List<NutrientDTO> nutrients = new ArrayList();
 }
