@@ -6,6 +6,7 @@ import lombok.EqualsAndHashCode;
 import lombok.Setter;
 
 import javax.persistence.*;
+import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -44,11 +45,13 @@ public class Food {
     @Column(name="ingredients")
     private String ingredients;
 
+    @Valid
     @Setter(AccessLevel.NONE)
     @OneToMany(mappedBy="food", cascade = CascadeType.ALL, orphanRemoval = true)
     // default to empty array list to appease hibernate state management voodoo
     private List<Nutrient> nutrients = new ArrayList();
 
+    @Valid
     @Setter(AccessLevel.NONE)
     @OneToMany(mappedBy="food", cascade = CascadeType.ALL, orphanRemoval = true)
     // default to empty array list to appease hibernate state management voodoo

@@ -5,6 +5,7 @@ import com.codetudes.caloriecomposerapi.contracts.FoodDTO;
 import com.codetudes.caloriecomposerapi.db.repositories.FoodRepository;
 import com.codetudes.caloriecomposerapi.db.repositories.UserRepository;
 import com.codetudes.caloriecomposerapi.services.FdcService;
+import com.codetudes.caloriecomposerapi.services.FoodService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -29,6 +30,9 @@ public class HelloWorldController {
     @Autowired
     private FdcService fdcService;
 
+    @Autowired
+    FoodService foodService;
+
     @Value("${foodDataCentral.apiEndpoint}")
     private String test;
 
@@ -40,9 +44,10 @@ public class HelloWorldController {
 //        Object srLegacy = fcdClient.getFoodByFdcId(169049L);
 //        Object surveyFNDDS = fcdClient.getFoodByFdcId(784222L);
 
-        FoodDTO foodDTO = fdcService.getFoodByFdcId("578012");
+        FoodDTO foodDTO = fdcService.getFoodByFdcId("769876");
+        FoodDTO savedFoodDTO = foodService.create(foodDTO);
 
 
-        return foodDTO;
+        return savedFoodDTO;
     }
 }

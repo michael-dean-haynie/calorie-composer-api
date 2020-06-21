@@ -209,6 +209,8 @@ Feature: Tests crud operations for Food type
     # clean up
     * call read('classpath:callable/delete-food.feature') { id: '#(response.id)'}
 
+  # TODO: Tests adding / removing portions too.
+
   # ---------------------------------------------
   # Delete
   # ---------------------------------------------
