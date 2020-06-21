@@ -17,5 +17,28 @@
       "unitName": "Unit Name B",
       "amount": "90.12"
     }
+  ],
+  "portions": [
+    {
+      "baseUnitName": "g",
+      "baseUnitAmount": 100,
+      "isNutrientRefPortion": true,
+      "isServingSizePortion": false
+    },
+    {
+      "baseUnitName": "g",
+      "baseUnitAmount": 200,
+      "isNutrientRefPortion": false,
+      "isServingSizePortion": true,
+      "description": "One half package"
+    },
+    {
+      "baseUnitName": "g",
+      "baseUnitAmount": 50,
+      "isNutrientRefPortion": false,
+      "isServingSizePortion": false,
+      "displayUnitName": "crackers",
+      "displayUnitAmount": 4
+    }
   ]
 }

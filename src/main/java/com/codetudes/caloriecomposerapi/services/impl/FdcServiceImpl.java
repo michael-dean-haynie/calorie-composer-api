@@ -61,6 +61,7 @@ public class FdcServiceImpl implements FdcService {
 
         List<LinkedHashMap<String, Object>> detailedResults = fdcClient.getFoodsByFdcIds(searchResultIds);
 
+        // TODO: Could probably use model mapper here?
         // Convert FDC DTOs to calorie-composer DTOs
         SearchResultDTO searchResultDTO = new SearchResultDTO();
         searchResultDTO.setTotalHits(searchResponse.getTotalHits());

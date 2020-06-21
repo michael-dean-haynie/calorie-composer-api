@@ -14,8 +14,8 @@ import java.math.BigDecimal;
 @Data
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Entity
-@Table(name="nutrient")
-public class Nutrient {
+@Table(name="portion")
+public class Portion {
     @EqualsAndHashCode.Include
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
@@ -28,17 +28,32 @@ public class Nutrient {
     private Food food;
 
     @NotBlank
-    @Size(max=45)
-    @Column(name="name")
-    private String name;
-
-    @NotBlank
-    @Size(max=45)
-    @Column(name="unit_name")
-    private String unitName;
+    @Size(max=10)
+    @Column(name="base_unit_name")
+    private String baseUnitName;
 
     @NotNull
     @DecimalMax("999.99")
-    @Column(name="amount")
-    private BigDecimal amount;
+    @Column(name="base_unit_amount")
+    private BigDecimal baseUnitAmount;
+
+    @NotNull
+    @Column(name="is_nutrient_ref_portion")
+    private Boolean isNutrientRefPortion = false;
+
+    @NotNull
+    @Column(name="is_serving_size_portion")
+    private Boolean isServingSizePortion = false;
+
+    @Size(max=100)
+    @Column(name="description")
+    private String description;
+
+    @Size(max=45)
+    @Column(name="display_unit_name")
+    private String displayUnitName;
+
+    @DecimalMax("999.99")
+    @Column(name="display_unit_amount")
+    private BigDecimal displayUnitAmount;
 }

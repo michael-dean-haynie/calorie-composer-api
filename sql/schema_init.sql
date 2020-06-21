@@ -70,9 +70,6 @@ CREATE TABLE `food` (
   `description` varchar(100) NOT NULL,
   `brand_owner` varchar(100) DEFAULT NULL,
   `ingredients` varchar(500) DEFAULT NULL,
-  `serving_size` decimal(5,2) NOT NULL,
-  `serving_size_unit` varchar(45) NOT NULL,
-  `household_serving_full_text` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `food_user_id_idx` (`user_id`),
   CONSTRAINT `food_user_id` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE CASCADE
@@ -113,6 +110,29 @@ CREATE TABLE `plan` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
+-- Table structure for table `portion`
+--
+
+DROP TABLE IF EXISTS `portion`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `portion` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `food_id` int(11) DEFAULT NULL,
+  `base_unit_name` varchar(10) NOT NULL,
+  `base_unit_amount` decimal(5,2) NOT NULL,
+  `is_nutrient_ref_portion` int(11) NOT NULL,
+  `is_serving_size_portion` int(11) NOT NULL,
+  `description` varchar(100) DEFAULT NULL,
+  `display_unit_name` varchar(45) DEFAULT NULL,
+  `display_unit_amount` decimal(5,2) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `portion_food_id_idx` (`food_id`),
+  CONSTRAINT `portion_food_id` FOREIGN KEY (`food_id`) REFERENCES `food` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
 -- Table structure for table `user`
 --
 
@@ -136,4 +156,4 @@ CREATE TABLE `user` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-06-14 14:35:23
+-- Dump completed on 2020-06-20 23:45:18

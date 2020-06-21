@@ -9,6 +9,7 @@ Feature: Tests crud operations for Food type
   # Create
   # ---------------------------------------------
 
+  @focus
   Scenario: Create a food item
     And path 'food'
     And request createFoodPayload
@@ -20,7 +21,7 @@ Feature: Tests crud operations for Food type
     When call read('classpath:callable/read-food.feature') { id: '#(response.id)'}
 
     # clean up
-    When call read('classpath:callable/delete-food.feature') { id: '#(response.id)'}
+#    When call read('classpath:callable/delete-food.feature') { id: '#(response.id)'}
 
   Scenario Outline: Create a food item and validate '<fieldName>' set appropriately
     * def payload = createFoodPayload
@@ -49,13 +50,18 @@ Feature: Tests crud operations for Food type
       | description              | utils.rs(5) |
       | brandOwner               | utils.rs(5) |
       | ingredients              | utils.rs(5) |
-      | servingSize              | utils.rd()  |
-      | servingSizeUnit          | utils.rs(5) |
-      | householdServingFullText | utils.rs(5) |
       # nested nutrients
-      | nutrients[0].name        | utils.rs(5) |
-      | nutrients[0].unitName    | utils.rs(5) |
-      | nutrients[0].amount      | utils.rd()  |
+      | nutrients[0].name                | utils.rs(5)                                         |
+      | nutrients[0].unitName            | utils.rs(5)                                         |
+      | nutrients[1].amount              | utils.rd()                                          |
+      # nested portions
+      | portions[0].baseUnitName         | utils.rs(5)                                         |
+      | portions[0].baseUnitAmount       | utils.rd()                                          |
+      | portions[0].isNutrientRefPortion | !createFoodPayload.portions[0].isNutrientRefPortion |
+      | portions[1].isServingSizePortion | !createFoodPayload.portions[0].isServingSizePortion |
+      | portions[1].description          | utils.rs(5)                                         |
+      | portions[2].displayUnitName      | utils.rs(5)                                         |
+      | portions[2].displayUnitAmount    | utils.rd()                                          |
 
   # ---------------------------------------------
   # Read
@@ -115,18 +121,23 @@ Feature: Tests crud operations for Food type
     When call read('classpath:callable/delete-food.feature') { id: '#(response.id)'}
 
     Examples:
-      | fieldName                | fieldValue  |
-      | fdcId                    | utils.rs(5) |
-      | description              | utils.rs(5) |
-      | brandOwner               | utils.rs(5) |
-      | ingredients              | utils.rs(5) |
-      | servingSize              | utils.rd()  |
-      | servingSizeUnit          | utils.rs(5) |
-      | householdServingFullText | utils.rs(5) |
-#      # nested nutrients
-      | nutrients[0].name        | utils.rs(5) |
-      | nutrients[0].unitName    | utils.rs(5) |
-      | nutrients[0].amount      | utils.rd()  |
+      | fieldName                        | fieldValue                                          |
+      | fdcId                            | utils.rs(5)                                         |
+      | description                      | utils.rs(5)                                         |
+      | brandOwner                       | utils.rs(5)                                         |
+      | ingredients                      | utils.rs(5)                                         |
+      # nested nutrients
+      | nutrients[0].name                | utils.rs(5)                                         |
+      | nutrients[0].unitName            | utils.rs(5)                                         |
+      | nutrients[1].amount              | utils.rd()                                          |
+      # nested portions
+      | portions[0].baseUnitName         | utils.rs(5)                                         |
+      | portions[0].baseUnitAmount       | utils.rd()                                          |
+      | portions[0].isNutrientRefPortion | !createFoodPayload.portions[0].isNutrientRefPortion |
+      | portions[1].isServingSizePortion | !createFoodPayload.portions[0].isServingSizePortion |
+      | portions[1].description          | utils.rs(5)                                         |
+      | portions[2].displayUnitName      | utils.rs(5)                                         |
+      | portions[2].displayUnitAmount    | utils.rd()                                          |
 
 
   Scenario: Update a food item by removing a nutrient

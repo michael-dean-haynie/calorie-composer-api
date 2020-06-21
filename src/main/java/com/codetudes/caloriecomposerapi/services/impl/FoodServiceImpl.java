@@ -3,6 +3,7 @@ package com.codetudes.caloriecomposerapi.services.impl;
 import com.codetudes.caloriecomposerapi.contracts.FoodDTO;
 import com.codetudes.caloriecomposerapi.db.domain.Food;
 import com.codetudes.caloriecomposerapi.db.domain.Nutrient;
+import com.codetudes.caloriecomposerapi.db.domain.Portion;
 import com.codetudes.caloriecomposerapi.db.repositories.FoodRepository;
 import com.codetudes.caloriecomposerapi.db.repositories.UserRepository;
 import com.codetudes.caloriecomposerapi.services.FoodService;
@@ -32,6 +33,9 @@ public class FoodServiceImpl implements FoodService {
 
         // Nutrients logically and physically own the relationship. Set it here.
         food.getNutrients().forEach(nutrient -> nutrient.setFood(food));
+
+        // Portions logically and physically own the relationship. Set it here.
+        food.getPortions().forEach(portion -> portion.setFood(food));
 
         // TODO: Don't hard code this
         userRepository.findById(1L).ifPresentOrElse(
@@ -70,6 +74,16 @@ public class FoodServiceImpl implements FoodService {
 
         // Nutrients logically and physically own the relationship. Set it here.
         existingFood.getNutrients().forEach(nutrient -> nutrient.setFood(existingFood));
+
+        // Clear and re-create portion entities
+        existingFood.getPortions().clear();
+        existingFood.setPortions(foodDTO.getPortions().stream()
+                .map(portionDTO -> modelMapper.map(portionDTO, Portion.class))
+                .collect(Collectors.toList()));
+
+        // Portions logically and physically own the relationship. Set it here.
+        existingFood.getPortions().forEach(portion -> portion.setFood(existingFood));
+
 
         Food updatedFood = foodRepository.save(existingFood);
 

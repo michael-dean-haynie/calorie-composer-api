@@ -3,10 +3,8 @@ package com.codetudes.caloriecomposerapi.contracts;
 import lombok.Data;
 
 import javax.validation.Valid;
-import javax.validation.constraints.DecimalMax;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,15 +25,9 @@ public class FoodDTO {
     @Size(max = 500)
     private String ingredients;
 
-    @DecimalMax("999.99")
-    private BigDecimal servingSize;
-
-    @Size(max=45)
-    private String servingSizeUnit;
-
-    @Size(max=100)
-    private String householdServingFullText;
-
     @Valid
     private List<NutrientDTO> nutrients = new ArrayList();
+
+    @Valid
+    private List<PortionDTO> portions = new ArrayList();
 }

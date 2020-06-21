@@ -12,6 +12,20 @@ Feature: Prepare schemas
 		}
 		"""
 
+		* set schemas.portion =
+		"""
+		{
+            id: '##number',
+            baseUnitName: '#string',
+            baseUnitAmount: '#number',
+            isNutrientRefPortion: '#boolean',
+            isServingSizePortion: '#boolean',
+            description: '##string',
+            displayUnitName: '##string',
+            displayUnitAmount: '##number'
+		}
+		"""
+
 		* set schemas.food =
         		"""
         		{
@@ -20,9 +34,7 @@ Feature: Prepare schemas
                     description: '#string',
                     brandOwner: '##string',
                     ingredients: '##string',
-                    servingSize: '#number',
-                    servingSizeUnit: '#string',
-                    householdServingFullText: '##string',
-                    nutrients: '##[] schemas.nutrient'
+                    nutrients: '##[] schemas.nutrient',
+                    portions: '##[] schemas.portion'
         		}
         		"""

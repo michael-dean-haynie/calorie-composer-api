@@ -6,11 +6,9 @@ import lombok.EqualsAndHashCode;
 import lombok.Setter;
 
 import javax.persistence.*;
-import javax.validation.constraints.DecimalMax;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -46,22 +44,15 @@ public class Food {
     @Column(name="ingredients")
     private String ingredients;
 
-    @DecimalMax("999.99")
-    @Column(name="serving_size")
-    private BigDecimal servingSize;
-
-    @Size(max=45)
-    @Column(name="serving_size_unit")
-    private String servingSizeUnit;
-
-    @Size(max=100)
-    @Column(name="household_serving_full_text")
-    private String householdServingFullText;
-
     @Setter(AccessLevel.NONE)
-    @OneToMany(mappedBy="food", cascade = CascadeType.ALL, orphanRemoval = true, fetch=FetchType.EAGER)
+    @OneToMany(mappedBy="food", cascade = CascadeType.ALL, orphanRemoval = true)
     // default to empty array list to appease hibernate state management voodoo
     private List<Nutrient> nutrients = new ArrayList();
+
+    @Setter(AccessLevel.NONE)
+    @OneToMany(mappedBy="food", cascade = CascadeType.ALL, orphanRemoval = true)
+    // default to empty array list to appease hibernate state management voodoo
+    private List<Portion> portions = new ArrayList();
 
     // opt to swap out contents instead of re-assigning collection
     // this to appease the hibernate state management voodoo
@@ -71,5 +62,15 @@ public class Food {
         }
         this.nutrients.clear();
         this.nutrients.addAll(nutrients);
+    }
+
+    // opt to swap out contents instead of re-assigning collection
+    // this to appease the hibernate state management voodoo
+    public void setPortions(List<Portion> portions) {
+        if (null == this.portions){
+            this.portions = portions;
+        }
+        this.portions.clear();
+        this.portions.addAll(portions);
     }
 }
