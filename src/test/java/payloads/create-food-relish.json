@@ -1,0 +1,88 @@
+{
+  "fdcId": "506775",
+  "description": "RELISH",
+  "brandOwner": "Hans Kissle Co., Inc.",
+  "ingredients": "CRANE BERRIES, SUGAR, ORANGE MARMALADE (HIGH FRUCTOSE CORN SYRUP, CORN SYRUP, ORANGE PEEL, ORANGE JUICE, FRUIT PECTIN, CITRIC ACID, NATURAL ORANGE FLAVOR), WATER.",
+  "nutrients": [
+    {
+      "name": "Total lipid (fat)",
+      "unitName": "g",
+      "amount": 0.0
+    },
+    {
+      "name": "Calcium, Ca",
+      "unitName": "mg",
+      "amount": 0.0
+    },
+    {
+      "name": "Iron, Fe",
+      "unitName": "mg",
+      "amount": 0.0
+    },
+    {
+      "name": "Sodium, Na",
+      "unitName": "mg",
+      "amount": 0.0
+    },
+    {
+      "name": "Vitamin A, IU",
+      "unitName": "IU",
+      "amount": 0.0
+    },
+    {
+      "name": "Vitamin C, total ascorbic acid",
+      "unitName": "mg",
+      "amount": 6.6
+    },
+    {
+      "name": "Cholesterol",
+      "unitName": "mg",
+      "amount": 0.0
+    },
+    {
+      "name": "Fatty acids, total saturated",
+      "unitName": "g",
+      "amount": 0.0
+    },
+    {
+      "name": "Protein",
+      "unitName": "g",
+      "amount": 0.0
+    },
+    {
+      "name": "Carbohydrate, by difference",
+      "unitName": "g",
+      "amount": 41.1
+    },
+    {
+      "name": "Energy",
+      "unitName": "kcal",
+      "amount": 164.0
+    },
+    {
+      "name": "Sugars, total including NLEA",
+      "unitName": "g",
+      "amount": 36.99
+    },
+    {
+      "name": "Fiber, total dietary",
+      "unitName": "g",
+      "amount": 1.4
+    }
+  ],
+  "portions": [
+    {
+      "baseUnitName": "g",
+      "baseUnitAmount": 100,
+      "isNutrientRefPortion": true,
+      "isServingSizePortion": false
+    },
+    {
+      "baseUnitName": "g",
+      "baseUnitAmount": 73.0,
+      "isNutrientRefPortion": false,
+      "isServingSizePortion": true,
+      "description": "0.33 cup"
+    }
+  ]
+}

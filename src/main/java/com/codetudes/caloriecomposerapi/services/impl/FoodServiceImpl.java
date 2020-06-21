@@ -29,7 +29,7 @@ public class FoodServiceImpl implements FoodService {
 
     @Override
     public FoodDTO create(FoodDTO foodDTO) {
-        final Food food = modelMapper.map(foodDTO, Food.class);
+        Food food = modelMapper.map(foodDTO, Food.class);
 
         // Nutrients logically and physically own the relationship. Set it here.
         food.getNutrients().forEach(nutrient -> nutrient.setFood(food));

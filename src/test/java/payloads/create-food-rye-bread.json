@@ -1,0 +1,93 @@
+{
+  "fdcId": "471527",
+  "description": "RYE BREAD",
+  "brandOwner": "RUBSCHLAGER",
+  "ingredients": "WHOLE WHEAT FLOUR, WHOLE RYE MEAL, UNBLEACHED WHEAT FLOUR, WATER, CANOLA OIL, MALT EXTRACT, SALT, SOY LECITHIN, BROWN RICE SYRUP, CARAWAY SEEDS, MOLASSES, YEAST, CALCIUM PROPIONATE (A PRESERVATIVE).",
+  "nutrients": [
+    {
+      "name": "Calcium, Ca",
+      "unitName": "mg",
+      "amount": 222.0
+    },
+    {
+      "name": "Iron, Fe",
+      "unitName": "mg",
+      "amount": 2.0
+    },
+    {
+      "name": "Vitamin A, IU",
+      "unitName": "IU",
+      "amount": 0.0
+    },
+    {
+      "name": "Vitamin C, total ascorbic acid",
+      "unitName": "mg",
+      "amount": 0.0
+    },
+    {
+      "name": "Cholesterol",
+      "unitName": "mg",
+      "amount": 0.0
+    },
+    {
+      "name": "Fatty acids, total saturated",
+      "unitName": "g",
+      "amount": 0.0
+    },
+    {
+      "name": "Protein",
+      "unitName": "g",
+      "amount": 8.33
+    },
+    {
+      "name": "Total lipid (fat)",
+      "unitName": "g",
+      "amount": 4.17
+    },
+    {
+      "name": "Carbohydrate, by difference",
+      "unitName": "g",
+      "amount": 47.22
+    },
+    {
+      "name": "Energy",
+      "unitName": "kcal",
+      "amount": 250.0
+    },
+    {
+      "name": "Sugars, total including NLEA",
+      "unitName": "g",
+      "amount": 2.78
+    },
+    {
+      "name": "Fiber, total dietary",
+      "unitName": "g",
+      "amount": 5.6
+    },
+    {
+      "name": "Sodium, Na",
+      "unitName": "mg",
+      "amount": 556.0
+    },
+    {
+      "name": "Fatty acids, total trans",
+      "unitName": "g",
+      "amount": 0.0
+    }
+  ],
+  "portions": [
+    {
+      "baseUnitName": "g",
+      "baseUnitAmount": 100,
+      "isNutrientRefPortion": true,
+      "isServingSizePortion": false
+    },
+    {
+      "baseUnitName": "g",
+      "baseUnitAmount": 36.0,
+      "isNutrientRefPortion": false,
+      "isServingSizePortion": true,
+      "description": "1 SLICE"
+    }
+  ]
+}

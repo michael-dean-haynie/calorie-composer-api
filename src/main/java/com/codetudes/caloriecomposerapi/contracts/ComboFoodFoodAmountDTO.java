@@ -11,9 +11,6 @@ public class ComboFoodFoodAmountDTO {
     private Long id;
 
     @NotNull
-    private ComboFoodDTO comboFood;
-
-    @NotNull
     private FoodDTO food;
 
     @NotNull

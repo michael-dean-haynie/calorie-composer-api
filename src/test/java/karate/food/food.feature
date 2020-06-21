@@ -10,23 +10,23 @@ Feature: Tests crud operations for Food type
   # ---------------------------------------------
 
   Scenario: Create a food item
-    And path 'food'
+    Given path 'food'
     And request createFoodPayload
     When method post
     Then status 201
     And match response == schemas.food
 
     # confirm read endpoint works as well
-    When call read('classpath:callable/read-food.feature') { id: '#(response.id)'}
+    When call read('classpath:callable/crud/food/read-food.feature') { id: '#(response.id)'}
 
     # clean up
-#    When call read('classpath:callable/delete-food.feature') { id: '#(response.id)'}
+    When call read('classpath:callable/crud/food/delete-food.feature') { id: '#(response.id)'}
 
   Scenario Outline: Create a food item and validate '<fieldName>' set appropriately
     * def payload = createFoodPayload
     * set payload.<fieldName> = <fieldValue>
 
-    And path 'food'
+    Given path 'food'
     And request payload
     When method post
     Then status 201
@@ -41,7 +41,7 @@ Feature: Tests crud operations for Food type
     And match response.<fieldName> == payload.<fieldName>
 
     # clean up
-    When call read('classpath:callable/delete-food.feature') { id: '#(response.id)'}
+    When call read('classpath:callable/crud/food/delete-food.feature') { id: '#(response.id)'}
 
     Examples:
       | fieldName                | fieldValue  |
@@ -67,22 +67,22 @@ Feature: Tests crud operations for Food type
   # ---------------------------------------------
 
   Scenario: Read a food item
-    When def createFoodResult = call read('classpath:callable/create-food.feature') { request: '#(createFoodPayload)'}
+    When def createFoodResult = call read('classpath:callable/crud/food/create-food.feature') { request: '#(createFoodPayload)'}
 
-    And path 'food', createFoodResult.response.id
+    Given path 'food', createFoodResult.response.id
     When method get
     Then status 200
     And match response == schemas.food
 
     # clean up
-    When call read('classpath:callable/delete-food.feature') { id: '#(response.id)'}
+    When call read('classpath:callable/crud/food/delete-food.feature') { id: '#(response.id)'}
 
   # ---------------------------------------------
   # Update
   # ---------------------------------------------
 
   Scenario Outline: Update a food item and validate '<fieldName>' set appropriately
-    When def createFoodResult = call read('classpath:callable/create-food.feature') { request: '#(createFoodPayload)'}
+    When def createFoodResult = call read('classpath:callable/crud/food/create-food.feature') { request: '#(createFoodPayload)'}
 
     # stash initial value
     * copy initialFood = createFoodResult.response
@@ -92,7 +92,7 @@ Feature: Tests crud operations for Food type
     * set payload.<fieldName> = <fieldValue>
 
     # update
-    And path 'food'
+    Given path 'food'
     And request payload
     When method put
     Then status 200
@@ -117,7 +117,7 @@ Feature: Tests crud operations for Food type
     * match response == almstInitial
 
     # clean up
-    When call read('classpath:callable/delete-food.feature') { id: '#(response.id)'}
+    When call read('classpath:callable/crud/food/delete-food.feature') { id: '#(response.id)'}
 
     Examples:
       | fieldName                        | fieldValue                                          |
@@ -140,7 +140,7 @@ Feature: Tests crud operations for Food type
 
 
   Scenario: Update a food item by removing a nutrient
-    When def createFoodResult = call read('classpath:callable/create-food.feature') { request: '#(createFoodPayload)'}
+    When def createFoodResult = call read('classpath:callable/crud/food/create-food.feature') { request: '#(createFoodPayload)'}
 
     # stash nutrient to remove and nutrient to stay
     * def n2r = createFoodResult.response.nutrients[0]
@@ -152,7 +152,7 @@ Feature: Tests crud operations for Food type
     * copy payload = createFoodResult.response
     * remove payload $.nutrients[0]
 
-    And path 'food'
+    Given path 'food'
     And request payload
     When method put
     Then status 200
@@ -177,12 +177,12 @@ Feature: Tests crud operations for Food type
     * assert karate.jsonPath(response, "$.nutrients[?(@.id=='"+n2r.id+"')]")[0] == null
 
     # clean up
-    When call read('classpath:callable/delete-food.feature') { id: '#(response.id)'}
+    When call read('classpath:callable/crud/food/delete-food.feature') { id: '#(response.id)'}
 
   Scenario: Update a food item by adding a nutrient
     * copy createPayload = createFoodPayload
     * remove createPayload $.nutrients[1]
-    When def createFoodResult = call read('classpath:callable/create-food.feature') { request: '#(createPayload)'}
+    When def createFoodResult = call read('classpath:callable/crud/food/create-food.feature') { request: '#(createPayload)'}
 
     # assert only 1 nutrient exists
     * match createFoodResult.response.nutrients == '#[1]'
@@ -190,7 +190,7 @@ Feature: Tests crud operations for Food type
     * copy updatePayload = createFoodResult.response
     * set updatePayload.nutrients[1] = createFoodPayload.nutrients[1]
 
-    And path 'food'
+    Given path 'food'
     And request updatePayload
     When method put
     Then status 200
@@ -207,7 +207,7 @@ Feature: Tests crud operations for Food type
     Then match response.nutrients == '#[2]'
 
     # clean up
-    * call read('classpath:callable/delete-food.feature') { id: '#(response.id)'}
+    * call read('classpath:callable/crud/food/delete-food.feature') { id: '#(response.id)'}
 
   # TODO: Tests adding / removing portions too.
 
@@ -216,13 +216,13 @@ Feature: Tests crud operations for Food type
   # ---------------------------------------------
 
   Scenario: Delete a food item
-    Given def createFoodResult = call read('classpath:callable/create-food.feature') { request: '#(createFoodPayload)'}
+    When def createFoodResult = call read('classpath:callable/crud/food/create-food.feature') { request: '#(createFoodPayload)'}
 
-    And path 'food', createFoodResult.response.id
+    Given path 'food', createFoodResult.response.id
     When method delete
     Then status 200
 
     # confirm we cannot read item anymore
-    Then path 'food', createFoodResult.response.id
+    Given path 'food', createFoodResult.response.id
     When method get
     Then status 404

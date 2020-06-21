@@ -1,0 +1,63 @@
+{
+  "fdcId": "910068",
+  "description": "CHUNK TUNA IN WATER, TUNA",
+  "brandOwner": "Tops Markets, LLC",
+  "ingredients": "YELLOWFIN TUNA, WATER, SALT.",
+  "nutrients": [
+    {
+      "name": "Protein",
+      "unitName": "g",
+      "amount": 17.61
+    },
+    {
+      "name": "Total lipid (fat)",
+      "unitName": "g",
+      "amount": 0.35
+    },
+    {
+      "name": "Energy",
+      "unitName": "kcal",
+      "amount": 77.0
+    },
+    {
+      "name": "Sugars, total including NLEA",
+      "unitName": "g",
+      "amount": 0.0
+    },
+    {
+      "name": "Fiber, total dietary",
+      "unitName": "g",
+      "amount": 0.0
+    },
+    {
+      "name": "Sodium, Na",
+      "unitName": "mg",
+      "amount": 268.0
+    },
+    {
+      "name": "Cholesterol",
+      "unitName": "mg",
+      "amount": 39.0
+    },
+    {
+      "name": "Fatty acids, total trans",
+      "unitName": "g",
+      "amount": 0.0
+    }
+  ],
+  "portions": [
+    {
+      "baseUnitName": "g",
+      "baseUnitAmount": 100,
+      "isNutrientRefPortion": true,
+      "isServingSizePortion": false
+    },
+    {
+      "baseUnitName": "g",
+      "baseUnitAmount": 142.0,
+      "isNutrientRefPortion": false,
+      "isServingSizePortion": true,
+      "description": "1 CAN"
+    }
+  ]
+}

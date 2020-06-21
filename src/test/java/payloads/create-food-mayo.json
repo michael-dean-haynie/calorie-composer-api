@@ -1,0 +1,103 @@
+{
+  "fdcId": "402338",
+  "description": "MAYO, MAYONNAISE",
+  "brandOwner": "Walgreens Co.",
+  "ingredients": "SOYBEAN OIL, WATER, WHOLE EGGS, EGG YOLKS, DISTILLED VINEGAR, CONTAINS LESS THAN 2% SALT, SUGAR, NATURAL FLAVOR, CONCENTRATED LEMON JUICE, PAPRIKA EXTRACT (COLOR), CALCIUM DISODIUM EDTA TO PROTECT FLAVOR.",
+  "nutrients": [
+    {
+      "name": "Carbohydrate, by difference",
+      "unitName": "g",
+      "amount": 0.0
+    },
+    {
+      "name": "Fiber, total dietary",
+      "unitName": "g",
+      "amount": 0.0
+    },
+    {
+      "name": "Calcium, Ca",
+      "unitName": "mg",
+      "amount": 0.0
+    },
+    {
+      "name": "Iron, Fe",
+      "unitName": "mg",
+      "amount": 0.0
+    },
+    {
+      "name": "Vitamin A, IU",
+      "unitName": "IU",
+      "amount": 0.0
+    },
+    {
+      "name": "Vitamin C, total ascorbic acid",
+      "unitName": "mg",
+      "amount": 0.0
+    },
+    {
+      "name": "Protein",
+      "unitName": "g",
+      "amount": 0.0
+    },
+    {
+      "name": "Total lipid (fat)",
+      "unitName": "g",
+      "amount": 78.57
+    },
+    {
+      "name": "Energy",
+      "unitName": "kcal",
+      "amount": 714.0
+    },
+    {
+      "name": "Sugars, total including NLEA",
+      "unitName": "g",
+      "amount": 0.0
+    },
+    {
+      "name": "Sodium, Na",
+      "unitName": "mg",
+      "amount": 571.0
+    },
+    {
+      "name": "Cholesterol",
+      "unitName": "mg",
+      "amount": 71.0
+    },
+    {
+      "name": "Fatty acids, total trans",
+      "unitName": "g",
+      "amount": 0.0
+    },
+    {
+      "name": "Fatty acids, total saturated",
+      "unitName": "g",
+      "amount": 10.71
+    },
+    {
+      "name": "Fatty acids, total monounsaturated",
+      "unitName": "g",
+      "amount": 17.86
+    },
+    {
+      "name": "Fatty acids, total polyunsaturated",
+      "unitName": "g",
+      "amount": 42.86
+    }
+  ],
+  "portions": [
+    {
+      "baseUnitName": "g",
+      "baseUnitAmount": 100,
+      "isNutrientRefPortion": true,
+      "isServingSizePortion": false
+    },
+    {
+      "baseUnitName": "g",
+      "baseUnitAmount": 14.0,
+      "isNutrientRefPortion": false,
+      "isServingSizePortion": true,
+      "description": "1 Tbsp"
+    }
+  ]
+}
