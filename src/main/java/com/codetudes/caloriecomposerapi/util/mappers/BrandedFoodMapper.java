@@ -31,15 +31,15 @@ public class BrandedFoodMapper {
 
         PortionDTO refPortion = new PortionDTO();
         refPortion.setIsNutrientRefPortion(true);
-        refPortion.setBaseUnitName(fdcBrandedFoodDTO.getServingSizeUnit());
-        refPortion.setBaseUnitAmount(new BigDecimal(100));
+        refPortion.setMetricUnit(fdcBrandedFoodDTO.getServingSizeUnit());
+        refPortion.setMetricAmount(new BigDecimal(100));
         foodDTO.getPortions().add(refPortion);
 
         PortionDTO ssPortion = new PortionDTO();
         ssPortion.setIsServingSizePortion(true);
-        ssPortion.setBaseUnitName(fdcBrandedFoodDTO.getServingSizeUnit());
-        ssPortion.setBaseUnitAmount(fdcBrandedFoodDTO.getServingSize());
-        ssPortion.setDescription(fdcBrandedFoodDTO.getHouseholdServingFullText());
+        ssPortion.setMetricUnit(fdcBrandedFoodDTO.getServingSizeUnit());
+        ssPortion.setMetricAmount(fdcBrandedFoodDTO.getServingSize());
+        ssPortion.setHouseholdMeasure(fdcBrandedFoodDTO.getHouseholdServingFullText());
         foodDTO.getPortions().add(ssPortion);
 
         // flatten and add nutrients

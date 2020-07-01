@@ -1,36 +1,37 @@
 {
+  "isDraft": false,
   "description": "Tuna on Rye",
   "foodAmounts": [
     {
       "food": null,
-      "baseUnitAmount": 255
+      "metricAmount": 255
     },
     {
       "food": null,
-      "baseUnitAmount": 28
+      "metricAmount": 28
     },
     {
       "food": null,
-      "baseUnitAmount": 65
+      "metricAmount": 65
     },
     {
       "food": null,
-      "baseUnitAmount": 504
+      "metricAmount": 504
     }
   ],
   "portions": [
     {
-      "baseUnitName": "g",
-      "baseUnitAmount": 852,
+      "metricUnit": "g",
+      "metricAmount": 852,
       "isFoodAmountRefPortion": true,
       "isServingSizePortion": false
     },
     {
-      "baseUnitName": "g",
-      "baseUnitAmount": 121.7,
+      "metricUnit": "g",
+      "metricAmount": 121.7,
       "isFoodAmountRefPortion": false,
       "isServingSizePortion": true,
-      "description": "1 SANDWICH"
+      "householdMeasure": "1 SANDWICH"
     }
   ]
 }

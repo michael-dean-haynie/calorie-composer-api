@@ -72,17 +72,17 @@
   ],
   "portions": [
     {
-      "baseUnitName": "g",
-      "baseUnitAmount": 100,
+      "metricUnit": "g",
+      "metricAmount": 100,
       "isNutrientRefPortion": true,
       "isServingSizePortion": false
     },
     {
-      "baseUnitName": "g",
-      "baseUnitAmount": 73.0,
+      "metricUnit": "g",
+      "metricAmount": 73.0,
       "isNutrientRefPortion": false,
       "isServingSizePortion": true,
-      "description": "0.33 cup"
+      "householdMeasure": "0.33 cup"
     }
   ]
 }

@@ -27,16 +27,6 @@ public class Portion {
     @JoinColumn(name="food_id")
     private Food food;
 
-    @NotBlank
-    @Size(max=10)
-    @Column(name="base_unit_name")
-    private String baseUnitName;
-
-    @NotNull
-    @DecimalMax("999.99")
-    @Column(name="base_unit_amount")
-    private BigDecimal baseUnitAmount;
-
     @NotNull
     @Column(name="is_nutrient_ref_portion")
     private Boolean isNutrientRefPortion = false;
@@ -45,15 +35,25 @@ public class Portion {
     @Column(name="is_serving_size_portion")
     private Boolean isServingSizePortion = false;
 
+    @NotBlank
+    @Size(max=10)
+    @Column(name="metric_unit")
+    private String metricUnit;
+
+    @NotNull
+    @DecimalMax("999.99")
+    @Column(name="metric_amount")
+    private BigDecimal metricAmount;
+
     @Size(max=100)
-    @Column(name="description")
-    private String description;
+    @Column(name="household_measure")
+    private String householdMeasure;
 
     @Size(max=45)
-    @Column(name="display_unit_name")
-    private String displayUnitName;
+    @Column(name="household_unit")
+    private String householdUnit;
 
     @DecimalMax("999.99")
-    @Column(name="display_unit_amount")
-    private BigDecimal displayUnitAmount;
+    @Column(name="household_amount")
+    private BigDecimal householdAmount;
 }

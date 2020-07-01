@@ -25,13 +25,12 @@ public class ComboFoodFoodAmount {
     @JoinColumn(name="combo_food_id")
     private ComboFood comboFood;
 
-    @NotNull
     @ManyToOne
     @JoinColumn(name="food_id")
     private Food food;
 
     @NotNull
     @DecimalMax("999.99")
-    @Column(name="base_unit_amount")
-    private BigDecimal baseUnitAmount;
+    @Column(name="metric_amount")
+    private BigDecimal metricAmount;
 }

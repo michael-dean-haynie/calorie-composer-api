@@ -114,15 +114,15 @@ Feature: Tests crud operations for ComboFood type
       | fieldName                          | fieldValue                                          |
       | description                        | utils.rs(5)                                         |
       # nested food amounts
-      | foodAmounts[0].baseUnitAmount      | utils.rd()                                          |
+      | foodAmounts[0].metricAmount      | utils.rd()                                          |
 #      # nested portions
-      | portions[0].baseUnitName           | utils.rs(5)                                         |
-      | portions[0].baseUnitAmount         | utils.rd()                                          |
+      | portions[0].metricUnit           | utils.rs(5)                                         |
+      | portions[0].metricAmount         | utils.rd()                                          |
       | portions[0].isFoodAmountRefPortion | !tunaSandwichPPL.portions[0].isFoodAmountRefPortion |
       | portions[1].isServingSizePortion   | !tunaSandwichPPL.portions[0].isServingSizePortion   |
-      | portions[1].description            | utils.rs(5)                                         |
-      | portions[1].displayUnitName        | utils.rs(5)                                         |
-      | portions[1].displayUnitAmount      | utils.rd()                                          |
+      | portions[1].householdMeasure            | utils.rs(5)                                         |
+      | portions[1].householdUnit        | utils.rs(5)                                         |
+      | portions[1].householdAmount      | utils.rd()                                          |
 
 
   # ---------------------------------------------

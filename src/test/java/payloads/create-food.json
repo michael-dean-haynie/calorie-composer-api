@@ -3,9 +3,6 @@
   "description": "Food A",
   "brandOwner": "Brand A",
   "ingredients": "Ingredients A",
-  "servingSize": 12.34,
-  "servingSizeUnit": "Serving Size Unit A",
-  "householdServingFullText": "Household Serving Full Text A",
   "nutrients": [
     {
       "name": "Name A",
@@ -20,25 +17,25 @@
   ],
   "portions": [
     {
-      "baseUnitName": "g",
-      "baseUnitAmount": 100,
+      "metricUnit": "g",
+      "metricAmount": 100,
       "isNutrientRefPortion": true,
       "isServingSizePortion": false
     },
     {
-      "baseUnitName": "g",
-      "baseUnitAmount": 200,
+      "metricUnit": "g",
+      "metricAmount": 200,
       "isNutrientRefPortion": false,
       "isServingSizePortion": true,
       "description": "One half package"
     },
     {
-      "baseUnitName": "g",
-      "baseUnitAmount": 50,
+      "metricUnit": "g",
+      "metricAmount": 50,
       "isNutrientRefPortion": false,
       "isServingSizePortion": false,
-      "displayUnitName": "crackers",
-      "displayUnitAmount": 4
+      "householdUnit": "crackers",
+      "householdAmount": 4
     }
   ]
 }

@@ -47,17 +47,17 @@
   ],
   "portions": [
     {
-      "baseUnitName": "g",
-      "baseUnitAmount": 100,
+      "metricUnit": "g",
+      "metricAmount": 100,
       "isNutrientRefPortion": true,
       "isServingSizePortion": false
     },
     {
-      "baseUnitName": "g",
-      "baseUnitAmount": 142.0,
+      "metricUnit": "g",
+      "metricAmount": 142.0,
       "isNutrientRefPortion": false,
       "isServingSizePortion": true,
-      "description": "1 CAN"
+      "householdMeasure": "1 CAN"
     }
   ]
 }

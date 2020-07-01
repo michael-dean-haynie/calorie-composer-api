@@ -3,16 +3,22 @@ package com.codetudes.caloriecomposerapi.contracts;
 import lombok.Data;
 
 import javax.validation.Valid;
-import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * API Contract (DTO) for a ComboFood instance
+ * API endpoint will accept and persist incomplete "draft" ComboFoods as well as fully validated "non-draft" ComboFoods
+ */
 @Data
 public class ComboFoodDTO {
     private Long id;
 
-    @NotBlank
+    @NotNull
+    private Boolean isDraft;
+
     @Size(max = 100)
     private String description;
 
@@ -21,5 +27,4 @@ public class ComboFoodDTO {
 
     @Valid
     private List<ComboFoodPortionDTO> portions = new ArrayList();
-
 }

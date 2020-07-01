@@ -87,17 +87,17 @@
   ],
   "portions": [
     {
-      "baseUnitName": "g",
-      "baseUnitAmount": 100,
+      "metricUnit": "g",
+      "metricAmount": 100,
       "isNutrientRefPortion": true,
       "isServingSizePortion": false
     },
     {
-      "baseUnitName": "g",
-      "baseUnitAmount": 14.0,
+      "metricUnit": "g",
+      "metricAmount": 14.0,
       "isNutrientRefPortion": false,
       "isServingSizePortion": true,
-      "description": "1 Tbsp"
+      "householdMeasure": "1 Tbsp"
     }
   ]
 }

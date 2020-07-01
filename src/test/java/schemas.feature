@@ -20,13 +20,13 @@ Feature: Prepare schemas
 		"""
 		{
             id: '##number',
-            baseUnitName: '#string',
-            baseUnitAmount: '#number',
-            isNutrientRefPortion: '#boolean',
+			isNutrientRefPortion: '#boolean',
             isServingSizePortion: '#boolean',
-            description: '##string',
-            displayUnitName: '##string',
-            displayUnitAmount: '##number'
+            metricUnit: '#string',
+            metricAmount: '#number',
+            householdMeasure: '##string',
+            householdUnit: '##string',
+            householdAmount: '##number'
 		}
 		"""
 
@@ -52,7 +52,7 @@ Feature: Prepare schemas
 		{
 			id: '##number',
 			food: '#(schemas.food)',
-			baseUnitAmount: '#number',
+			metricAmount: '##number',
 		}
 		"""
 
@@ -60,13 +60,13 @@ Feature: Prepare schemas
 		"""
 		{
 			id: '##number',
-			baseUnitName: '#string',
-            baseUnitAmount: '#number',
-            isFoodAmountRefPortion: '#boolean',
+			isFoodAmountRefPortion: '#boolean',
             isServingSizePortion: '#boolean',
-            description: '##string',
-            displayUnitName: '##string',
-            displayUnitAmount: '##number'
+			metricUnit: '##string',
+            metricAmount: '##number',
+            householdMeasure: '##string',
+            householdUnit: '##string',
+            householdAmount: '##number'
 		}
 		"""
 
@@ -74,7 +74,8 @@ Feature: Prepare schemas
 		"""
 		{
 			id: '##number',
-			description: '#string',
+			isDraft: '#boolean',
+			description: '##string',
 			foodAmounts: '##[] schemas.comboFoodFoodAmount',
 			portions: '##[] schemas.comboFoodPortion'
 		}

@@ -77,17 +77,17 @@
   ],
   "portions": [
     {
-      "baseUnitName": "g",
-      "baseUnitAmount": 100,
+      "metricUnit": "g",
+      "metricAmount": 100,
       "isNutrientRefPortion": true,
       "isServingSizePortion": false
     },
     {
-      "baseUnitName": "g",
-      "baseUnitAmount": 36.0,
+      "metricUnit": "g",
+      "metricAmount": 36.0,
       "isNutrientRefPortion": false,
       "isServingSizePortion": true,
-      "description": "1 SLICE"
+      "householdMeasure": "1 SLICE"
     }
   ]
 }

@@ -7,7 +7,6 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import javax.validation.Valid;
-import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.util.ArrayList;
@@ -24,11 +23,14 @@ public class ComboFood {
     private Long id;
 
     @NotNull
+    @Column(name="is_draft")
+    private Boolean isDraft;
+
+    @NotNull
     @ManyToOne
     @JoinColumn(name="user_id")
     private User user;
 
-    @NotBlank
     @Size(max = 100)
     @Column(name="description")
     private String description;

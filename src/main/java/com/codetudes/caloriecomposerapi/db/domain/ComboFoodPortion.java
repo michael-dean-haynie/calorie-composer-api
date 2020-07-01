@@ -6,7 +6,6 @@ import lombok.ToString;
 
 import javax.persistence.*;
 import javax.validation.constraints.DecimalMax;
-import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.math.BigDecimal;
@@ -27,16 +26,6 @@ public class ComboFoodPortion {
     @JoinColumn(name="combo_food_id")
     private ComboFood comboFood;
 
-    @NotBlank
-    @Size(max=10)
-    @Column(name="base_unit_name")
-    private String baseUnitName;
-
-    @NotNull
-    @DecimalMax("999.99")
-    @Column(name="base_unit_amount")
-    private BigDecimal baseUnitAmount;
-
     @NotNull
     @Column(name="is_food_amount_ref_portion")
     private Boolean isFoodAmountRefPortion = false;
@@ -45,15 +34,23 @@ public class ComboFoodPortion {
     @Column(name="is_serving_size_portion")
     private Boolean isServingSizePortion = false;
 
-    @Size(max=100)
-    @Column(name="description")
-    private String description;
-
-    @Size(max=45)
-    @Column(name="display_unit_name")
-    private String displayUnitName;
+    @Size(max=10)
+    @Column(name="metric_unit")
+    private String metricUnit;
 
     @DecimalMax("999.99")
-    @Column(name="display_unit_amount")
-    private BigDecimal displayUnitAmount;
+    @Column(name="metric_amount")
+    private BigDecimal metricAmount;
+
+    @Size(max=100)
+    @Column(name="household_measure")
+    private String householdMeasure;
+
+    @Size(max=45)
+    @Column(name="household_unit")
+    private String householdUnit;
+
+    @DecimalMax("999.99")
+    @Column(name="household_amount")
+    private BigDecimal householdAmount;
 }
