@@ -4,6 +4,7 @@ import com.codetudes.caloriecomposerapi.contracts.ComboFoodDTO;
 import com.codetudes.caloriecomposerapi.db.domain.ComboFood;
 import com.codetudes.caloriecomposerapi.db.domain.ComboFoodFoodAmount;
 import com.codetudes.caloriecomposerapi.db.domain.ComboFoodPortion;
+import com.codetudes.caloriecomposerapi.db.domain.User;
 import com.codetudes.caloriecomposerapi.db.repositories.ComboFoodRepository;
 import com.codetudes.caloriecomposerapi.db.repositories.FoodRepository;
 import com.codetudes.caloriecomposerapi.db.repositories.UserRepository;
@@ -14,6 +15,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
@@ -39,14 +41,14 @@ public class ComboFoodServiceImpl implements ComboFoodService {
         comboFood.getPortions().forEach(portion -> portion.setComboFood(comboFood));
 
         // TODO: Don't hard code this
-        userRepository.findById(1L).ifPresentOrElse(
-                user -> comboFood.setUser(user),
-                () -> {
-                    throw new ResponseStatusException(
-                            HttpStatus.INTERNAL_SERVER_ERROR,
-                            "Hard-coded user unable to be found while creating comboFood.");
-                }
-        );
+        List<User> users = userRepository.findAll();
+        if (users.size() > 0){
+            comboFood.setUser(users.get(0));
+        } else {
+            throw new ResponseStatusException(
+                    HttpStatus.INTERNAL_SERVER_ERROR,
+                    "Hard-coded user unable to be found while creating food.");
+        }
 
         ComboFood savedComboFood = comboFoodRepository.save(comboFood);
         return modelMapper.map(savedComboFood, ComboFoodDTO.class);

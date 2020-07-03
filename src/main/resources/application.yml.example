@@ -10,6 +10,10 @@ foodDataCentral:
   apiEndpoint: https://api.nal.usda.gov/fdc/v1/
   apiKey: <api key>
 
+db-seeding:
+  seed-on-startup: false
+  truncate-tables-first: false
+
 ---
 # Feign Client Logging
 logging.level.com.codetudes.caloriecomposerapi.clients.FdcClient: DEBUG
@@ -19,3 +23,7 @@ feign:
     config:
       default:
         loggerLevel: basic
+---
+# SQL Logging
+logging.level.org.hibernate.SQL: DEBUG
+logging.level.org.hibernate.type: TRACE

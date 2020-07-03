@@ -4,6 +4,7 @@ import com.codetudes.caloriecomposerapi.contracts.FoodDTO;
 import com.codetudes.caloriecomposerapi.db.domain.Food;
 import com.codetudes.caloriecomposerapi.db.domain.Nutrient;
 import com.codetudes.caloriecomposerapi.db.domain.Portion;
+import com.codetudes.caloriecomposerapi.db.domain.User;
 import com.codetudes.caloriecomposerapi.db.repositories.FoodRepository;
 import com.codetudes.caloriecomposerapi.db.repositories.UserRepository;
 import com.codetudes.caloriecomposerapi.services.FoodService;
@@ -13,6 +14,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
@@ -38,14 +40,14 @@ public class FoodServiceImpl implements FoodService {
         food.getPortions().forEach(portion -> portion.setFood(food));
 
         // TODO: Don't hard code this
-        userRepository.findById(1L).ifPresentOrElse(
-                user -> food.setUser(user),
-                () -> {
-                    throw new ResponseStatusException(
-                            HttpStatus.INTERNAL_SERVER_ERROR,
-                            "Hard-coded user unable to be found while creating food.");
-                }
-        );
+        List<User> users = userRepository.findAll();
+        if (users.size() > 0){
+            food.setUser(users.get(0));
+        } else {
+            throw new ResponseStatusException(
+                    HttpStatus.INTERNAL_SERVER_ERROR,
+                    "Hard-coded user unable to be found while creating food.");
+        }
 
         Food savedFood = foodRepository.save(food);
         return modelMapper.map(savedFood, FoodDTO.class);

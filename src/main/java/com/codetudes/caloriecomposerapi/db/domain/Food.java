@@ -41,7 +41,7 @@ public class Food {
     @Column(name="brand_owner")
     private String brandOwner;
 
-    @Size(max = 500)
+    @Size(max = 10000)
     @Column(name="ingredients")
     private String ingredients;
 

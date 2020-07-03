@@ -22,7 +22,7 @@ public class FoodDTO {
     @Size(max = 100)
     private String brandOwner;
 
-    @Size(max = 500)
+    @Size(max = 10000)
     private String ingredients;
 
     @Valid
