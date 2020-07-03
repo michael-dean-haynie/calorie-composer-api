@@ -9,11 +9,15 @@ import com.codetudes.caloriecomposerapi.db.repositories.FoodRepository;
 import com.codetudes.caloriecomposerapi.db.repositories.UserRepository;
 import com.codetudes.caloriecomposerapi.services.FoodService;
 import org.modelmapper.ModelMapper;
+import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.lang.reflect.Type;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -98,6 +102,13 @@ public class FoodServiceImpl implements FoodService {
         throw404IfNull(food);
 
         foodRepository.deleteById(food.getId());
+    }
+
+    @Override
+    public List<FoodDTO> search(String query){
+        Pageable pageable = PageRequest.of(0, 5);
+        Type targetListType = new TypeToken<List<FoodDTO>>() {}.getType();
+        return modelMapper.map(foodRepository.search(query, pageable), targetListType);
     }
 
     private void throw404IfNull(Food existingFood) {

@@ -10,6 +10,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/food")
 public class FoodController {
@@ -49,5 +51,13 @@ public class FoodController {
         foodService.delete(id);
         LOG.info("Successfully deleted food with id {},", id);
         return new ResponseEntity(HttpStatus.OK);
+    }
+
+    @GetMapping("/search")
+    ResponseEntity search(@RequestParam String searchQuery) {
+        LOG.info("Received search request with search query '{}'", searchQuery);
+        List<FoodDTO> results = foodService.search(searchQuery);
+        LOG.info("Successfully searched for foods by search query '{}', returning {} results", searchQuery, results.size());
+        return new ResponseEntity(results, HttpStatus.OK);
     }
 }
