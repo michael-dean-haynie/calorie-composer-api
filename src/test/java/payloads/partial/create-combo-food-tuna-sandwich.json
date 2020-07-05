@@ -4,19 +4,23 @@
   "foodAmounts": [
     {
       "food": null,
-      "metricAmount": 255
+      "unit": "g",
+      "amount": 255
     },
     {
       "food": null,
-      "metricAmount": 28
+      "unit": "g",
+      "amount": 28
     },
     {
       "food": null,
-      "metricAmount": 65
+      "unit": "g",
+      "amount": 65
     },
     {
       "food": null,
-      "metricAmount": 504
+      "unit": "g",
+      "amount": 504
     }
   ],
   "portions": [

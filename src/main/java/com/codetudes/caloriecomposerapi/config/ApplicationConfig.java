@@ -16,7 +16,7 @@ public class ApplicationConfig implements WebMvcConfigurer {
     @Override
     public void addCorsMappings(CorsRegistry registry) {
         // TODO: lock down before deploying publicly
-        registry.addMapping("/**");
+        registry.addMapping("/**").allowedMethods("*");
     }
 
     @Bean
@@ -26,7 +26,8 @@ public class ApplicationConfig implements WebMvcConfigurer {
     }
 
     @Bean
-    ModelMapper modelMapper() {
-        return new ModelMapper();
-    }
+    ModelMapper modelMapper() { return new ModelMapper(); }
+
+    @Bean
+    MergeMapper mergeMapper() { return new MergeMapper(); }
 }

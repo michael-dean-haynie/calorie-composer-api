@@ -1,5 +1,3 @@
-CREATE DATABASE  IF NOT EXISTS `calorie_composer` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
-USE `calorie_composer`;
 -- MySQL dump 10.13  Distrib 8.0.18, for Win64 (x86_64)
 --
 -- Host: localhost    Database: calorie_composer
@@ -32,7 +30,7 @@ CREATE TABLE `combo_food` (
   PRIMARY KEY (`id`),
   KEY `combo_food_user_id_idx` (`user_id`),
   CONSTRAINT `combo_food_user_id` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -46,13 +44,14 @@ CREATE TABLE `combo_food_food_amount` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `combo_food_id` int(11) DEFAULT NULL,
   `food_id` int(11) DEFAULT NULL,
-  `metric_amount` decimal(5,2) DEFAULT NULL,
+  `amount` decimal(5,2) DEFAULT NULL,
+  `unit` varchar(10) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `combo_food_food_combo_food_id_idx` (`combo_food_id`),
   KEY `combo_food_food_food_id_idx` (`food_id`),
   CONSTRAINT `combo_food_food_amount_combo_food_id` FOREIGN KEY (`combo_food_id`) REFERENCES `combo_food` (`id`) ON DELETE CASCADE,
   CONSTRAINT `combo_food_food_amount_food_id` FOREIGN KEY (`food_id`) REFERENCES `food` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=97 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -75,7 +74,7 @@ CREATE TABLE `combo_food_portion` (
   PRIMARY KEY (`id`),
   KEY `combo_food_portion_combo_food_id_idx` (`combo_food_id`),
   CONSTRAINT `combo_food_portion_combo_food_id` FOREIGN KEY (`combo_food_id`) REFERENCES `combo_food` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=49 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -95,7 +94,7 @@ CREATE TABLE `food` (
   PRIMARY KEY (`id`),
   KEY `food_user_id_idx` (`user_id`),
   CONSTRAINT `food_user_id` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=461 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -114,7 +113,7 @@ CREATE TABLE `nutrient` (
   PRIMARY KEY (`id`),
   KEY `nutrient_food_id_idx` (`food_id`),
   CONSTRAINT `nutrient_food_id` FOREIGN KEY (`food_id`) REFERENCES `food` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=3041 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -151,7 +150,7 @@ CREATE TABLE `portion` (
   PRIMARY KEY (`id`),
   KEY `portion_food_id_idx` (`food_id`),
   CONSTRAINT `portion_food_id` FOREIGN KEY (`food_id`) REFERENCES `food` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=975 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -166,7 +165,7 @@ CREATE TABLE `user` (
   `username` varchar(45) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `username_UNIQUE` (`username`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -178,4 +177,4 @@ CREATE TABLE `user` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-07-02 21:16:21
+-- Dump completed on 2020-07-04 15:53:33

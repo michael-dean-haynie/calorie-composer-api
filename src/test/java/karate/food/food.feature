@@ -209,6 +209,16 @@ Feature: Tests crud operations for Food type
     # clean up
     * call read('classpath:callable/crud/food/delete-food.feature') { id: '#(response.id)'}
 
+  Scenario: Update a food with collection elements in a different order
+    When def createFoodResult = call read('classpath:callable/crud/food/create-food.feature') { request: '#(createFoodPayload)'}
+
+    # swap order of portions
+    * copy responseCopy = createFoodResult.response
+    * set createFoodResult.response.portions[0] = responseCopy.portions[1]
+    * set createFoodResult.response.portions[1] = responseCopy.portions[0]
+
+    When call read('classpath:callable/crud/food/update-food.feature') { request: '#(createFoodResult.response)'}
+
   # TODO: Tests adding / removing portions too.
 
   # ---------------------------------------------

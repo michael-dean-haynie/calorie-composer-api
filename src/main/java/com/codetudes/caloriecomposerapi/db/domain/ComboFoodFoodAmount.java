@@ -7,6 +7,7 @@ import lombok.ToString;
 import javax.persistence.*;
 import javax.validation.constraints.DecimalMax;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.math.BigDecimal;
 
 @Data
@@ -29,8 +30,11 @@ public class ComboFoodFoodAmount {
     @JoinColumn(name="food_id")
     private Food food;
 
-    @NotNull
+    @Size(max=10)
+    @Column(name="unit")
+    private String unit;
+
     @DecimalMax("999.99")
-    @Column(name="metric_amount")
-    private BigDecimal metricAmount;
+    @Column(name="amount")
+    private BigDecimal amount;
 }

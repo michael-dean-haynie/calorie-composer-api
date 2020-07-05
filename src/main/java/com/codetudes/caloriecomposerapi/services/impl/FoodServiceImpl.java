@@ -2,12 +2,11 @@ package com.codetudes.caloriecomposerapi.services.impl;
 
 import com.codetudes.caloriecomposerapi.contracts.FoodDTO;
 import com.codetudes.caloriecomposerapi.db.domain.Food;
-import com.codetudes.caloriecomposerapi.db.domain.Nutrient;
-import com.codetudes.caloriecomposerapi.db.domain.Portion;
 import com.codetudes.caloriecomposerapi.db.domain.User;
 import com.codetudes.caloriecomposerapi.db.repositories.FoodRepository;
 import com.codetudes.caloriecomposerapi.db.repositories.UserRepository;
 import com.codetudes.caloriecomposerapi.services.FoodService;
+import com.codetudes.caloriecomposerapi.util.mergers.FoodMerger;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,17 +18,17 @@ import org.springframework.web.server.ResponseStatusException;
 
 import java.lang.reflect.Type;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 public class FoodServiceImpl implements FoodService {
 
     @Autowired
     ModelMapper modelMapper;
+    @Autowired
+    FoodMerger foodMerger;
 
     @Autowired
     FoodRepository foodRepository;
-
     @Autowired
     UserRepository userRepository;
 
@@ -70,28 +69,9 @@ public class FoodServiceImpl implements FoodService {
         Food existingFood = foodRepository.findById(foodDTO.getId()).orElse(null);
         throw404IfNull(existingFood);
 
-        modelMapper.map(foodDTO, existingFood);
+        Food mergedFood = foodMerger.merge(foodDTO, existingFood);
 
-        // Clear and re-create nutrient entities
-        existingFood.getNutrients().clear();
-        existingFood.setNutrients(foodDTO.getNutrients().stream()
-                .map(nutrientDTO -> modelMapper.map(nutrientDTO, Nutrient.class))
-                .collect(Collectors.toList()));
-
-        // Nutrients logically and physically own the relationship. Set it here.
-        existingFood.getNutrients().forEach(nutrient -> nutrient.setFood(existingFood));
-
-        // Clear and re-create portion entities
-        existingFood.getPortions().clear();
-        existingFood.setPortions(foodDTO.getPortions().stream()
-                .map(portionDTO -> modelMapper.map(portionDTO, Portion.class))
-                .collect(Collectors.toList()));
-
-        // Portions logically and physically own the relationship. Set it here.
-        existingFood.getPortions().forEach(portion -> portion.setFood(existingFood));
-
-
-        Food updatedFood = foodRepository.save(existingFood);
+        Food updatedFood = foodRepository.save(mergedFood);
 
         return modelMapper.map(updatedFood, FoodDTO.class);
     }

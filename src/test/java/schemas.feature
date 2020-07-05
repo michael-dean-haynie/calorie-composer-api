@@ -52,7 +52,8 @@ Feature: Prepare schemas
 		{
 			id: '##number',
 			food: '#(schemas.food)',
-			metricAmount: '##number',
+			unit: '##string',
+			amount: '##number',
 		}
 		"""
 
