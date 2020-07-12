@@ -34,11 +34,11 @@ public class Nutrient {
 
     @NotBlank
     @Size(max=45)
-    @Column(name="unit_name")
-    private String unitName;
+    @Column(name="unit")
+    private String unit;
 
     @NotNull
     @DecimalMax("999.99")
-    @Column(name="amount")
-    private BigDecimal amount;
+    @Column(name="scalar")
+    private BigDecimal scalar;
 }

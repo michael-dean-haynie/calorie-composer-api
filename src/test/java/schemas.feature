@@ -11,8 +11,8 @@ Feature: Prepare schemas
 		{
             id: '##number',
             name: '#string',
-            unitName: '#string',
-            amount: '#number'
+            unit: '#string',
+            scalar: '#number'
 		}
 		"""
 
@@ -23,10 +23,10 @@ Feature: Prepare schemas
 			isNutrientRefPortion: '#boolean',
             isServingSizePortion: '#boolean',
             metricUnit: '#string',
-            metricAmount: '#number',
+            metricScalar: '#number',
             householdMeasure: '##string',
             householdUnit: '##string',
-            householdAmount: '##number'
+            householdScalar: '##number'
 		}
 		"""
 
@@ -53,7 +53,7 @@ Feature: Prepare schemas
 			id: '##number',
 			food: '#(schemas.food)',
 			unit: '##string',
-			amount: '##number',
+			scalar: '##number',
 		}
 		"""
 
@@ -64,10 +64,9 @@ Feature: Prepare schemas
 			isFoodAmountRefPortion: '#boolean',
             isServingSizePortion: '#boolean',
 			metricUnit: '##string',
-            metricAmount: '##number',
-            householdMeasure: '##string',
+            metricScalar: '##number',
             householdUnit: '##string',
-            householdAmount: '##number'
+            householdScalar: '##number'
 		}
 		"""
 

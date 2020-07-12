@@ -5,37 +5,38 @@
     {
       "food": null,
       "unit": "g",
-      "amount": 255
+      "scalar": 255
     },
     {
       "food": null,
       "unit": "g",
-      "amount": 28
+      "scalar": 28
     },
     {
       "food": null,
       "unit": "g",
-      "amount": 65
+      "scalar": 65
     },
     {
       "food": null,
       "unit": "g",
-      "amount": 504
+      "scalar": 504
     }
   ],
   "portions": [
     {
       "metricUnit": "g",
-      "metricAmount": 852,
+      "metricScalar": 852,
       "isFoodAmountRefPortion": true,
       "isServingSizePortion": false
     },
     {
       "metricUnit": "g",
-      "metricAmount": 121.7,
+      "metricScalar": 121.7,
       "isFoodAmountRefPortion": false,
       "isServingSizePortion": true,
-      "householdMeasure": "1 SANDWICH"
+      "householdUnit": "sandwich",
+      "householdScalar": 1
     }
   ]
 }

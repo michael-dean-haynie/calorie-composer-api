@@ -6,36 +6,36 @@
   "nutrients": [
     {
       "name": "Name A",
-      "unitName": "Unit Name A",
-      "amount": "56.78"
+      "unit": "Unit Name A",
+      "scalar": "56.78"
     },
     {
       "name": "Name B",
-      "unitName": "Unit Name B",
-      "amount": "90.12"
+      "unit": "Unit Name B",
+      "scalar": "90.12"
     }
   ],
   "portions": [
     {
       "metricUnit": "g",
-      "metricAmount": 100,
+      "metricScalar": 100,
       "isNutrientRefPortion": true,
       "isServingSizePortion": false
     },
     {
       "metricUnit": "g",
-      "metricAmount": 200,
+      "metricScalar": 200,
       "isNutrientRefPortion": false,
       "isServingSizePortion": true,
       "description": "One half package"
     },
     {
       "metricUnit": "g",
-      "metricAmount": 50,
+      "metricScalar": 50,
       "isNutrientRefPortion": false,
       "isServingSizePortion": false,
       "householdUnit": "crackers",
-      "householdAmount": 4
+      "householdScalar": 4
     }
   ]
 }

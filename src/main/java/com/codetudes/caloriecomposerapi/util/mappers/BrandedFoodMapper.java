@@ -32,13 +32,13 @@ public class BrandedFoodMapper {
         PortionDTO refPortion = new PortionDTO();
         refPortion.setIsNutrientRefPortion(true);
         refPortion.setMetricUnit(fdcBrandedFoodDTO.getServingSizeUnit());
-        refPortion.setMetricAmount(new BigDecimal(100));
+        refPortion.setMetricScalar(new BigDecimal(100));
         foodDTO.getPortions().add(refPortion);
 
         PortionDTO ssPortion = new PortionDTO();
         ssPortion.setIsServingSizePortion(true);
         ssPortion.setMetricUnit(fdcBrandedFoodDTO.getServingSizeUnit());
-        ssPortion.setMetricAmount(fdcBrandedFoodDTO.getServingSize());
+        ssPortion.setMetricScalar(fdcBrandedFoodDTO.getServingSize());
         ssPortion.setHouseholdMeasure(fdcBrandedFoodDTO.getHouseholdServingFullText());
         foodDTO.getPortions().add(ssPortion);
 
@@ -46,8 +46,8 @@ public class BrandedFoodMapper {
         foodDTO.setNutrients(fdcBrandedFoodDTO.getFoodNutrients().stream().map(fdcFoodNutrientDTO -> {
             NutrientDTO nutrientDTO = new NutrientDTO();
             nutrientDTO.setName(fdcFoodNutrientDTO.getNutrient().getName());
-            nutrientDTO.setUnitName(fdcFoodNutrientDTO.getNutrient().getUnitName());
-            nutrientDTO.setAmount(fdcFoodNutrientDTO.getAmount());
+            nutrientDTO.setUnit(fdcFoodNutrientDTO.getNutrient().getUnitName());
+            nutrientDTO.setScalar(fdcFoodNutrientDTO.getAmount());
             return nutrientDTO;
         }).collect(Collectors.toList()));
 

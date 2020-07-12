@@ -21,7 +21,7 @@ public class PortionDTO {
     private String metricUnit;
 
     @DecimalMax("999.99")
-    private BigDecimal metricAmount;
+    private BigDecimal metricScalar;
 
     @Size(max=100)
     private String householdMeasure;
@@ -30,5 +30,5 @@ public class PortionDTO {
     private String householdUnit;
 
     @DecimalMax("999.99")
-    private BigDecimal householdAmount;
+    private BigDecimal householdScalar;
 }

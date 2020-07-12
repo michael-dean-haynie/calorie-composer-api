@@ -9,6 +9,4 @@ public class FdcFoodNutrientDTO {
     private FdcNutrientDTO nutrient;
 
     private BigDecimal amount;
-
-//    private FdcFoodNutrientDerivationDTO foodNutrientDerivation;
 }

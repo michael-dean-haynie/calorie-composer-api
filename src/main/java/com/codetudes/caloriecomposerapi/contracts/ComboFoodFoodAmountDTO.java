@@ -16,6 +16,6 @@ public class ComboFoodFoodAmountDTO {
     private String unit;
 
     @DecimalMax("999.99")
-    private BigDecimal amount;
+    private BigDecimal scalar;
 
 }

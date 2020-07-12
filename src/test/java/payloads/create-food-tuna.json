@@ -6,55 +6,55 @@
   "nutrients": [
     {
       "name": "Protein",
-      "unitName": "g",
-      "amount": 17.61
+      "unit": "g",
+      "scalar": 17.61
     },
     {
       "name": "Total lipid (fat)",
-      "unitName": "g",
-      "amount": 0.35
+      "unit": "g",
+      "scalar": 0.35
     },
     {
       "name": "Energy",
-      "unitName": "kcal",
-      "amount": 77.0
+      "unit": "kcal",
+      "scalar": 77.0
     },
     {
       "name": "Sugars, total including NLEA",
-      "unitName": "g",
-      "amount": 0.0
+      "unit": "g",
+      "scalar": 0.0
     },
     {
       "name": "Fiber, total dietary",
-      "unitName": "g",
-      "amount": 0.0
+      "unit": "g",
+      "scalar": 0.0
     },
     {
       "name": "Sodium, Na",
-      "unitName": "mg",
-      "amount": 268.0
+      "unit": "mg",
+      "scalar": 268.0
     },
     {
       "name": "Cholesterol",
-      "unitName": "mg",
-      "amount": 39.0
+      "unit": "mg",
+      "scalar": 39.0
     },
     {
       "name": "Fatty acids, total trans",
-      "unitName": "g",
-      "amount": 0.0
+      "unit": "g",
+      "scalar": 0.0
     }
   ],
   "portions": [
     {
       "metricUnit": "g",
-      "metricAmount": 100,
+      "metricScalar": 100,
       "isNutrientRefPortion": true,
       "isServingSizePortion": false
     },
     {
       "metricUnit": "g",
-      "metricAmount": 142.0,
+      "metricScalar": 142.0,
       "isNutrientRefPortion": false,
       "isServingSizePortion": true,
       "householdMeasure": "1 CAN"

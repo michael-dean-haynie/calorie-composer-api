@@ -16,6 +16,7 @@ Feature: Tests crud operations for ComboFood type
   # Create
   # ---------------------------------------------
 
+  @focus
   Scenario: Create a comboFood item (Tuna Sandwich)
     # Create foods
     When def createFoodResult = call read('classpath:callable/crud/food/create-food.feature') { request: '#(tunaPL)'}
@@ -115,15 +116,14 @@ Feature: Tests crud operations for ComboFood type
       | description                        | utils.rs(5)                                         |
       # nested food amounts
       | foodAmounts[0].unit                | utils.rs(5)                                         |
-      | foodAmounts[0].amount              | utils.rd()                                          |
+      | foodAmounts[0].scalar              | utils.rd()                                          |
 #      # nested portions
       | portions[0].metricUnit             | utils.rs(5)                                         |
-      | portions[0].metricAmount           | utils.rd()                                          |
+      | portions[0].metricScalar           | utils.rd()                                          |
       | portions[0].isFoodAmountRefPortion | !tunaSandwichPPL.portions[0].isFoodAmountRefPortion |
       | portions[1].isServingSizePortion   | !tunaSandwichPPL.portions[0].isServingSizePortion   |
-      | portions[1].householdMeasure       | utils.rs(5)                                         |
       | portions[1].householdUnit          | utils.rs(5)                                         |
-      | portions[1].householdAmount        | utils.rd()                                          |
+      | portions[1].householdScalar        | utils.rd()                                          |
 
 
   # ---------------------------------------------

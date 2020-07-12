@@ -18,9 +18,9 @@ public class NutrientDTO {
 
     @NotBlank
     @Size(max=45)
-    private String unitName;
+    private String unit;
 
     @NotNull
     @DecimalMax("999.99")
-    private BigDecimal amount;
+    private BigDecimal scalar;
 }

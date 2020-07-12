@@ -44,23 +44,23 @@ Feature: Tests crud operations for Food type
     When call read('classpath:callable/crud/food/delete-food.feature') { id: '#(response.id)'}
 
     Examples:
-      | fieldName                | fieldValue  |
-      | fdcId                    | utils.rs(5) |
-      | description              | utils.rs(5) |
-      | brandOwner               | utils.rs(5) |
-      | ingredients              | utils.rs(5) |
+      | fieldName                        | fieldValue                                          |
+      | fdcId                            | utils.rs(5)                                         |
+      | description                      | utils.rs(5)                                         |
+      | brandOwner                       | utils.rs(5)                                         |
+      | ingredients                      | utils.rs(5)                                         |
       # nested nutrients
       | nutrients[0].name                | utils.rs(5)                                         |
-      | nutrients[0].unitName            | utils.rs(5)                                         |
-      | nutrients[1].amount              | utils.rd()                                          |
+      | nutrients[0].unit                | utils.rs(5)                                         |
+      | nutrients[1].scalar              | utils.rd()                                          |
       # nested portions
-      | portions[0].metricUnit         | utils.rs(5)                                         |
-      | portions[0].metricAmount       | utils.rd()                                          |
+      | portions[0].metricUnit           | utils.rs(5)                                         |
+      | portions[0].metricScalar         | utils.rd()                                          |
       | portions[0].isNutrientRefPortion | !createFoodPayload.portions[0].isNutrientRefPortion |
       | portions[1].isServingSizePortion | !createFoodPayload.portions[0].isServingSizePortion |
-      | portions[1].householdMeasure          | utils.rs(5)                                         |
-      | portions[2].householdUnit      | utils.rs(5)                                         |
-      | portions[2].householdAmount    | utils.rd()                                          |
+      | portions[1].householdMeasure     | utils.rs(5)                                         |
+      | portions[2].householdUnit        | utils.rs(5)                                         |
+      | portions[2].householdScalar      | utils.rd()                                          |
 
   # ---------------------------------------------
   # Read
@@ -127,16 +127,16 @@ Feature: Tests crud operations for Food type
       | ingredients                      | utils.rs(5)                                         |
       # nested nutrients
       | nutrients[0].name                | utils.rs(5)                                         |
-      | nutrients[0].unitName            | utils.rs(5)                                         |
-      | nutrients[1].amount              | utils.rd()                                          |
+      | nutrients[0].unit                | utils.rs(5)                                         |
+      | nutrients[1].scalar              | utils.rd()                                          |
       # nested portions
-      | portions[0].metricUnit         | utils.rs(5)                                         |
-      | portions[0].metricAmount       | utils.rd()                                          |
+      | portions[0].metricUnit           | utils.rs(5)                                         |
+      | portions[0].metricScalar         | utils.rd()                                          |
       | portions[0].isNutrientRefPortion | !createFoodPayload.portions[0].isNutrientRefPortion |
       | portions[1].isServingSizePortion | !createFoodPayload.portions[0].isServingSizePortion |
-      | portions[1].householdMeasure          | utils.rs(5)                                         |
-      | portions[2].householdUnit      | utils.rs(5)                                         |
-      | portions[2].householdAmount    | utils.rd()                                          |
+      | portions[1].householdMeasure     | utils.rs(5)                                         |
+      | portions[2].householdUnit        | utils.rs(5)                                         |
+      | portions[2].householdScalar      | utils.rd()                                          |
 
 
   Scenario: Update a food item by removing a nutrient

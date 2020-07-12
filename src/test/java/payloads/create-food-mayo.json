@@ -6,95 +6,95 @@
   "nutrients": [
     {
       "name": "Carbohydrate, by difference",
-      "unitName": "g",
-      "amount": 0.0
+      "unit": "g",
+      "scalar": 0.0
     },
     {
       "name": "Fiber, total dietary",
-      "unitName": "g",
-      "amount": 0.0
+      "unit": "g",
+      "scalar": 0.0
     },
     {
       "name": "Calcium, Ca",
-      "unitName": "mg",
-      "amount": 0.0
+      "unit": "mg",
+      "scalar": 0.0
     },
     {
       "name": "Iron, Fe",
-      "unitName": "mg",
-      "amount": 0.0
+      "unit": "mg",
+      "scalar": 0.0
     },
     {
       "name": "Vitamin A, IU",
-      "unitName": "IU",
-      "amount": 0.0
+      "unit": "IU",
+      "scalar": 0.0
     },
     {
       "name": "Vitamin C, total ascorbic acid",
-      "unitName": "mg",
-      "amount": 0.0
+      "unit": "mg",
+      "scalar": 0.0
     },
     {
       "name": "Protein",
-      "unitName": "g",
-      "amount": 0.0
+      "unit": "g",
+      "scalar": 0.0
     },
     {
       "name": "Total lipid (fat)",
-      "unitName": "g",
-      "amount": 78.57
+      "unit": "g",
+      "scalar": 78.57
     },
     {
       "name": "Energy",
-      "unitName": "kcal",
-      "amount": 714.0
+      "unit": "kcal",
+      "scalar": 714.0
     },
     {
       "name": "Sugars, total including NLEA",
-      "unitName": "g",
-      "amount": 0.0
+      "unit": "g",
+      "scalar": 0.0
     },
     {
       "name": "Sodium, Na",
-      "unitName": "mg",
-      "amount": 571.0
+      "unit": "mg",
+      "scalar": 571.0
     },
     {
       "name": "Cholesterol",
-      "unitName": "mg",
-      "amount": 71.0
+      "unit": "mg",
+      "scalar": 71.0
     },
     {
       "name": "Fatty acids, total trans",
-      "unitName": "g",
-      "amount": 0.0
+      "unit": "g",
+      "scalar": 0.0
     },
     {
       "name": "Fatty acids, total saturated",
-      "unitName": "g",
-      "amount": 10.71
+      "unit": "g",
+      "scalar": 10.71
     },
     {
       "name": "Fatty acids, total monounsaturated",
-      "unitName": "g",
-      "amount": 17.86
+      "unit": "g",
+      "scalar": 17.86
     },
     {
       "name": "Fatty acids, total polyunsaturated",
-      "unitName": "g",
-      "amount": 42.86
+      "unit": "g",
+      "scalar": 42.86
     }
   ],
   "portions": [
     {
       "metricUnit": "g",
-      "metricAmount": 100,
+      "metricScalar": 100,
       "isNutrientRefPortion": true,
       "isServingSizePortion": false
     },
     {
       "metricUnit": "g",
-      "metricAmount": 14.0,
+      "metricScalar": 14.0,
       "isNutrientRefPortion": false,
       "isServingSizePortion": true,
       "householdMeasure": "1 Tbsp"

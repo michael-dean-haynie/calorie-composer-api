@@ -35,6 +35,6 @@ public class ComboFoodFoodAmount {
     private String unit;
 
     @DecimalMax("999.99")
-    @Column(name="amount")
-    private BigDecimal amount;
+    @Column(name="scalar")
+    private BigDecimal scalar;
 }

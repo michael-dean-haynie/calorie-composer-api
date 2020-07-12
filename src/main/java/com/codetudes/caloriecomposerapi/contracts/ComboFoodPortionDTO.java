@@ -21,14 +21,11 @@ public class ComboFoodPortionDTO {
     private String metricUnit;
 
     @DecimalMax("999.99")
-    private BigDecimal metricAmount;
-
-    @Size(max=100)
-    private String householdMeasure;
+    private BigDecimal metricScalar;
 
     @Size(max=45)
     private String householdUnit;
 
     @DecimalMax("999.99")
-    private BigDecimal householdAmount;
+    private BigDecimal householdScalar;
 }

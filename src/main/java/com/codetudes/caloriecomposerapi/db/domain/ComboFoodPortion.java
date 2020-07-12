@@ -39,18 +39,14 @@ public class ComboFoodPortion {
     private String metricUnit;
 
     @DecimalMax("999.99")
-    @Column(name="metric_amount")
-    private BigDecimal metricAmount;
-
-    @Size(max=100)
-    @Column(name="household_measure")
-    private String householdMeasure;
+    @Column(name="metric_scalar")
+    private BigDecimal metricScalar;
 
     @Size(max=45)
     @Column(name="household_unit")
     private String householdUnit;
 
     @DecimalMax("999.99")
-    @Column(name="household_amount")
-    private BigDecimal householdAmount;
+    @Column(name="household_scalar")
+    private BigDecimal householdScalar;
 }
