@@ -1,8 +1,8 @@
 package com.codetudes.caloriecomposerapi.util.mappers;
 
+import com.codetudes.caloriecomposerapi.contracts.ConversionRatioDTO;
 import com.codetudes.caloriecomposerapi.contracts.FoodDTO;
 import com.codetudes.caloriecomposerapi.contracts.NutrientDTO;
-import com.codetudes.caloriecomposerapi.contracts.PortionDTO;
 import com.codetudes.caloriecomposerapi.contracts.fdc.FdcBrandedFoodDTO;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,21 +26,23 @@ public class BrandedFoodMapper {
 
         FdcBrandedFoodDTO fdcBrandedFoodDTO = objectMapper.convertValue(fdcResponse, FdcBrandedFoodDTO.class);
 
-        // add portions
-        foodDTO.setPortions(new ArrayList<>());
+        // Add conversion ratios
+        foodDTO.setConversionRatios(new ArrayList<>());
 
-        PortionDTO refPortion = new PortionDTO();
-        refPortion.setIsNutrientRefPortion(true);
-        refPortion.setMetricUnit(fdcBrandedFoodDTO.getServingSizeUnit());
-        refPortion.setMetricScalar(new BigDecimal(100));
-        foodDTO.getPortions().add(refPortion);
+        ConversionRatioDTO constituentsRefCR = new ConversionRatioDTO();
+        constituentsRefCR.setAmountA(new BigDecimal(1));
+        constituentsRefCR.setUnitA("CONSTITUENTS_REF");
+        constituentsRefCR.setAmountB(new BigDecimal(100));
+        constituentsRefCR.setUnitB(fdcBrandedFoodDTO.getServingSizeUnit());
+        foodDTO.getConversionRatios().add(constituentsRefCR);
 
-        PortionDTO ssPortion = new PortionDTO();
-        ssPortion.setIsServingSizePortion(true);
-        ssPortion.setMetricUnit(fdcBrandedFoodDTO.getServingSizeUnit());
-        ssPortion.setMetricScalar(fdcBrandedFoodDTO.getServingSize());
-        ssPortion.setHouseholdMeasure(fdcBrandedFoodDTO.getHouseholdServingFullText());
-        foodDTO.getPortions().add(ssPortion);
+        ConversionRatioDTO servingSizeRefCR = new ConversionRatioDTO();
+        servingSizeRefCR.setAmountA(new BigDecimal(1));
+        servingSizeRefCR.setUnitA("SERVING_SIZE_REF");
+        servingSizeRefCR.setAmountB(fdcBrandedFoodDTO.getServingSize());
+        servingSizeRefCR.setUnitB(fdcBrandedFoodDTO.getServingSizeUnit());
+        // TODO: Add household measure back in somehow like maybe parsing fdcBrandedFoodDTO.getHouseholdServingFullText()
+        foodDTO.getConversionRatios().add(servingSizeRefCR);
 
         // flatten and add nutrients
         foodDTO.setNutrients(fdcBrandedFoodDTO.getFoodNutrients().stream().map(fdcFoodNutrientDTO -> {

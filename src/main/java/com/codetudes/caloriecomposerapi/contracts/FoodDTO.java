@@ -29,5 +29,5 @@ public class FoodDTO {
     private List<NutrientDTO> nutrients = new ArrayList();
 
     @Valid
-    private List<PortionDTO> portions = new ArrayList();
+    private List<ConversionRatioDTO> conversionRatios = new ArrayList();
 }

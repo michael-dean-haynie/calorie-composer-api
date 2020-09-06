@@ -39,8 +39,8 @@ public class FoodServiceImpl implements FoodService {
         // Nutrients logically and physically own the relationship. Set it here.
         food.getNutrients().forEach(nutrient -> nutrient.setFood(food));
 
-        // Portions logically and physically own the relationship. Set it here.
-        food.getPortions().forEach(portion -> portion.setFood(food));
+        // Conversion ratios logically and physically own the relationship. Set it here.
+        food.getConversionRatios().forEach(conversionRatio -> conversionRatio.setFood(food));
 
         // TODO: Don't hard code this
         List<User> users = userRepository.findAll();

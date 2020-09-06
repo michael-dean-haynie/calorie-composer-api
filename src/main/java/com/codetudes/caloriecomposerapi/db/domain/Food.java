@@ -55,7 +55,7 @@ public class Food {
     @Setter(AccessLevel.NONE)
     @OneToMany(mappedBy="food", cascade = CascadeType.ALL, orphanRemoval = true)
     // default to empty array list to appease hibernate state management voodoo
-    private List<Portion> portions = new ArrayList();
+    private List<ConversionRatio> conversionRatios = new ArrayList();
 
     // opt to swap out contents instead of re-assigning collection
     // this to appease the hibernate state management voodoo
@@ -69,11 +69,11 @@ public class Food {
 
     // opt to swap out contents instead of re-assigning collection
     // this to appease the hibernate state management voodoo
-    public void setPortions(List<Portion> portions) {
-        if (null == this.portions){
-            this.portions = portions;
+    public void setConversionRatios(List<ConversionRatio> conversionRatios) {
+        if (null == this.conversionRatios){
+            this.conversionRatios = conversionRatios;
         }
-        this.portions.clear();
-        this.portions.addAll(portions);
+        this.conversionRatios.clear();
+        this.conversionRatios.addAll(conversionRatios);
     }
 }

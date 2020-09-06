@@ -16,7 +16,7 @@ public class MergeMapper extends ModelMapper {
         super();
         // Food DTO -> Entity: skip collections
         this.typeMap(FoodDTO.class, Food.class)
-                .addMappings(mpr -> mpr.skip(Food::setPortions))
+                .addMappings(mpr -> mpr.skip(Food::setConversionRatios))
                 .addMappings(mpr -> mpr.skip(Food::setNutrients));
 
         // TODO: ComboFood

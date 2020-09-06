@@ -79,6 +79,26 @@ CREATE TABLE `combo_food_portion` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
+-- Table structure for table `conversion_ratio`
+--
+
+DROP TABLE IF EXISTS `conversion_ratio`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `conversion_ratio` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `food_id` int(11) DEFAULT NULL,
+  `amount_a` decimal(5,2) NOT NULL,
+  `unit_a` varchar(20) NOT NULL,
+  `amount_b` decimal(5,2) NOT NULL,
+  `unit_b` varchar(20) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `conversion_ratio_food_id_idx` (`food_id`),
+  CONSTRAINT `conversion_ratio_food_id` FOREIGN KEY (`food_id`) REFERENCES `food` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
 -- Table structure for table `food`
 --
 
@@ -95,7 +115,7 @@ CREATE TABLE `food` (
   PRIMARY KEY (`id`),
   KEY `food_user_id_idx` (`user_id`),
   CONSTRAINT `food_user_id` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -114,7 +134,7 @@ CREATE TABLE `nutrient` (
   PRIMARY KEY (`id`),
   KEY `nutrient_food_id_idx` (`food_id`),
   CONSTRAINT `nutrient_food_id` FOREIGN KEY (`food_id`) REFERENCES `food` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=55 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -132,29 +152,6 @@ CREATE TABLE `plan` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Table structure for table `portion`
---
-
-DROP TABLE IF EXISTS `portion`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `portion` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `food_id` int(11) DEFAULT NULL,
-  `is_nutrient_ref_portion` int(11) NOT NULL,
-  `is_serving_size_portion` int(11) NOT NULL,
-  `metric_unit` varchar(10) NOT NULL,
-  `metric_scalar` decimal(5,2) NOT NULL,
-  `household_measure` varchar(100) DEFAULT NULL,
-  `household_unit` varchar(45) DEFAULT NULL,
-  `household_scalar` decimal(5,2) DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `portion_food_id_idx` (`food_id`),
-  CONSTRAINT `portion_food_id` FOREIGN KEY (`food_id`) REFERENCES `food` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
 -- Table structure for table `user`
 --
 
@@ -166,7 +163,7 @@ CREATE TABLE `user` (
   `username` varchar(45) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `username_UNIQUE` (`username`)
-) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -178,4 +175,4 @@ CREATE TABLE `user` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-07-11 20:05:47
+-- Dump completed on 2020-09-06 18:17:24

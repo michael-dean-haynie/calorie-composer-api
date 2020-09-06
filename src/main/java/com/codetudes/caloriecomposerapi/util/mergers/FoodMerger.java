@@ -2,9 +2,9 @@ package com.codetudes.caloriecomposerapi.util.mergers;
 
 import com.codetudes.caloriecomposerapi.config.MergeMapper;
 import com.codetudes.caloriecomposerapi.contracts.FoodDTO;
+import com.codetudes.caloriecomposerapi.db.domain.ConversionRatio;
 import com.codetudes.caloriecomposerapi.db.domain.Food;
 import com.codetudes.caloriecomposerapi.db.domain.Nutrient;
-import com.codetudes.caloriecomposerapi.db.domain.Portion;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -31,14 +31,14 @@ public class FoodMerger {
         // Nutrients logically and physically own the relationship. Set it here.
         food.getNutrients().forEach(nutrient -> nutrient.setFood(food));
 
-        // Clear and re-create portion entities
-        food.getPortions().clear();
-        food.setPortions(foodDTO.getPortions().stream()
-                .map(portionDTO -> modelMapper.map(portionDTO, Portion.class))
+        // Clear and re-create conversion ratio entities
+        food.getConversionRatios().clear();
+        food.setConversionRatios(foodDTO.getConversionRatios().stream()
+                .map(conversionRatioDTO -> modelMapper.map(conversionRatioDTO, ConversionRatio.class))
                 .collect(Collectors.toList()));
 
-        // Portions logically and physically own the relationship. Set it here.
-        food.getPortions().forEach(portion -> portion.setFood(food));
+        // Conversion ratios logically and physically own the relationship. Set it here.
+        food.getConversionRatios().forEach(conversionRatio -> conversionRatio.setFood(food));
 
         return food;
     }
