@@ -25,21 +25,23 @@ public class ConversionRatio {
     @JoinColumn(name="food_id")
     private Food food;
 
-    @NotNull
     @DecimalMax("999.99")
     @Column(name="amount_a")
     private BigDecimal amountA;
 
-    @NotNull
     @Column(name="unit_a")
     private String unitA;
 
-    @NotNull
+    @Column(name="free_form_value_a")
+    private String freeFormValueA;
+
     @DecimalMax("999.99")
     @Column(name="amount_b")
     private BigDecimal amountB;
 
-    @NotNull
     @Column(name="unit_b")
     private String unitB;
+
+    @Column(name="free_form_value_b")
+    private String freeFormValueB;
 }

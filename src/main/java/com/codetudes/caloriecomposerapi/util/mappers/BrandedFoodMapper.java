@@ -29,6 +29,7 @@ public class BrandedFoodMapper {
         // Add conversion ratios
         foodDTO.setConversionRatios(new ArrayList<>());
 
+        // Add conversion ratio for constituents reference size
         ConversionRatioDTO constituentsRefCR = new ConversionRatioDTO();
         constituentsRefCR.setAmountA(new BigDecimal(1));
         constituentsRefCR.setUnitA("CONSTITUENTS_REF");
@@ -36,13 +37,24 @@ public class BrandedFoodMapper {
         constituentsRefCR.setUnitB(fdcBrandedFoodDTO.getServingSizeUnit());
         foodDTO.getConversionRatios().add(constituentsRefCR);
 
+        // Add conversion ratio for serving size reference
         ConversionRatioDTO servingSizeRefCR = new ConversionRatioDTO();
         servingSizeRefCR.setAmountA(new BigDecimal(1));
         servingSizeRefCR.setUnitA("SERVING_SIZE_REF");
         servingSizeRefCR.setAmountB(fdcBrandedFoodDTO.getServingSize());
         servingSizeRefCR.setUnitB(fdcBrandedFoodDTO.getServingSizeUnit());
-        // TODO: Add household measure back in somehow like maybe parsing fdcBrandedFoodDTO.getHouseholdServingFullText()
         foodDTO.getConversionRatios().add(servingSizeRefCR);
+
+        // Add conversion ratio for free-form household serving
+        if (null != fdcBrandedFoodDTO.getHouseholdServingFullText()) {
+            ConversionRatioDTO householdRefCR = new ConversionRatioDTO();
+            householdRefCR.setAmountA(new BigDecimal(1));
+            householdRefCR.setUnitA("SERVING_SIZE_REF");
+            householdRefCR.setFreeFormValueB(fdcBrandedFoodDTO.getHouseholdServingFullText());
+            foodDTO.getConversionRatios().add(householdRefCR);
+        }
+
+
 
         // flatten and add nutrients
         foodDTO.setNutrients(fdcBrandedFoodDTO.getFoodNutrients().stream().map(fdcFoodNutrientDTO -> {

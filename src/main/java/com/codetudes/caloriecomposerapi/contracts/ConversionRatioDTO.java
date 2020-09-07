@@ -16,9 +16,15 @@ public class ConversionRatioDTO {
     @Size(max=20)
     private String unitA;
 
+    @Size(max=50)
+    private String freeFormValueA;
+
     @DecimalMax("999.99")
     private BigDecimal amountB;
 
     @Size(max=20)
     private String unitB;
+
+    @Size(max=50)
+    private String freeFormValueB;
 }
