@@ -32,7 +32,7 @@ public class BrandedFoodMapper {
         // Add conversion ratio for constituents reference size
         ConversionRatioDTO constituentsRefCR = new ConversionRatioDTO();
         constituentsRefCR.setAmountA(new BigDecimal(1));
-        constituentsRefCR.setUnitA("CONSTITUENTS_REF");
+        constituentsRefCR.setUnitA("CONSTITUENTS_SIZE_REF");
         constituentsRefCR.setAmountB(new BigDecimal(100));
         constituentsRefCR.setUnitB(fdcBrandedFoodDTO.getServingSizeUnit());
         foodDTO.getConversionRatios().add(constituentsRefCR);

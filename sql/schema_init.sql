@@ -47,7 +47,7 @@ CREATE TABLE `combo_food_food_amount` (
   `combo_food_id` int(11) DEFAULT NULL,
   `food_id` int(11) DEFAULT NULL,
   `scalar` decimal(5,2) DEFAULT NULL,
-  `unit` varchar(10) DEFAULT NULL,
+  `unit` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `combo_food_food_combo_food_id_idx` (`combo_food_id`),
   KEY `combo_food_food_food_id_idx` (`food_id`),
@@ -89,15 +89,15 @@ CREATE TABLE `conversion_ratio` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `food_id` int(11) DEFAULT NULL,
   `amount_a` decimal(5,2) DEFAULT NULL,
-  `unit_a` varchar(20) DEFAULT NULL,
+  `unit_a` varchar(45) DEFAULT NULL,
   `free_form_value_a` varchar(45) DEFAULT NULL,
   `amount_b` decimal(5,2) DEFAULT NULL,
-  `unit_b` varchar(20) DEFAULT NULL,
+  `unit_b` varchar(45) DEFAULT NULL,
   `free_form_value_b` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `conversion_ratio_food_id_idx` (`food_id`),
   CONSTRAINT `conversion_ratio_food_id` FOREIGN KEY (`food_id`) REFERENCES `food` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -117,7 +117,7 @@ CREATE TABLE `food` (
   PRIMARY KEY (`id`),
   KEY `food_user_id_idx` (`user_id`),
   CONSTRAINT `food_user_id` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -136,7 +136,7 @@ CREATE TABLE `nutrient` (
   PRIMARY KEY (`id`),
   KEY `nutrient_food_id_idx` (`food_id`),
   CONSTRAINT `nutrient_food_id` FOREIGN KEY (`food_id`) REFERENCES `food` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=217 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -165,7 +165,7 @@ CREATE TABLE `user` (
   `username` varchar(45) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `username_UNIQUE` (`username`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 

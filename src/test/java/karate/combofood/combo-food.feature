@@ -16,7 +16,6 @@ Feature: Tests crud operations for ComboFood type
   # Create
   # ---------------------------------------------
 
-  @focus
   Scenario: Create a comboFood item (Tuna Sandwich)
     # Create foods
     When def createFoodResult = call read('classpath:callable/crud/food/create-food.feature') { request: '#(tunaPL)'}

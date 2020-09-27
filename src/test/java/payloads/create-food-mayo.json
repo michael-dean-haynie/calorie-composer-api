@@ -85,19 +85,22 @@
       "scalar": 42.86
     }
   ],
-  "portions": [
+  "conversionRatios": [
     {
-      "metricUnit": "g",
-      "metricScalar": 100,
-      "isNutrientRefPortion": true,
-      "isServingSizePortion": false
+      "amountA": 1,
+      "unitA": "CONSTITUENTS_SIZE_REF",
+      "freeFormValueA": null,
+      "amountB": 100,
+      "unitB": "g",
+      "freeFormValueB": null
     },
     {
-      "metricUnit": "g",
-      "metricScalar": 14.0,
-      "isNutrientRefPortion": false,
-      "isServingSizePortion": true,
-      "householdMeasure": "1 Tbsp"
+      "amountA": 1,
+      "unitA": "SERVING_SIZE_REF",
+      "freeFormValueA": null,
+      "amountB": 14,
+      "unitB": "g",
+      "freeFormValueB": null
     }
   ]
 }

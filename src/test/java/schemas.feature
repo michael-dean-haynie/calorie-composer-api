@@ -16,6 +16,7 @@ Feature: Prepare schemas
 		}
 		"""
 
+
 		* set schemas.portion =
 		"""
 		{
@@ -30,6 +31,19 @@ Feature: Prepare schemas
 		}
 		"""
 
+		* set schemas.conversionRatio =
+		"""
+		{
+            id: '##number',
+			amountA: '##number',
+            unitA: '##string',
+            freeFormValueA: '##string',
+            amountB: '##number',
+            unitB: '##string',
+            freeFormValueB: '##string'
+		}
+		"""
+
 		* set schemas.food =
 		"""
 		{
@@ -39,7 +53,7 @@ Feature: Prepare schemas
 			brandOwner: '##string',
 			ingredients: '##string',
 			nutrients: '##[] schemas.nutrient',
-			portions: '##[] schemas.portion'
+			conversionRatios: '##[] schemas.conversionRatio'
 		}
 		"""
 

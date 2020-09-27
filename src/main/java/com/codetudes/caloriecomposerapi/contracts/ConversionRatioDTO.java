@@ -13,7 +13,7 @@ public class ConversionRatioDTO {
     @DecimalMax("999.99")
     private BigDecimal amountA;
 
-    @Size(max=20)
+    @Size(max=45)
     private String unitA;
 
     @Size(max=50)
@@ -22,7 +22,7 @@ public class ConversionRatioDTO {
     @DecimalMax("999.99")
     private BigDecimal amountB;
 
-    @Size(max=20)
+    @Size(max=45)
     private String unitB;
 
     @Size(max=50)

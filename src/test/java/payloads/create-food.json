@@ -15,27 +15,30 @@
       "scalar": "90.12"
     }
   ],
-  "portions": [
+  "conversionRatios": [
     {
-      "metricUnit": "g",
-      "metricScalar": 100,
-      "isNutrientRefPortion": true,
-      "isServingSizePortion": false
+      "amountA": 1,
+      "unitA": "CONSTITUENTS_SIZE_REF",
+      "freeFormValueA": null,
+      "amountB": 100,
+      "unitB": "g",
+      "freeFormValueB": null
     },
     {
-      "metricUnit": "g",
-      "metricScalar": 200,
-      "isNutrientRefPortion": false,
-      "isServingSizePortion": true,
-      "description": "One half package"
+      "amountA": 1,
+      "unitA": "SERVING_SIZE_REF",
+      "freeFormValueA": null,
+      "amountB": 200,
+      "unitB": "g",
+      "freeFormValueB": null
     },
     {
-      "metricUnit": "g",
-      "metricScalar": 50,
-      "isNutrientRefPortion": false,
-      "isServingSizePortion": false,
-      "householdUnit": "crackers",
-      "householdScalar": 4
+      "amountA": 4,
+      "unitA": "crackers",
+      "freeFormValueA": null,
+      "amountB": 50,
+      "unitB": "g",
+      "freeFormValueB": null
     }
   ]
 }

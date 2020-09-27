@@ -37,6 +37,30 @@
       "isServingSizePortion": true,
       "householdUnit": "sandwich",
       "householdScalar": 1
+    },
+    {
+      "amountA": 1,
+      "unitA": "CONSTITUENTS_SIZE_REF",
+      "freeFormValueA": null,
+      "amountB": 100,
+      "unitB": "g",
+      "freeFormValueB": null
+    },
+    {
+      "amountA": 1,
+      "unitA": "SERVING_SIZE_REF",
+      "freeFormValueA": null,
+      "amountB": 73.0,
+      "unitB": "g",
+      "freeFormValueB": null
+    },
+    {
+      "amountA": 1,
+      "unitA": "SERVING_SIZE_REF",
+      "freeFormValueA": null,
+      "amountB": null,
+      "unitB": null,
+      "freeFormValueB": "0.33 cup"
     }
   ]
 }

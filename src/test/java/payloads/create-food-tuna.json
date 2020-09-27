@@ -45,19 +45,37 @@
       "scalar": 0.0
     }
   ],
-  "portions": [
-    {
-      "metricUnit": "g",
-      "metricScalar": 100,
-      "isNutrientRefPortion": true,
-      "isServingSizePortion": false
-    },
+  "conversionRatios": [
     {
       "metricUnit": "g",
       "metricScalar": 142.0,
       "isNutrientRefPortion": false,
       "isServingSizePortion": true,
       "householdMeasure": "1 CAN"
+    },
+    {
+      "amountA": 1,
+      "unitA": "CONSTITUENTS_SIZE_REF",
+      "freeFormValueA": null,
+      "amountB": 100,
+      "unitB": "g",
+      "freeFormValueB": null
+    },
+    {
+      "amountA": 1,
+      "unitA": "SERVING_SIZE_REF",
+      "freeFormValueA": null,
+      "amountB": 142,
+      "unitB": "g",
+      "freeFormValueB": null
+    },
+    {
+      "amountA": 1,
+      "unitA": "SERVING_SIZE_REF",
+      "freeFormValueA": null,
+      "amountB": null,
+      "unitB": null,
+      "freeFormValueB": "1 CAN"
     }
   ]
 }

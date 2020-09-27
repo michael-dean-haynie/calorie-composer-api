@@ -70,19 +70,30 @@
       "scalar": 1.4
     }
   ],
-  "portions": [
+  "conversionRatios": [
     {
-      "metricUnit": "g",
-      "metricScalar": 100,
-      "isNutrientRefPortion": true,
-      "isServingSizePortion": false
+      "amountA": 1,
+      "unitA": "CONSTITUENTS_SIZE_REF",
+      "freeFormValueA": null,
+      "amountB": 100,
+      "unitB": "g",
+      "freeFormValueB": null
     },
     {
-      "metricUnit": "g",
-      "metricScalar": 73.0,
-      "isNutrientRefPortion": false,
-      "isServingSizePortion": true,
-      "householdMeasure": "0.33 cup"
+      "amountA": 1,
+      "unitA": "SERVING_SIZE_REF",
+      "freeFormValueA": null,
+      "amountB": 73.0,
+      "unitB": "g",
+      "freeFormValueB": null
+    },
+    {
+      "amountA": 1,
+      "unitA": "SERVING_SIZE_REF",
+      "freeFormValueA": null,
+      "amountB": null,
+      "unitB": null,
+      "freeFormValueB": "0.33 cup"
     }
   ]
 }

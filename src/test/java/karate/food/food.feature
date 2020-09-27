@@ -1,3 +1,4 @@
+@focus
 Feature: Tests crud operations for Food type
 
   Background:
@@ -44,23 +45,28 @@ Feature: Tests crud operations for Food type
     When call read('classpath:callable/crud/food/delete-food.feature') { id: '#(response.id)'}
 
     Examples:
-      | fieldName                        | fieldValue                                          |
-      | fdcId                            | utils.rs(5)                                         |
-      | description                      | utils.rs(5)                                         |
-      | brandOwner                       | utils.rs(5)                                         |
-      | ingredients                      | utils.rs(5)                                         |
+      | fieldName                          | fieldValue  |
+      | fdcId                              | utils.rs(5) |
+      | description                        | utils.rs(5) |
+      | brandOwner                         | utils.rs(5) |
+      | ingredients                        | utils.rs(5) |
       # nested nutrients
-      | nutrients[0].name                | utils.rs(5)                                         |
-      | nutrients[0].unit                | utils.rs(5)                                         |
-      | nutrients[1].scalar              | utils.rd()                                          |
-      # nested portions
-      | portions[0].metricUnit           | utils.rs(5)                                         |
-      | portions[0].metricScalar         | utils.rd()                                          |
-      | portions[0].isNutrientRefPortion | !createFoodPayload.portions[0].isNutrientRefPortion |
-      | portions[1].isServingSizePortion | !createFoodPayload.portions[0].isServingSizePortion |
-      | portions[1].householdMeasure     | utils.rs(5)                                         |
-      | portions[2].householdUnit        | utils.rs(5)                                         |
-      | portions[2].householdScalar      | utils.rd()                                          |
+      | nutrients[0].name                  | utils.rs(5) |
+      | nutrients[0].unit                  | utils.rs(5) |
+      | nutrients[1].scalar                | utils.rd()  |
+      # nested conversionRatios
+      | conversionRatios[0].amountA        | utils.rd()  |
+      | conversionRatios[0].unitA          | utils.rs(5) |
+      | conversionRatios[0].freeFormValueA | utils.rs(5) |
+      | conversionRatios[0].amountB        | utils.rd()  |
+      | conversionRatios[0].unitB          | utils.rs(5) |
+      | conversionRatios[0].freeFormValueB | utils.rs(5) |
+      | conversionRatios[1].amountA        | utils.rd()  |
+      | conversionRatios[1].unitA          | utils.rs(5) |
+      | conversionRatios[1].freeFormValueA | utils.rs(5) |
+      | conversionRatios[1].amountB        | utils.rd()  |
+      | conversionRatios[1].unitB          | utils.rs(5) |
+      | conversionRatios[1].freeFormValueB | utils.rs(5) |
 
   # ---------------------------------------------
   # Read
@@ -120,23 +126,28 @@ Feature: Tests crud operations for Food type
     When call read('classpath:callable/crud/food/delete-food.feature') { id: '#(response.id)'}
 
     Examples:
-      | fieldName                        | fieldValue                                          |
-      | fdcId                            | utils.rs(5)                                         |
-      | description                      | utils.rs(5)                                         |
-      | brandOwner                       | utils.rs(5)                                         |
-      | ingredients                      | utils.rs(5)                                         |
+      | fieldName                          | fieldValue  |
+      | fdcId                              | utils.rs(5) |
+      | description                        | utils.rs(5) |
+      | brandOwner                         | utils.rs(5) |
+      | ingredients                        | utils.rs(5) |
       # nested nutrients
-      | nutrients[0].name                | utils.rs(5)                                         |
-      | nutrients[0].unit                | utils.rs(5)                                         |
-      | nutrients[1].scalar              | utils.rd()                                          |
-      # nested portions
-      | portions[0].metricUnit           | utils.rs(5)                                         |
-      | portions[0].metricScalar         | utils.rd()                                          |
-      | portions[0].isNutrientRefPortion | !createFoodPayload.portions[0].isNutrientRefPortion |
-      | portions[1].isServingSizePortion | !createFoodPayload.portions[0].isServingSizePortion |
-      | portions[1].householdMeasure     | utils.rs(5)                                         |
-      | portions[2].householdUnit        | utils.rs(5)                                         |
-      | portions[2].householdScalar      | utils.rd()                                          |
+      | nutrients[0].name                  | utils.rs(5) |
+      | nutrients[0].unit                  | utils.rs(5) |
+      | nutrients[1].scalar                | utils.rd()  |
+      # nested conversionRatios
+      | conversionRatios[0].amountA        | utils.rd()  |
+      | conversionRatios[0].unitA          | utils.rs(5) |
+      | conversionRatios[0].freeFormValueA | utils.rs(5) |
+      | conversionRatios[0].amountB        | utils.rd()  |
+      | conversionRatios[0].unitB          | utils.rs(5) |
+      | conversionRatios[0].freeFormValueB | utils.rs(5) |
+      | conversionRatios[1].amountA        | utils.rd()  |
+      | conversionRatios[1].unitA          | utils.rs(5) |
+      | conversionRatios[1].freeFormValueA | utils.rs(5) |
+      | conversionRatios[1].amountB        | utils.rd()  |
+      | conversionRatios[1].unitB          | utils.rs(5) |
+      | conversionRatios[1].freeFormValueB | utils.rs(5) |
 
 
   Scenario: Update a food item by removing a nutrient
@@ -212,14 +223,14 @@ Feature: Tests crud operations for Food type
   Scenario: Update a food with collection elements in a different order
     When def createFoodResult = call read('classpath:callable/crud/food/create-food.feature') { request: '#(createFoodPayload)'}
 
-    # swap order of portions
+    # swap order of conversionRatios
     * copy responseCopy = createFoodResult.response
-    * set createFoodResult.response.portions[0] = responseCopy.portions[1]
-    * set createFoodResult.response.portions[1] = responseCopy.portions[0]
+    * set createFoodResult.response.conversionRatios[0] = responseCopy.conversionRatios[1]
+    * set createFoodResult.response.conversionRatios[1] = responseCopy.conversionRatios[0]
 
     When call read('classpath:callable/crud/food/update-food.feature') { request: '#(createFoodResult.response)'}
 
-  # TODO: Tests adding / removing portions too.
+  # TODO: Tests adding / removing conversionRatios too.
 
   # ---------------------------------------------
   # Delete
