@@ -12,7 +12,7 @@ Feature: Prepare schemas
             id: '##number',
             name: '#string',
             unit: '#string',
-            scalar: '#number'
+            amount: '#number'
 		}
 		"""
 

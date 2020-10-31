@@ -22,5 +22,5 @@ public class NutrientDTO {
 
     @NotNull
     @DecimalMax("999.99")
-    private BigDecimal scalar;
+    private BigDecimal amount;
 }

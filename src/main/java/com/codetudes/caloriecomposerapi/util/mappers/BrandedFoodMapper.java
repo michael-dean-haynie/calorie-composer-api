@@ -54,14 +54,12 @@ public class BrandedFoodMapper {
             foodDTO.getConversionRatios().add(householdRefCR);
         }
 
-
-
         // flatten and add nutrients
         foodDTO.setNutrients(fdcBrandedFoodDTO.getFoodNutrients().stream().map(fdcFoodNutrientDTO -> {
             NutrientDTO nutrientDTO = new NutrientDTO();
             nutrientDTO.setName(fdcFoodNutrientDTO.getNutrient().getName());
-            nutrientDTO.setUnit(fdcFoodNutrientDTO.getNutrient().getUnitName());
-            nutrientDTO.setScalar(fdcFoodNutrientDTO.getAmount());
+            nutrientDTO.setUnit(fdcFoodNutrientDTO.getNutrient().getNutrientUnit().getName());
+            nutrientDTO.setAmount(fdcFoodNutrientDTO.getAmount());
             return nutrientDTO;
         }).collect(Collectors.toList()));
 

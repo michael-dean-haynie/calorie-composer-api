@@ -7,52 +7,45 @@
     {
       "name": "Protein",
       "unit": "g",
-      "scalar": 17.61
+      "amount": 17.61
     },
     {
       "name": "Total lipid (fat)",
       "unit": "g",
-      "scalar": 0.35
+      "amount": 0.35
     },
     {
       "name": "Energy",
       "unit": "kcal",
-      "scalar": 77.0
+      "amount": 77.0
     },
     {
       "name": "Sugars, total including NLEA",
       "unit": "g",
-      "scalar": 0.0
+      "amount": 0.0
     },
     {
       "name": "Fiber, total dietary",
       "unit": "g",
-      "scalar": 0.0
+      "amount": 0.0
     },
     {
       "name": "Sodium, Na",
       "unit": "mg",
-      "scalar": 268.0
+      "amount": 268.0
     },
     {
       "name": "Cholesterol",
       "unit": "mg",
-      "scalar": 39.0
+      "amount": 39.0
     },
     {
       "name": "Fatty acids, total trans",
       "unit": "g",
-      "scalar": 0.0
+      "amount": 0.0
     }
   ],
   "conversionRatios": [
-    {
-      "metricUnit": "g",
-      "metricScalar": 142.0,
-      "isNutrientRefPortion": false,
-      "isServingSizePortion": true,
-      "householdMeasure": "1 CAN"
-    },
     {
       "amountA": 1,
       "unitA": "CONSTITUENTS_SIZE_REF",

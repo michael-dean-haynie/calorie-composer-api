@@ -7,12 +7,12 @@
     {
       "name": "Name A",
       "unit": "Unit Name A",
-      "scalar": "56.78"
+      "amount": "56.78"
     },
     {
       "name": "Name B",
       "unit": "Unit Name B",
-      "scalar": "90.12"
+      "amount": "90.12"
     }
   ],
   "conversionRatios": [

@@ -3,8 +3,6 @@ package com.codetudes.caloriecomposerapi.contracts.fdc;
 import lombok.Data;
 
 @Data
-public class FdcNutrientDTO {
+public class FdcNutrientUnitDTO {
     private String name;
-
-    private FdcNutrientUnitDTO nutrientUnit;
 }

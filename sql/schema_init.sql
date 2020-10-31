@@ -132,7 +132,7 @@ CREATE TABLE `nutrient` (
   `food_id` int(11) DEFAULT NULL,
   `name` varchar(45) NOT NULL,
   `unit` varchar(45) NOT NULL,
-  `scalar` decimal(5,2) NOT NULL,
+  `amount` decimal(5,2) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `nutrient_food_id_idx` (`food_id`),
   CONSTRAINT `nutrient_food_id` FOREIGN KEY (`food_id`) REFERENCES `food` (`id`) ON DELETE CASCADE

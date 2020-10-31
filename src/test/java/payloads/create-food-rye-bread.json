@@ -7,72 +7,72 @@
     {
       "name": "Calcium, Ca",
       "unit": "mg",
-      "scalar": 222.0
+      "amount": 222.0
     },
     {
       "name": "Iron, Fe",
       "unit": "mg",
-      "scalar": 2.0
+      "amount": 2.0
     },
     {
       "name": "Vitamin A, IU",
       "unit": "IU",
-      "scalar": 0.0
+      "amount": 0.0
     },
     {
       "name": "Vitamin C, total ascorbic acid",
       "unit": "mg",
-      "scalar": 0.0
+      "amount": 0.0
     },
     {
       "name": "Cholesterol",
       "unit": "mg",
-      "scalar": 0.0
+      "amount": 0.0
     },
     {
       "name": "Fatty acids, total saturated",
       "unit": "g",
-      "scalar": 0.0
+      "amount": 0.0
     },
     {
       "name": "Protein",
       "unit": "g",
-      "scalar": 8.33
+      "amount": 8.33
     },
     {
       "name": "Total lipid (fat)",
       "unit": "g",
-      "scalar": 4.17
+      "amount": 4.17
     },
     {
       "name": "Carbohydrate, by difference",
       "unit": "g",
-      "scalar": 47.22
+      "amount": 47.22
     },
     {
       "name": "Energy",
       "unit": "kcal",
-      "scalar": 250.0
+      "amount": 250.0
     },
     {
       "name": "Sugars, total including NLEA",
       "unit": "g",
-      "scalar": 2.78
+      "amount": 2.78
     },
     {
       "name": "Fiber, total dietary",
       "unit": "g",
-      "scalar": 5.6
+      "amount": 5.6
     },
     {
       "name": "Sodium, Na",
       "unit": "mg",
-      "scalar": 556.0
+      "amount": 556.0
     },
     {
       "name": "Fatty acids, total trans",
       "unit": "g",
-      "scalar": 0.0
+      "amount": 0.0
     }
   ],
   "conversionRatios": [

@@ -39,6 +39,6 @@ public class Nutrient {
 
     @NotNull
     @DecimalMax("999.99")
-    @Column(name="scalar")
-    private BigDecimal scalar;
+    @Column(name="amount")
+    private BigDecimal amount;
 }

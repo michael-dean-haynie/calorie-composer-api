@@ -53,7 +53,7 @@ Feature: Tests crud operations for Food type
       # nested nutrients
       | nutrients[0].name                  | utils.rs(5) |
       | nutrients[0].unit                  | utils.rs(5) |
-      | nutrients[1].scalar                | utils.rd()  |
+      | nutrients[1].amount                | utils.rd()  |
       # nested conversionRatios
       | conversionRatios[0].amountA        | utils.rd()  |
       | conversionRatios[0].unitA          | utils.rs(5) |
@@ -134,7 +134,7 @@ Feature: Tests crud operations for Food type
       # nested nutrients
       | nutrients[0].name                  | utils.rs(5) |
       | nutrients[0].unit                  | utils.rs(5) |
-      | nutrients[1].scalar                | utils.rd()  |
+      | nutrients[1].amount                | utils.rd()  |
       # nested conversionRatios
       | conversionRatios[0].amountA        | utils.rd()  |
       | conversionRatios[0].unitA          | utils.rs(5) |
