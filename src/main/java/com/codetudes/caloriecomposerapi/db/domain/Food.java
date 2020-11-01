@@ -1,9 +1,6 @@
 package com.codetudes.caloriecomposerapi.db.domain;
 
-import lombok.AccessLevel;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.Valid;
@@ -45,11 +42,17 @@ public class Food {
     @Column(name="ingredients")
     private String ingredients;
 
-    @Column(name="ssr_display_unit")
-    private String ssrDisplayUnit;
+    @Valid
+    @ToString.Exclude
+    @ManyToOne(fetch=FetchType.LAZY)
+    @JoinColumn(name="ssr_display_unit_id")
+    private Unit ssrDisplayUnit;
 
-    @Column(name="csr_display_unit")
-    private String csrDisplayUnit;
+    @Valid
+    @ToString.Exclude
+    @ManyToOne(fetch=FetchType.LAZY)
+    @JoinColumn(name="csr_display_unit_id")
+    private Unit csrDisplayUnit;
 
     @Valid
     @Setter(AccessLevel.NONE)

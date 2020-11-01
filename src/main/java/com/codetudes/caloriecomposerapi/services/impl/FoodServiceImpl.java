@@ -2,10 +2,13 @@ package com.codetudes.caloriecomposerapi.services.impl;
 
 import com.codetudes.caloriecomposerapi.contracts.FoodDTO;
 import com.codetudes.caloriecomposerapi.db.domain.Food;
+import com.codetudes.caloriecomposerapi.db.domain.Unit;
 import com.codetudes.caloriecomposerapi.db.domain.User;
 import com.codetudes.caloriecomposerapi.db.repositories.FoodRepository;
+import com.codetudes.caloriecomposerapi.db.repositories.UnitRepository;
 import com.codetudes.caloriecomposerapi.db.repositories.UserRepository;
 import com.codetudes.caloriecomposerapi.services.FoodService;
+import com.codetudes.caloriecomposerapi.services.UnitService;
 import com.codetudes.caloriecomposerapi.util.mergers.FoodMerger;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
@@ -23,18 +26,26 @@ import java.util.List;
 public class FoodServiceImpl implements FoodService {
 
     @Autowired
-    ModelMapper modelMapper;
+    private ModelMapper modelMapper;
     @Autowired
-    FoodMerger foodMerger;
+    private FoodMerger foodMerger;
 
     @Autowired
-    FoodRepository foodRepository;
+    private FoodRepository foodRepository;
     @Autowired
-    UserRepository userRepository;
+    private UserRepository userRepository;
+    @Autowired
+    private UnitRepository unitRepository;
+
+    @Autowired
+    UnitService unitService;
 
     @Override
     public FoodDTO create(FoodDTO foodDTO) {
         Food food = modelMapper.map(foodDTO, Food.class);
+
+        handleSsrDisplayUnit(food);
+        handleCsrDisplayUnit(food);
 
         // Nutrients logically and physically own the relationship. Set it here.
         food.getNutrients().forEach(nutrient -> nutrient.setFood(food));
@@ -96,5 +107,40 @@ public class FoodServiceImpl implements FoodService {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND,
                     "Food not found.");
         }
+    }
+
+    private void handleSsrDisplayUnit(Food food) {
+        if (food.getSsrDisplayUnit() == null) {
+            return;
+        }
+
+        if (food.getSsrDisplayUnit().getId() == null) {
+            food.setSsrDisplayUnit(unitService.create(food.getSsrDisplayUnit()));
+        }
+
+        Unit existingUnit = unitRepository.findById(food.getSsrDisplayUnit().getId()).orElse(null);
+        if (existingUnit == null){
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND,
+                    "Unit not found.");
+        }
+        food.setSsrDisplayUnit(existingUnit);
+    }
+
+    // TODO: find a neat way to not duplicate this
+    private void handleCsrDisplayUnit(Food food) {
+        if (food.getCsrDisplayUnit() == null) {
+            return;
+        }
+
+        if (food.getCsrDisplayUnit().getId() == null) {
+            food.setCsrDisplayUnit(unitService.create(food.getCsrDisplayUnit()));
+        }
+
+        Unit existingUnit = unitRepository.findById(food.getCsrDisplayUnit().getId()).orElse(null);
+        if (existingUnit == null){
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND,
+                    "Unit not found.");
+        }
+        food.setCsrDisplayUnit(existingUnit);
     }
 }

@@ -26,10 +26,10 @@ public class FoodDTO {
     private String ingredients;
 
     @Size(max=45)
-    private String ssrDisplayUnit;
+    private UnitDTO ssrDisplayUnit;
 
     @Size(max=45)
-    private String csrDisplayUnit;
+    private UnitDTO csrDisplayUnit;
 
     @Valid
     private List<NutrientDTO> nutrients = new ArrayList();
