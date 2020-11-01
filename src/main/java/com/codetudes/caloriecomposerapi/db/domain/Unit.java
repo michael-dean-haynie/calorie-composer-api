@@ -4,7 +4,6 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
@@ -23,21 +22,14 @@ public class Unit {
     @JoinColumn(name="user_id")
     private User user;
 
-    @NotBlank
     @Size(max=45)
     @Column(name="singular_name")
     private String singular;
 
-    @NotBlank
     @Size(max=45)
     @Column(name="plural_name")
     private String plural;
 
-    @Size(max=45)
     @Column(name="abbreviation")
     private String abbreviation;
-
-    @NotNull
-    @Column(name="is_custom")
-    private Boolean isCustom;
 }

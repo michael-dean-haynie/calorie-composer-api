@@ -25,10 +25,8 @@ public class FoodDTO {
     @Size(max = 10000)
     private String ingredients;
 
-    @Size(max=45)
     private UnitDTO ssrDisplayUnit;
 
-    @Size(max=45)
     private UnitDTO csrDisplayUnit;
 
     @Valid

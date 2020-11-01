@@ -36,10 +36,9 @@ CREATE TABLE `user` (
 CREATE TABLE `unit` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `user_id` int(11) NOT NULL,
-  `singular_name` varchar(45) NOT NULL,
-  `plural_name` varchar(45) NOT NULL,
+  `singular_name` varchar(45) DEFAULT NULL,
+  `plural_name` varchar(45) DEFAULT NULL,
   `abbreviation` varchar(45) DEFAULT NULL,
-  `is_custom` varchar(45) NOT NULL,
   PRIMARY KEY (`id`),
   CONSTRAINT `unit_user_id` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
@@ -52,7 +51,7 @@ CREATE TABLE `food` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `user_id` int(11) NOT NULL,
   `fdc_id` varchar(10) DEFAULT NULL,
-  `description` varchar(100) NOT NULL,
+  `description` varchar(100) DEFAULT NULL,
   `brand_owner` varchar(100) DEFAULT NULL,
   `ingredients` varchar(1000) DEFAULT NULL,
   `ssr_display_unit_id` int(11) DEFAULT NULL,
@@ -72,14 +71,16 @@ CREATE TABLE `conversion_ratio` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `food_id` int(11) DEFAULT NULL,
   `amount_a` decimal(5,2) DEFAULT NULL,
-  `unit_a` varchar(45) DEFAULT NULL,
+  `unit_a_id` int(11) DEFAULT NULL,
   `free_form_value_a` varchar(45) DEFAULT NULL,
   `amount_b` decimal(5,2) DEFAULT NULL,
-  `unit_b` varchar(45) DEFAULT NULL,
+  `unit_b_id` int(11) DEFAULT NULL,
   `free_form_value_b` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `conversion_ratio_food_id_idx` (`food_id`),
-  CONSTRAINT `conversion_ratio_food_id` FOREIGN KEY (`food_id`) REFERENCES `food` (`id`) ON DELETE CASCADE
+  CONSTRAINT `conversion_ratio_food_id` FOREIGN KEY (`food_id`) REFERENCES `food` (`id`) ON DELETE CASCADE,
+  CONSTRAINT `conversion_ratio_unit_a_id` FOREIGN KEY (`unit_a_id`) REFERENCES `unit` (`id`),
+  CONSTRAINT `conversion_ratio_unit_b_id` FOREIGN KEY (`unit_b_id`) REFERENCES `unit` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
@@ -90,11 +91,12 @@ CREATE TABLE `nutrient` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `food_id` int(11) DEFAULT NULL,
   `name` varchar(45) NOT NULL,
-  `unit` varchar(45) NOT NULL,
+  `unit_id` int(11) NOT NULL,
   `amount` decimal(5,2) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `nutrient_food_id_idx` (`food_id`),
-  CONSTRAINT `nutrient_food_id` FOREIGN KEY (`food_id`) REFERENCES `food` (`id`) ON DELETE CASCADE
+  CONSTRAINT `nutrient_food_id` FOREIGN KEY (`food_id`) REFERENCES `food` (`id`) ON DELETE CASCADE,
+  CONSTRAINT `nutrient_unit_id` FOREIGN KEY (`unit_id`) REFERENCES `unit` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --

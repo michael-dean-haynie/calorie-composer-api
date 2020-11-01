@@ -5,6 +5,7 @@ import com.codetudes.caloriecomposerapi.contracts.FoodDTO;
 import com.codetudes.caloriecomposerapi.db.domain.ConversionRatio;
 import com.codetudes.caloriecomposerapi.db.domain.Food;
 import com.codetudes.caloriecomposerapi.db.domain.Nutrient;
+import com.codetudes.caloriecomposerapi.services.UnitService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -19,8 +20,14 @@ public class FoodMerger {
     @Autowired
     MergeMapper mergeMapper;
 
-    public Food merge(FoodDTO foodDTO, Food food) {
+    @Autowired
+    UnitService unitService;
+
+    public Food  merge(FoodDTO foodDTO, Food food) {
         mergeMapper.map(foodDTO, food);
+
+        food.setSsrDisplayUnit(unitService.resolveUnit(food.getSsrDisplayUnit()));
+        food.setCsrDisplayUnit(unitService.resolveUnit(food.getCsrDisplayUnit()));
 
         // Clear and re-create nutrient entities
         food.getNutrients().clear();
@@ -28,8 +35,13 @@ public class FoodMerger {
                 .map(nutrientDTO -> modelMapper.map(nutrientDTO, Nutrient.class))
                 .collect(Collectors.toList()));
 
-        // Nutrients logically and physically own the relationship. Set it here.
-        food.getNutrients().forEach(nutrient -> nutrient.setFood(food));
+        food.getNutrients().forEach(nutrient -> {
+            // Nutrients logically and physically own the relationship. Set it here.
+            nutrient.setFood(food);
+
+            // Resolve units for nutrients
+            nutrient.setUnit(unitService.resolveUnit(nutrient.getUnit()));
+        });
 
         // Clear and re-create conversion ratio entities
         food.getConversionRatios().clear();
@@ -37,8 +49,14 @@ public class FoodMerger {
                 .map(conversionRatioDTO -> modelMapper.map(conversionRatioDTO, ConversionRatio.class))
                 .collect(Collectors.toList()));
 
-        // Conversion ratios logically and physically own the relationship. Set it here.
-        food.getConversionRatios().forEach(conversionRatio -> conversionRatio.setFood(food));
+        food.getConversionRatios().forEach(cvRat -> {
+            // Conversion ratios logically and physically own the relationship. Set it here.
+            cvRat.setFood(food);
+
+            // Resolve units for conversion ratios
+            cvRat.setUnitA(unitService.resolveUnit(cvRat.getUnitA()));
+            cvRat.setUnitB(unitService.resolveUnit(cvRat.getUnitB()));
+        });
 
         return food;
     }

@@ -2,7 +2,6 @@ package com.codetudes.caloriecomposerapi.services.impl;
 
 import com.codetudes.caloriecomposerapi.contracts.FoodDTO;
 import com.codetudes.caloriecomposerapi.db.domain.Food;
-import com.codetudes.caloriecomposerapi.db.domain.Unit;
 import com.codetudes.caloriecomposerapi.db.domain.User;
 import com.codetudes.caloriecomposerapi.db.repositories.FoodRepository;
 import com.codetudes.caloriecomposerapi.db.repositories.UnitRepository;
@@ -44,24 +43,29 @@ public class FoodServiceImpl implements FoodService {
     public FoodDTO create(FoodDTO foodDTO) {
         Food food = modelMapper.map(foodDTO, Food.class);
 
-        handleSsrDisplayUnit(food);
-        handleCsrDisplayUnit(food);
+        food.setSsrDisplayUnit(unitService.resolveUnit(food.getSsrDisplayUnit()));
+        food.setCsrDisplayUnit(unitService.resolveUnit(food.getCsrDisplayUnit()));
 
-        // Nutrients logically and physically own the relationship. Set it here.
-        food.getNutrients().forEach(nutrient -> nutrient.setFood(food));
 
-        // Conversion ratios logically and physically own the relationship. Set it here.
-        food.getConversionRatios().forEach(conversionRatio -> conversionRatio.setFood(food));
+        food.getNutrients().forEach(nutrient -> {
+            // Nutrients logically and physically own the relationship. Set it here.
+            nutrient.setFood(food);
 
-        // TODO: Don't hard code this
-        List<User> users = userRepository.findAll();
-        if (users.size() > 0){
-            food.setUser(users.get(0));
-        } else {
-            throw new ResponseStatusException(
-                    HttpStatus.INTERNAL_SERVER_ERROR,
-                    "Hard-coded user unable to be found while creating food.");
-        }
+            // Resolve units for nutrients
+            nutrient.setUnit(unitService.resolveUnit(nutrient.getUnit()));
+        });
+
+
+        food.getConversionRatios().forEach(cvRat -> {
+            // Conversion ratios logically and physically own the relationship. Set it here.
+            cvRat.setFood(food);
+
+            // Resolve units for conversion ratios
+            cvRat.setUnitA(unitService.resolveUnit(cvRat.getUnitA()));
+            cvRat.setUnitB(unitService.resolveUnit(cvRat.getUnitB()));
+        });
+
+        food.setUser(getUser());
 
         Food savedFood = foodRepository.save(food);
         return modelMapper.map(savedFood, FoodDTO.class);
@@ -109,38 +113,15 @@ public class FoodServiceImpl implements FoodService {
         }
     }
 
-    private void handleSsrDisplayUnit(Food food) {
-        if (food.getSsrDisplayUnit() == null) {
-            return;
+    private User getUser(){
+        // TODO: Don't hard code this
+        List<User> users = userRepository.findAll();
+        if (users.size() > 0){
+            return users.get(0);
+        } else {
+            throw new ResponseStatusException(
+                    HttpStatus.INTERNAL_SERVER_ERROR,
+                    "Hard-coded user unable to be found while creating food.");
         }
-
-        if (food.getSsrDisplayUnit().getId() == null) {
-            food.setSsrDisplayUnit(unitService.create(food.getSsrDisplayUnit()));
-        }
-
-        Unit existingUnit = unitRepository.findById(food.getSsrDisplayUnit().getId()).orElse(null);
-        if (existingUnit == null){
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND,
-                    "Unit not found.");
-        }
-        food.setSsrDisplayUnit(existingUnit);
-    }
-
-    // TODO: find a neat way to not duplicate this
-    private void handleCsrDisplayUnit(Food food) {
-        if (food.getCsrDisplayUnit() == null) {
-            return;
-        }
-
-        if (food.getCsrDisplayUnit().getId() == null) {
-            food.setCsrDisplayUnit(unitService.create(food.getCsrDisplayUnit()));
-        }
-
-        Unit existingUnit = unitRepository.findById(food.getCsrDisplayUnit().getId()).orElse(null);
-        if (existingUnit == null){
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND,
-                    "Unit not found.");
-        }
-        food.setCsrDisplayUnit(existingUnit);
     }
 }

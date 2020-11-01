@@ -1,8 +1,6 @@
 package com.codetudes.caloriecomposerapi.util;
 
 import com.codetudes.caloriecomposerapi.contracts.FoodDTO;
-import com.codetudes.caloriecomposerapi.contracts.UnitDTO;
-import com.codetudes.caloriecomposerapi.db.domain.Unit;
 import com.codetudes.caloriecomposerapi.db.domain.User;
 import com.codetudes.caloriecomposerapi.db.repositories.ComboFoodRepository;
 import com.codetudes.caloriecomposerapi.db.repositories.FoodRepository;
@@ -78,31 +76,8 @@ public class SeedOnStartup {
         user.setUsername("username");
         userRepository.save(user);
 
-        // also first, create unit
-        Unit unit = new Unit();
-        unit.setUser(user);
-        unit.setIsCustom(false);
-        unit.setSingular("gram");
-        unit.setPlural("grams");
-        unit.setAbbreviation("g");
-        unitRepository.save(unit);
-
-        // unitDTOs
-        UnitDTO unitDTO = new UnitDTO();
-        unitDTO.setIsCustom(false);
-        unitDTO.setSingular("gram");
-        unitDTO.setPlural("grams");
-        unitDTO.setAbbreviation("g");
-
-        UnitDTO unitDTO2 = new UnitDTO();
-        unitDTO2.setId(unit.getId());
-
         // PBJ Food items
-        FoodDTO peanutButterDTO = fdcService.getFoodByFdcId("358350");
-        peanutButterDTO.setSsrDisplayUnit(unitDTO);
-        peanutButterDTO.setCsrDisplayUnit(unitDTO2);
-        peanutButterDTO = foodService.create(peanutButterDTO);
-
+        FoodDTO peanutButterDTO = foodService.create(fdcService.getFoodByFdcId("358350"));
         FoodDTO jellyDTO = foodService.create(fdcService.getFoodByFdcId("386995"));
         FoodDTO breadDTO = foodService.create(fdcService.getFoodByFdcId("406269"));
 

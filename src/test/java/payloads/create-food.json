@@ -3,43 +3,83 @@
   "description": "Food A",
   "brandOwner": "Brand A",
   "ingredients": "Ingredients A",
-  "ssrDisplayUnit": "g",
-  "csrDisplayUnit": "g",
+  "ssrDisplayUnit": {
+    "singular": "singular",
+    "plural": "plural",
+    "abbreviation": "abbreviation"
+  },
+  "csrDisplayUnit": {
+    "singular": "singular",
+    "plural": "plural",
+    "abbreviation": "abbreviation"
+  },
   "nutrients": [
     {
       "name": "Name A",
-      "unit": "Unit Name A",
+      "unit": {
+        "singular": "singular",
+        "plural": "plural",
+        "abbreviation": "abbreviation"
+      },
       "amount": "56.78"
     },
     {
       "name": "Name B",
-      "unit": "Unit Name B",
+      "unit": {
+        "singular": "singular",
+        "plural": "plural",
+        "abbreviation": "abbreviation"
+      },
       "amount": "90.12"
     }
   ],
   "conversionRatios": [
     {
       "amountA": 1,
-      "unitA": "CONSTITUENTS_SIZE_REF",
+      "unitA": {
+        "singular": "CONSTITUENTS_SIZE_REF",
+        "plural": "CONSTITUENTS_SIZE_REF",
+        "abbreviation": "CONSTITUENTS_SIZE_REF"
+      },
       "freeFormValueA": null,
       "amountB": 100,
-      "unitB": "g",
+      "unitB": {
+        "singular": "gram",
+        "plural": "grams",
+        "abbreviation": "g"
+      },
       "freeFormValueB": null
     },
     {
       "amountA": 1,
-      "unitA": "SERVING_SIZE_REF",
+      "unitA": {
+        "singular": "SERVING_SIZE_REF,",
+        "plural": "SERVING_SIZE_REF",
+        "abbreviation": "SERVING_SIZE_REF"
+      },
       "freeFormValueA": null,
       "amountB": 200,
-      "unitB": "g",
+      "unitB": {
+        "singular": "gram",
+        "plural": "grams",
+        "abbreviation": "g"
+      },
       "freeFormValueB": null
     },
     {
       "amountA": 4,
-      "unitA": "crackers",
+      "unitA": {
+        "singular": "cracker",
+        "plural": "crackers",
+        "abbreviation": null
+      },
       "freeFormValueA": null,
       "amountB": 50,
-      "unitB": "g",
+      "unitB": {
+        "singular": "gram",
+        "plural": "grams",
+        "abbreviation": "g"
+      },
       "freeFormValueB": null
     }
   ]

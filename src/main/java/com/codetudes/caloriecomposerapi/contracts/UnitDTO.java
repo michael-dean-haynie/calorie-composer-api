@@ -11,6 +11,4 @@ public class UnitDTO {
     private String plural;
 
     private String abbreviation;
-
-    private Boolean isCustom;
 }

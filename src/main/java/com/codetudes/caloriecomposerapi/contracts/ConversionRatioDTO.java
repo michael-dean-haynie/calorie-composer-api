@@ -2,6 +2,7 @@ package com.codetudes.caloriecomposerapi.contracts;
 
 import lombok.Data;
 
+import javax.validation.Valid;
 import javax.validation.constraints.DecimalMax;
 import javax.validation.constraints.Size;
 import java.math.BigDecimal;
@@ -13,8 +14,8 @@ public class ConversionRatioDTO {
     @DecimalMax("999.99")
     private BigDecimal amountA;
 
-    @Size(max=45)
-    private String unitA;
+    @Valid
+    private UnitDTO unitA;
 
     @Size(max=50)
     private String freeFormValueA;
@@ -22,8 +23,8 @@ public class ConversionRatioDTO {
     @DecimalMax("999.99")
     private BigDecimal amountB;
 
-    @Size(max=45)
-    private String unitB;
+    @Valid
+    private UnitDTO unitB;
 
     @Size(max=50)
     private String freeFormValueB;

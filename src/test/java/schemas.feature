@@ -2,32 +2,27 @@ Feature: Prepare schemas
 	Scenario: Prepare schemas
 		* def schemas = {}
 
+		* set schemas.unit =
+		"""
+		{
+            id: '##number',
+            singular: '##string',
+            plural: '##string',
+            abbreviation: '##string'
+		}
+		"""
+
 		# ---------------------------------------------
-		# Food and Nutrient
+		# Food
 		# ---------------------------------------------
 
 		* set schemas.nutrient =
 		"""
 		{
             id: '##number',
-            name: '#string',
-            unit: '#string',
-            amount: '#number'
-		}
-		"""
-
-
-		* set schemas.portion =
-		"""
-		{
-            id: '##number',
-			isNutrientRefPortion: '#boolean',
-            isServingSizePortion: '#boolean',
-            metricUnit: '#string',
-            metricScalar: '#number',
-            householdMeasure: '##string',
-            householdUnit: '##string',
-            householdScalar: '##number'
+            name: '##string',
+            unit: '##(schemas.unit)',
+            amount: '##number'
 		}
 		"""
 
@@ -36,10 +31,10 @@ Feature: Prepare schemas
 		{
             id: '##number',
 			amountA: '##number',
-            unitA: '##string',
+            unitA: '##(schemas.unit)',
             freeFormValueA: '##string',
             amountB: '##number',
-            unitB: '##string',
+            unitB: '##(schemas.unit)',
             freeFormValueB: '##string'
 		}
 		"""
@@ -52,8 +47,8 @@ Feature: Prepare schemas
 			description: '#string',
 			brandOwner: '##string',
 			ingredients: '##string',
-			ssrDisplayUnit: '##string',
-			csrDisplayUnit: '##string',
+			ssrDisplayUnit: '##(schemas.unit)',
+			csrDisplayUnit: '##(schemas.unit)',
 			nutrients: '##[] schemas.nutrient',
 			conversionRatios: '##[] schemas.conversionRatio'
 		}

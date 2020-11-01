@@ -43,13 +43,11 @@ public class Food {
     private String ingredients;
 
     @Valid
-    @ToString.Exclude
     @ManyToOne(fetch=FetchType.LAZY)
     @JoinColumn(name="ssr_display_unit_id")
     private Unit ssrDisplayUnit;
 
     @Valid
-    @ToString.Exclude
     @ManyToOne(fetch=FetchType.LAZY)
     @JoinColumn(name="csr_display_unit_id")
     private Unit csrDisplayUnit;

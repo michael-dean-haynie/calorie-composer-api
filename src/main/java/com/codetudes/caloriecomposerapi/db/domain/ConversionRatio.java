@@ -5,6 +5,7 @@ import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
 import javax.persistence.*;
+import javax.validation.Valid;
 import javax.validation.constraints.DecimalMax;
 import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
@@ -29,8 +30,10 @@ public class ConversionRatio {
     @Column(name="amount_a")
     private BigDecimal amountA;
 
-    @Column(name="unit_a")
-    private String unitA;
+    @Valid
+    @ManyToOne(fetch=FetchType.LAZY)
+    @JoinColumn(name="unit_a_id")
+    private Unit unitA;
 
     @Column(name="free_form_value_a")
     private String freeFormValueA;
@@ -39,8 +42,10 @@ public class ConversionRatio {
     @Column(name="amount_b")
     private BigDecimal amountB;
 
-    @Column(name="unit_b")
-    private String unitB;
+    @Valid
+    @ManyToOne(fetch=FetchType.LAZY)
+    @JoinColumn(name="unit_b_id")
+    private Unit unitB;
 
     @Column(name="free_form_value_b")
     private String freeFormValueB;

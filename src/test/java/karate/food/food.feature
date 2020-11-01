@@ -45,30 +45,45 @@ Feature: Tests crud operations for Food type
     When call read('classpath:callable/crud/food/delete-food.feature') { id: '#(response.id)'}
 
     Examples:
-      | fieldName                          | fieldValue  |
-      | fdcId                              | utils.rs(5) |
-      | description                        | utils.rs(5) |
-      | brandOwner                         | utils.rs(5) |
-      | ingredients                        | utils.rs(5) |
-      | ssrDisplayUnit                     | utils.rs(5) |
-      | csrDisplayUnit                     | utils.rs(5) |
+      | fieldName                              | fieldValue  |
+      | fdcId                                  | utils.rs(5) |
+      | description                            | utils.rs(5) |
+      | brandOwner                             | utils.rs(5) |
+      | ingredients                            | utils.rs(5) |
+      # display units
+      | ssrDisplayUnit.singular                | utils.rs(5) |
+      | ssrDisplayUnit.plural                  | utils.rs(5) |
+      | ssrDisplayUnit.abbreviation            | utils.rs(5) |
+      | csrDisplayUnit.singular                | utils.rs(5) |
+      | csrDisplayUnit.plural                  | utils.rs(5) |
+      | csrDisplayUnit.abbreviation            | utils.rs(5) |
       # nested nutrients
-      | nutrients[0].name                  | utils.rs(5) |
-      | nutrients[0].unit                  | utils.rs(5) |
-      | nutrients[1].amount                | utils.rd()  |
+      | nutrients[0].name                      | utils.rs(5) |
+      | nutrients[0].unit.singular             | utils.rs(5) |
+      | nutrients[0].unit.plural               | utils.rs(5) |
+      | nutrients[0].unit.abbreviation         | utils.rs(5) |
+      | nutrients[1].amount                    | utils.rd()  |
       # nested conversionRatios
-      | conversionRatios[0].amountA        | utils.rd()  |
-      | conversionRatios[0].unitA          | utils.rs(5) |
-      | conversionRatios[0].freeFormValueA | utils.rs(5) |
-      | conversionRatios[0].amountB        | utils.rd()  |
-      | conversionRatios[0].unitB          | utils.rs(5) |
-      | conversionRatios[0].freeFormValueB | utils.rs(5) |
-      | conversionRatios[1].amountA        | utils.rd()  |
-      | conversionRatios[1].unitA          | utils.rs(5) |
-      | conversionRatios[1].freeFormValueA | utils.rs(5) |
-      | conversionRatios[1].amountB        | utils.rd()  |
-      | conversionRatios[1].unitB          | utils.rs(5) |
-      | conversionRatios[1].freeFormValueB | utils.rs(5) |
+      | conversionRatios[0].amountA            | utils.rd()  |
+      | conversionRatios[0].unitA.singular     | utils.rs(5) |
+      | conversionRatios[0].unitA.plural       | utils.rs(5) |
+      | conversionRatios[0].unitA.abbreviation | utils.rs(5) |
+      | conversionRatios[0].freeFormValueA     | utils.rs(5) |
+      | conversionRatios[0].amountB            | utils.rd()  |
+      | conversionRatios[0].unitB.singular     | utils.rs(5) |
+      | conversionRatios[0].unitB.plural       | utils.rs(5) |
+      | conversionRatios[0].unitB.abbreviation | utils.rs(5) |
+      | conversionRatios[0].freeFormValueB     | utils.rs(5) |
+      | conversionRatios[1].amountA            | utils.rd()  |
+      | conversionRatios[1].unitA.singular     | utils.rs(5) |
+      | conversionRatios[1].unitA.plural       | utils.rs(5) |
+      | conversionRatios[1].unitA.abbreviation | utils.rs(5) |
+      | conversionRatios[1].freeFormValueA     | utils.rs(5) |
+      | conversionRatios[1].amountB            | utils.rd()  |
+      | conversionRatios[1].unitB.singular     | utils.rs(5) |
+      | conversionRatios[1].unitB.plural       | utils.rs(5) |
+      | conversionRatios[1].unitB.abbreviation | utils.rs(5) |
+      | conversionRatios[1].freeFormValueB     | utils.rs(5) |
 
   # ---------------------------------------------
   # Read
@@ -118,7 +133,7 @@ Feature: Tests crud operations for Food type
     When method get
     Then status 200
 
-    # assert updated value in create response
+    # assert updated value in get response
     * match response.<fieldName> == payload.<fieldName>
 
     # assert other values didn't change
@@ -128,30 +143,24 @@ Feature: Tests crud operations for Food type
     When call read('classpath:callable/crud/food/delete-food.feature') { id: '#(response.id)'}
 
     Examples:
-      | fieldName                          | fieldValue  |
-      | fdcId                              | utils.rs(5) |
-      | description                        | utils.rs(5) |
-      | brandOwner                         | utils.rs(5) |
-      | ingredients                        | utils.rs(5) |
-      | ssrDisplayUnit                     | utils.rs(5) |
-      | csrDisplayUnit                     | utils.rs(5) |
+      | fieldName                              | fieldValue  |
+      | fdcId                                  | utils.rs(5) |
+      | description                            | utils.rs(5) |
+      | brandOwner                             | utils.rs(5) |
+      | ingredients                            | utils.rs(5) |
+      # units themselves not meant to be updated via this endpoint
       # nested nutrients
-      | nutrients[0].name                  | utils.rs(5) |
-      | nutrients[0].unit                  | utils.rs(5) |
-      | nutrients[1].amount                | utils.rd()  |
+      | nutrients[0].name                      | utils.rs(5) |
+      | nutrients[1].amount                    | utils.rd()  |
       # nested conversionRatios
-      | conversionRatios[0].amountA        | utils.rd()  |
-      | conversionRatios[0].unitA          | utils.rs(5) |
-      | conversionRatios[0].freeFormValueA | utils.rs(5) |
-      | conversionRatios[0].amountB        | utils.rd()  |
-      | conversionRatios[0].unitB          | utils.rs(5) |
-      | conversionRatios[0].freeFormValueB | utils.rs(5) |
-      | conversionRatios[1].amountA        | utils.rd()  |
-      | conversionRatios[1].unitA          | utils.rs(5) |
-      | conversionRatios[1].freeFormValueA | utils.rs(5) |
-      | conversionRatios[1].amountB        | utils.rd()  |
-      | conversionRatios[1].unitB          | utils.rs(5) |
-      | conversionRatios[1].freeFormValueB | utils.rs(5) |
+      | conversionRatios[0].amountA            | utils.rd()  |
+      | conversionRatios[0].freeFormValueA     | utils.rs(5) |
+      | conversionRatios[0].amountB            | utils.rd()  |
+      | conversionRatios[0].freeFormValueB     | utils.rs(5) |
+      | conversionRatios[1].amountA            | utils.rd()  |
+      | conversionRatios[1].freeFormValueA     | utils.rs(5) |
+      | conversionRatios[1].amountB            | utils.rd()  |
+      | conversionRatios[1].freeFormValueB     | utils.rs(5) |
 
 
   Scenario: Update a food item by removing a nutrient

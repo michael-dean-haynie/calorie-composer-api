@@ -5,6 +5,7 @@ import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
 import javax.persistence.*;
+import javax.validation.Valid;
 import javax.validation.constraints.DecimalMax;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
@@ -32,10 +33,10 @@ public class Nutrient {
     @Column(name="name")
     private String name;
 
-    @NotBlank
-    @Size(max=45)
-    @Column(name="unit")
-    private String unit;
+    @Valid
+    @ManyToOne(fetch=FetchType.LAZY)
+    @JoinColumn(name="unit_id")
+    private Unit unit;
 
     @NotNull
     @DecimalMax("999.99")
