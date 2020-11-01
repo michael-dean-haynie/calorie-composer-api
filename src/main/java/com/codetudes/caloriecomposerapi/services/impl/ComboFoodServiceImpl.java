@@ -2,8 +2,6 @@ package com.codetudes.caloriecomposerapi.services.impl;
 
 import com.codetudes.caloriecomposerapi.contracts.ComboFoodDTO;
 import com.codetudes.caloriecomposerapi.db.domain.ComboFood;
-import com.codetudes.caloriecomposerapi.db.domain.ComboFoodFoodAmount;
-import com.codetudes.caloriecomposerapi.db.domain.ComboFoodPortion;
 import com.codetudes.caloriecomposerapi.db.domain.User;
 import com.codetudes.caloriecomposerapi.db.repositories.ComboFoodRepository;
 import com.codetudes.caloriecomposerapi.db.repositories.FoodRepository;
@@ -16,7 +14,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 public class ComboFoodServiceImpl implements ComboFoodService {
@@ -36,9 +33,9 @@ public class ComboFoodServiceImpl implements ComboFoodService {
     public ComboFoodDTO create(ComboFoodDTO comboFoodDTO) {
         ComboFood comboFood = modelMapper.map(comboFoodDTO, ComboFood.class);
 
-        // ComboFoodFoodAmounts and ComboFoodPortions own the relationship
-        comboFood.getFoodAmounts().forEach(foodAmount -> foodAmount.setComboFood(comboFood));
-        comboFood.getPortions().forEach(portion -> portion.setComboFood(comboFood));
+        // ComboFoodConstituents and ComboFoodConversionRatios own the relationship
+        comboFood.getConstituents().forEach(constituent -> constituent.setComboFood(comboFood));
+        comboFood.getConversionRatios().forEach(cvRat -> cvRat.setComboFood(comboFood));
 
         // TODO: Don't hard code this
         List<User> users = userRepository.findAll();
@@ -64,39 +61,40 @@ public class ComboFoodServiceImpl implements ComboFoodService {
 
     @Override
     public ComboFoodDTO update(ComboFoodDTO comboFoodDTO) {
-        ComboFood existingComboFood = comboFoodRepository.findById(comboFoodDTO.getId()).orElse(null);
-        throw404IfNull(existingComboFood);
-
-        // model mapper freaking out - not type mapping as expected
-        existingComboFood.setDescription(comboFoodDTO.getDescription());
-
-        // food amounts
-        existingComboFood.getFoodAmounts().clear();
-        existingComboFood.setFoodAmounts(comboFoodDTO.getFoodAmounts().stream()
-                .map(foodAmountDTO -> {
-                    ComboFoodFoodAmount foodAmount = modelMapper.map(foodAmountDTO, ComboFoodFoodAmount.class);
-                    // assign relationship for comboFood
-                    foodAmount.setComboFood(existingComboFood);
-                    // assign relationship for food
-                    foodAmount.setFood(foodRepository.findById(foodAmountDTO.getFood().getId()).orElse(null));
-                    return foodAmount;
-                })
-                .collect(Collectors.toList())
-        );
-
-        // portions
-        existingComboFood.getPortions().clear();
-        existingComboFood.setPortions(comboFoodDTO.getPortions().stream()
-                .map(portionDTO -> {
-                    ComboFoodPortion foodPortion = modelMapper.map(portionDTO, ComboFoodPortion.class);
-                    // assign relationship for comboFood
-                    foodPortion.setComboFood(existingComboFood);
-                    return foodPortion;
-                })
-                .collect(Collectors.toList()));
-
-        ComboFood updatedComboFood = comboFoodRepository.save(existingComboFood);
-        return modelMapper.map(updatedComboFood, ComboFoodDTO.class);
+//        ComboFood existingComboFood = comboFoodRepository.findById(comboFoodDTO.getId()).orElse(null);
+//        throw404IfNull(existingComboFood);
+//
+//        // model mapper freaking out - not type mapping as expected
+//        existingComboFood.setDescription(comboFoodDTO.getDescription());
+//
+//        // food amounts
+//        existingComboFood.getFoodAmounts().clear();
+//        existingComboFood.setFoodAmounts(comboFoodDTO.getFoodAmounts().stream()
+//                .map(foodAmountDTO -> {
+//                    ComboFoodFoodAmount foodAmount = modelMapper.map(foodAmountDTO, ComboFoodFoodAmount.class);
+//                    // assign relationship for comboFood
+//                    foodAmount.setComboFood(existingComboFood);
+//                    // assign relationship for food
+//                    foodAmount.setFood(foodRepository.findById(foodAmountDTO.getFood().getId()).orElse(null));
+//                    return foodAmount;
+//                })
+//                .collect(Collectors.toList())
+//        );
+//
+//        // portions
+//        existingComboFood.getPortions().clear();
+//        existingComboFood.setPortions(comboFoodDTO.getPortions().stream()
+//                .map(portionDTO -> {
+//                    ComboFoodPortion foodPortion = modelMapper.map(portionDTO, ComboFoodPortion.class);
+//                    // assign relationship for comboFood
+//                    foodPortion.setComboFood(existingComboFood);
+//                    return foodPortion;
+//                })
+//                .collect(Collectors.toList()));
+//
+//        ComboFood updatedComboFood = comboFoodRepository.save(existingComboFood);
+//        return modelMapper.map(updatedComboFood, ComboFoodDTO.class);
+        return null;
     }
 
     @Override

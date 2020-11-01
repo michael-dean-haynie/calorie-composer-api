@@ -52,6 +52,8 @@ Feature: Prepare schemas
 			description: '#string',
 			brandOwner: '##string',
 			ingredients: '##string',
+			ssrDisplayUnit: '##string',
+			csrDisplayUnit: '##string',
 			nutrients: '##[] schemas.nutrient',
 			conversionRatios: '##[] schemas.conversionRatio'
 		}

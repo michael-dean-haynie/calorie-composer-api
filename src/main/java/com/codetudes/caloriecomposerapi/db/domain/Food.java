@@ -45,6 +45,12 @@ public class Food {
     @Column(name="ingredients")
     private String ingredients;
 
+    @Column(name="ssr_display_unit")
+    private String ssrDisplayUnit;
+
+    @Column(name="csr_display_unit")
+    private String csrDisplayUnit;
+
     @Valid
     @Setter(AccessLevel.NONE)
     @OneToMany(mappedBy="food", cascade = CascadeType.ALL, orphanRemoval = true)

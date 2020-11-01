@@ -23,13 +23,17 @@ public class ComboFood {
     private Long id;
 
     @NotNull
-    @Column(name="is_draft")
-    private Boolean isDraft;
-
-    @NotNull
     @ManyToOne
     @JoinColumn(name="user_id")
     private User user;
+
+    @NotNull
+    @Column(name="is_draft")
+    private Boolean isDraft;
+
+    @ManyToOne
+    @JoinColumn(name="draft_of_combo_food_id")
+    private ComboFood draftOf;
 
     @Size(max = 100)
     @Column(name="description")
@@ -38,26 +42,26 @@ public class ComboFood {
     @Valid
     @Setter(AccessLevel.NONE)
     @OneToMany(mappedBy="comboFood", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<ComboFoodFoodAmount> foodAmounts = new ArrayList();
+    private List<ComboFoodConversionRatio> conversionRatios = new ArrayList();
 
     @Valid
     @Setter(AccessLevel.NONE)
     @OneToMany(mappedBy="comboFood", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<ComboFoodPortion> portions = new ArrayList();
+    private List<ComboFoodConstituent> constituents = new ArrayList();
 
-    public void setFoodAmounts(List<ComboFoodFoodAmount> foodAmounts) {
-        if (null == this.foodAmounts){
-            this.foodAmounts = foodAmounts;
+    public void setConversionRatios(List<ComboFoodConversionRatio> conversionRatios) {
+        if (null == this.conversionRatios){
+            this.conversionRatios = conversionRatios;
         }
-        this.foodAmounts.clear();
-        this.foodAmounts.addAll(foodAmounts);
+        this.conversionRatios.clear();
+        this.conversionRatios.addAll(conversionRatios);
     }
 
-    public void setPortions(List<ComboFoodPortion> portions) {
-        if (null == this.portions){
-            this.portions = portions;
+    public void setConstituents(List<ComboFoodConstituent> constituents) {
+        if (null == this.constituents){
+            this.constituents = constituents;
         }
-        this.portions.clear();
-        this.portions.addAll(portions);
+        this.constituents.clear();
+        this.constituents.addAll(constituents);
     }
 }

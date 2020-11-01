@@ -70,7 +70,7 @@ Feature: Tests crud operations for ComboFood type
     When call read('classpath:callable/crud/combofood/delete-combo-food-and-const.feature') { id: '#(response.id)', constFoodIds: '#(constFoodIds)'}
 
   # ---------------------------------------------
-  # Create
+  # Update
   # ---------------------------------------------
 
   Scenario Outline: Update a comboFood item and validate '<fieldName>' set appropriately

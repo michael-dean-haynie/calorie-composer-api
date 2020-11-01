@@ -50,6 +50,8 @@ Feature: Tests crud operations for Food type
       | description                        | utils.rs(5) |
       | brandOwner                         | utils.rs(5) |
       | ingredients                        | utils.rs(5) |
+      | ssrDisplayUnit                     | utils.rs(5) |
+      | csrDisplayUnit                     | utils.rs(5) |
       # nested nutrients
       | nutrients[0].name                  | utils.rs(5) |
       | nutrients[0].unit                  | utils.rs(5) |
@@ -131,6 +133,8 @@ Feature: Tests crud operations for Food type
       | description                        | utils.rs(5) |
       | brandOwner                         | utils.rs(5) |
       | ingredients                        | utils.rs(5) |
+      | ssrDisplayUnit                     | utils.rs(5) |
+      | csrDisplayUnit                     | utils.rs(5) |
       # nested nutrients
       | nutrients[0].name                  | utils.rs(5) |
       | nutrients[0].unit                  | utils.rs(5) |

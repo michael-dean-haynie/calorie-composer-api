@@ -3,6 +3,8 @@
   "description": "Food A",
   "brandOwner": "Brand A",
   "ingredients": "Ingredients A",
+  "ssrDisplayUnit": "g",
+  "csrDisplayUnit": "g",
   "nutrients": [
     {
       "name": "Name A",

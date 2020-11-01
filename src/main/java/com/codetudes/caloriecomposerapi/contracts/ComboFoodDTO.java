@@ -16,6 +16,8 @@ import java.util.List;
 public class ComboFoodDTO {
     private Long id;
 
+    private ComboFoodDTO draftOf;
+
     @NotNull
     private Boolean isDraft;
 
@@ -23,8 +25,8 @@ public class ComboFoodDTO {
     private String description;
 
     @Valid
-    private List<ComboFoodFoodAmountDTO> foodAmounts = new ArrayList();
+    private List<ComboFoodConversionRatioDTO> conversionRatios = new ArrayList();
 
     @Valid
-    private List<ComboFoodPortionDTO> portions = new ArrayList();
+    private List<ComboFoodConstituentDTO> constituents = new ArrayList();
 }
