@@ -2,29 +2,66 @@ package com.codetudes.caloriecomposerapi.services.impl;
 
 import com.codetudes.caloriecomposerapi.contracts.UnitDTO;
 import com.codetudes.caloriecomposerapi.db.domain.Unit;
-import com.codetudes.caloriecomposerapi.db.domain.User;
 import com.codetudes.caloriecomposerapi.db.repositories.UnitRepository;
-import com.codetudes.caloriecomposerapi.db.repositories.UserRepository;
 import com.codetudes.caloriecomposerapi.services.UnitService;
+import com.codetudes.caloriecomposerapi.services.UserService;
 import com.codetudes.caloriecomposerapi.util.enums.TokenUnit;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
-import java.util.List;
-
 @Service
 public class UnitServiceImpl implements UnitService {
 
     @Autowired
-    private UnitRepository unitRepository;
+    private ModelMapper modelMapper;
+
     @Autowired
-    private UserRepository userRepository;
+    private UnitRepository unitRepository;
+
+    @Autowired
+    private UserService userService;
 
     @Override
-    public Unit create(Unit unit) {
-        unit.setUser(getUser());
+    public UnitDTO create(UnitDTO unitDTO) {
+        Unit unit = modelMapper.map(unitDTO, Unit.class);
+        throw400IfMatchingUnitExists(unit);
+        return modelMapper.map(createEntity(unit), UnitDTO.class);
+    }
+
+    @Override
+    public UnitDTO read(Long id) {
+        Unit unit = unitRepository.findById(id).orElse(null);
+        throw404IfNull(unit);
+
+        return modelMapper.map(unit, UnitDTO.class);
+    }
+
+    @Override
+    public UnitDTO update(UnitDTO unitDTO) {
+        Unit existingUnit = unitRepository.findById(unitDTO.getId()).orElse(null);
+        throw404IfNull(existingUnit);
+
+        modelMapper.map(unitDTO, existingUnit);
+
+        Unit updatedUnit = unitRepository.save(existingUnit);
+
+        return modelMapper.map(updatedUnit, UnitDTO.class);
+    }
+
+    @Override
+    public void delete(Long id) {
+        Unit unit = unitRepository.findById(id).orElse(null);
+        throw404IfNull(unit);
+
+        unitRepository.deleteById(unit.getId());
+    }
+
+    @Override
+    public Unit createEntity(Unit unit) {
+        unit.setUser(userService.getCurrentUser());
         return unitRepository.save(unit);
     }
 
@@ -40,7 +77,7 @@ public class UnitServiceImpl implements UnitService {
             if (matchingUnit != null){
                 return matchingUnit;
             } else {
-                return create(unit);
+                return createEntity(unit);
             }
         } else {
             Unit existingUnit = unitRepository.findById(unit.getId()).orElse(null);
@@ -61,20 +98,24 @@ public class UnitServiceImpl implements UnitService {
         return unitDTO;
     }
 
-    private User getUser() {
-        // TODO: don't hard code this
-        List<User> users = userRepository.findAll();
-        if (users.size() > 0) {
-            return users.get(0);
-        } else {
-            throw new ResponseStatusException(
-                    HttpStatus.INTERNAL_SERVER_ERROR,
-                    "Hard-coded user unable to be found while creating unit.");
+    private void throw404IfNull(Unit existingUnit) {
+        if (existingUnit == null) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND,
+                    "Unit not found.");
         }
     }
 
     private Unit findMatchingUnit(Unit unit) {
         return unitRepository.findFirstByUserAndSingularAndPluralAndAbbreviation(
-                getUser(), unit.getSingular(), unit.getPlural(), unit.getAbbreviation());
+                userService.getCurrentUser(), unit.getSingular(), unit.getPlural(), unit.getAbbreviation());
+    }
+
+    private void throw400IfMatchingUnitExists(Unit unit) {
+        boolean matchingUnitExists = findMatchingUnit(unit) != null;
+        if (matchingUnitExists){
+            throw new ResponseStatusException(
+                    HttpStatus.BAD_REQUEST,
+                    "A matching unit already exists.");
+        }
     }
 }

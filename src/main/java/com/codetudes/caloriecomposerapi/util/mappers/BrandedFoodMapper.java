@@ -64,7 +64,7 @@ public class BrandedFoodMapper {
         foodDTO.setNutrients(fdcBrandedFoodDTO.getFoodNutrients().stream().map(fdcFoodNutrientDTO -> {
             NutrientDTO nutrientDTO = new NutrientDTO();
             nutrientDTO.setName(fdcFoodNutrientDTO.getNutrient().getName());
-            nutrientDTO.setUnit(createUnitDTO(fdcFoodNutrientDTO.getNutrient().getNutrientUnit().getName()));
+            nutrientDTO.setUnit(createUnitDTO(fdcFoodNutrientDTO.getNutrient().getUnitName()));
             nutrientDTO.setAmount(fdcFoodNutrientDTO.getAmount());
             return nutrientDTO;
         }).collect(Collectors.toList()));

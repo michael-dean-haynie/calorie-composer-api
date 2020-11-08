@@ -6,5 +6,8 @@ import lombok.Data;
 public class FdcNutrientDTO {
     private String name;
 
-    private FdcNutrientUnitDTO nutrientUnit;
+    // This may be the culprit
+//    private FdcNutrientUnitDTO nutrientUnit;
+
+    private String unitName;
 }

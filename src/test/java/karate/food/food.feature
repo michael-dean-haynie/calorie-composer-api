@@ -1,4 +1,3 @@
-@focus
 Feature: Tests crud operations for Food type
 
   Background:

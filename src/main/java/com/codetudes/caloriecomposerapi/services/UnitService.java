@@ -5,12 +5,20 @@ import com.codetudes.caloriecomposerapi.db.domain.Unit;
 import com.codetudes.caloriecomposerapi.util.enums.TokenUnit;
 
 public interface UnitService {
+    UnitDTO create(UnitDTO unitDTO);
+
+    UnitDTO read(Long id);
+
+    UnitDTO update(UnitDTO unitDTO);
+
+    void delete(Long id);
+
     /**
      * Accepts a Unit entity, persists it to the database and returns the result
      * @param unit the unit entity
      * @return the persisted result
      */
-    Unit create(Unit unit);
+    Unit createEntity(Unit unit);
 
     /**
      * Checks if same unit already exists in db. If it does, returns that.
