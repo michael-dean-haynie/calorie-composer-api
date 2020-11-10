@@ -11,6 +11,8 @@ Feature: Tests crud operations for Unit type
   # ---------------------------------------------
 
   Scenario: Create a unit item
+    * set createUnitPayload.abbreviation = utils.rs(5)
+
     Given path 'unit'
     And request createUnitPayload
     When method post
@@ -24,6 +26,8 @@ Feature: Tests crud operations for Unit type
     When call read('classpath:callable/crud/unit/delete-unit.feature') { id: '#(response.id)'}
 
   Scenario: Creating a unit that matches an existing unit results in 400
+    * set createUnitPayload.abbreviation = utils.rs(5)
+
     When def createUnitResult = call read('classpath:callable/crud/unit/create-unit.feature') { request: '#(createUnitPayload)'}
 
     Given path 'unit'
@@ -39,6 +43,8 @@ Feature: Tests crud operations for Unit type
   # ---------------------------------------------
 
   Scenario: Read a unit item
+    * set createUnitPayload.abbreviation = utils.rs(5)
+
     When def createUnitResult = call read('classpath:callable/crud/unit/create-unit.feature') { request: '#(createUnitPayload)'}
 
     Given path 'unit', createUnitResult.response.id
@@ -49,11 +55,26 @@ Feature: Tests crud operations for Unit type
     # clean up
     When call read('classpath:callable/crud/unit/delete-unit.feature') { id: '#(response.id)'}
 
+  Scenario: Read all unit items for user
+    * set createUnitPayload.abbreviation = utils.rs(5)
+
+    When def createUnitResult = call read('classpath:callable/crud/unit/create-unit.feature') { request: '#(createUnitPayload)'}
+
+    Given path 'unit/all'
+    When method get
+    Then status 200
+    And match response == '##[] schemas.unit'
+
+    # clean up
+    When call read('classpath:callable/crud/unit/delete-unit.feature') { id: '#(createUnitResult.response.id)'}
+
   # ---------------------------------------------
   # Update
   # ---------------------------------------------
 
   Scenario Outline: Update a unit item and validate '<fieldName>' set appropriately
+    * set createUnitPayload.abbreviation = utils.rs(5)
+
     When def createUnitResult = call read('classpath:callable/crud/unit/create-unit.feature') { request: '#(createUnitPayload)'}
 
     # stash initial value
@@ -102,6 +123,8 @@ Feature: Tests crud operations for Unit type
   # ---------------------------------------------
 
   Scenario: Delete a unit item
+    * set createUnitPayload.abbreviation = utils.rs(5)
+
     When def createUnitResult = call read('classpath:callable/crud/unit/create-unit.feature') { request: '#(createUnitPayload)'}
 
     Given path 'unit', createUnitResult.response.id

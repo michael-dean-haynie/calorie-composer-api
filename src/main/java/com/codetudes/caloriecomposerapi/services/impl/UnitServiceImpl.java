@@ -7,10 +7,13 @@ import com.codetudes.caloriecomposerapi.services.UnitService;
 import com.codetudes.caloriecomposerapi.services.UserService;
 import com.codetudes.caloriecomposerapi.util.enums.TokenUnit;
 import org.modelmapper.ModelMapper;
+import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
+
+import java.util.List;
 
 @Service
 public class UnitServiceImpl implements UnitService {
@@ -37,6 +40,14 @@ public class UnitServiceImpl implements UnitService {
         throw404IfNull(unit);
 
         return modelMapper.map(unit, UnitDTO.class);
+    }
+
+    @Override
+    public List<UnitDTO> readAll() {
+        return modelMapper.map(
+                unitRepository.findByUser(this.userService.getCurrentUser()),
+                new TypeToken<List<UnitDTO>>() {}.getType()
+        );
     }
 
     @Override

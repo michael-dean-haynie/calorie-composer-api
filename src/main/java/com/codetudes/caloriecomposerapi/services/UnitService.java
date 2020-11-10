@@ -4,10 +4,14 @@ import com.codetudes.caloriecomposerapi.contracts.UnitDTO;
 import com.codetudes.caloriecomposerapi.db.domain.Unit;
 import com.codetudes.caloriecomposerapi.util.enums.TokenUnit;
 
+import java.util.List;
+
 public interface UnitService {
     UnitDTO create(UnitDTO unitDTO);
 
     UnitDTO read(Long id);
+
+    List<UnitDTO> readAll();
 
     UnitDTO update(UnitDTO unitDTO);
 
