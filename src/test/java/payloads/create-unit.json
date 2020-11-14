@@ -1,5 +1,13 @@
 {
+  "isDraft": false,
   "singular": "singular",
   "plural": "plural",
-  "abbreviation": "abbreviation"
+  "abbreviation": "abbreviation",
+  "draft": {
+    "isDraft": true,
+    "singular": "singular",
+    "plural": "plural",
+    "abbreviation": "abbreviation",
+    "draft": null
+  }
 }

@@ -36,11 +36,14 @@ CREATE TABLE `user` (
 CREATE TABLE `unit` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `user_id` int(11) NOT NULL,
+  `is_draft` int(11) NOT NULL,
+  `draft_of` int(11) DEFAULT NULL,
   `singular_name` varchar(45) DEFAULT NULL,
   `plural_name` varchar(45) DEFAULT NULL,
   `abbreviation` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`id`),
-  CONSTRAINT `unit_user_id` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE CASCADE
+  CONSTRAINT `unit_user_id` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE CASCADE,
+  CONSTRAINT `unit_draft_of` FOREIGN KEY (`draft_of`) REFERENCES `unit` (`id`) ON DELETE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --

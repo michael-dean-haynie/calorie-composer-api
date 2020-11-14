@@ -30,7 +30,9 @@ public class UnitServiceImpl implements UnitService {
     @Override
     public UnitDTO create(UnitDTO unitDTO) {
         Unit unit = modelMapper.map(unitDTO, Unit.class);
-        throw400IfMatchingUnitExists(unit);
+        if (!unitDTO.getIsDraft()){
+            throw400IfMatchingUnitExists(unit);
+        }
         return modelMapper.map(createEntity(unit), UnitDTO.class);
     }
 
@@ -45,7 +47,7 @@ public class UnitServiceImpl implements UnitService {
     @Override
     public List<UnitDTO> readAll() {
         return modelMapper.map(
-                unitRepository.findByUser(this.userService.getCurrentUser()),
+                unitRepository.findByUserAndDraftOfIsNull(this.userService.getCurrentUser()),
                 new TypeToken<List<UnitDTO>>() {}.getType()
         );
     }
@@ -56,6 +58,18 @@ public class UnitServiceImpl implements UnitService {
         throw404IfNull(existingUnit);
 
         modelMapper.map(unitDTO, existingUnit);
+
+        // check if draft was removed
+        if (unitDTO.getDraft() == null && existingUnit.getDraft() != null){
+            existingUnit.getDraft().setDraftOf(null);
+            existingUnit.setDraft(null);
+        }
+
+        if (existingUnit.getDraft() != null) {
+            // Draft unit owns the relationship. Set it here.
+            existingUnit.getDraft().setDraftOf(existingUnit);
+            existingUnit.getDraft().setUser(existingUnit.getUser());
+        }
 
         Unit updatedUnit = unitRepository.save(existingUnit);
 
@@ -73,6 +87,11 @@ public class UnitServiceImpl implements UnitService {
     @Override
     public Unit createEntity(Unit unit) {
         unit.setUser(userService.getCurrentUser());
+        if (unit.getDraft() != null) {
+            // Draft unit owns the relationship. Set it here.
+            unit.getDraft().setDraftOf(unit);
+            unit.getDraft().setUser(unit.getUser());
+        }
         return unitRepository.save(unit);
     }
 
@@ -117,8 +136,8 @@ public class UnitServiceImpl implements UnitService {
     }
 
     private Unit findMatchingUnit(Unit unit) {
-        return unitRepository.findFirstByUserAndSingularAndPluralAndAbbreviation(
-                userService.getCurrentUser(), unit.getSingular(), unit.getPlural(), unit.getAbbreviation());
+        return unitRepository.findFirstByUserAndAbbreviationAndDraftOfIsNull(
+                userService.getCurrentUser(), unit.getAbbreviation());
     }
 
     private void throw400IfMatchingUnitExists(Unit unit) {

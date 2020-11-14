@@ -9,7 +9,7 @@ import java.util.List;
 
 @Repository
 public interface UnitRepository extends JpaRepository<Unit, Long> {
-    Unit findFirstByUserAndSingularAndPluralAndAbbreviation(User user, String singular, String plural, String abbreviation);
+    Unit findFirstByUserAndAbbreviationAndDraftOfIsNull(User user, String abbreviation);
 
-    List<Unit> findByUser(User user);
+    List<Unit> findByUserAndDraftOfIsNull(User user);
 }

@@ -1,7 +1,6 @@
 package com.codetudes.caloriecomposerapi.db.domain;
 
-import lombok.Data;
-import lombok.EqualsAndHashCode;
+import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -22,6 +21,15 @@ public class Unit {
     @JoinColumn(name="user_id")
     private User user;
 
+    @NotNull
+    @Column(name="is_draft")
+    private Boolean isDraft;
+
+    @ToString.Exclude
+    @ManyToOne
+    @JoinColumn(name="draft_of")
+    private Unit draftOf;
+
     @Size(max=45)
     @Column(name="singular_name")
     private String singular;
@@ -32,4 +40,7 @@ public class Unit {
 
     @Column(name="abbreviation")
     private String abbreviation;
+
+    @OneToOne(mappedBy="draftOf", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Unit draft;
 }

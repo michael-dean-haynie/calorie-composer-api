@@ -1,6 +1,7 @@
 package com.codetudes.caloriecomposerapi.util;
 
 import com.codetudes.caloriecomposerapi.contracts.FoodDTO;
+import com.codetudes.caloriecomposerapi.db.domain.Unit;
 import com.codetudes.caloriecomposerapi.db.domain.User;
 import com.codetudes.caloriecomposerapi.db.repositories.ComboFoodRepository;
 import com.codetudes.caloriecomposerapi.db.repositories.FoodRepository;
@@ -17,16 +18,22 @@ import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Component
 public class SeedOnStartup {
 
     static final Logger LOG = LoggerFactory.getLogger(SeedOnStartup.class);
 
-    @Value("${db-seeding.seed-on-startup}")
+    @Value("${db-seeding.seed-on-startup:false}")
     private Boolean seedOnStartup;
 
-    @Value("${db-seeding.truncate-tables-first}")
+    @Value("${db-seeding.truncate-tables-first:false}")
     private Boolean truncateTablesFirst;
+
+    @Value("${db-seeding.seed-fdc-data:false}")
+    private Boolean seedFdcData;
 
     @Autowired
     private UserRepository userRepository;
@@ -44,6 +51,8 @@ public class SeedOnStartup {
     @Autowired
     private ComboFoodService comboFoodService;
 
+    private List<User> seededUsers = new ArrayList<>();
+
 
     @EventListener
     public void onContextRefreshd(ContextRefreshedEvent event){
@@ -53,7 +62,14 @@ public class SeedOnStartup {
             if (truncateTablesFirst){
                 truncateTables();
             }
-            seed();
+
+            seedUser();
+            seedUnits();
+
+            LOG.info("db-seeding.seed-fdc-data: {}", seedFdcData);
+            if (seedFdcData){
+                seedFdcData();
+            }
         }
     }
 
@@ -70,12 +86,38 @@ public class SeedOnStartup {
         unitRepository.deleteAll();
     }
 
-    private void seed() {
-        // first create user
+    private void seedUser() {
         User user = new User();
         user.setUsername("username");
-        userRepository.save(user);
+        seededUsers.add(userRepository.saveAndFlush(user));
+    }
 
+    private void seedUnits() {
+        Unit unit = new Unit();
+        unit.setUser(seededUsers.get(0));
+        unit.setIsDraft(false);
+        unit.setAbbreviation("ckr");
+        unitRepository.saveAndFlush(unit);
+
+        Unit draft = new Unit();
+        draft.setUser(seededUsers.get(0));
+        draft.setIsDraft(true);
+        draft.setDraftOf(unit);
+        draft.setSingular("cracker");
+        draft.setPlural("crackers");
+        draft.setAbbreviation("ckr");
+        unitRepository.saveAndFlush(draft);
+
+        Unit roughDraft = new Unit(); // draft but not of something else.
+        roughDraft.setUser(seededUsers.get(0));
+        roughDraft.setIsDraft(true);
+        roughDraft.setSingular("box");
+        roughDraft.setPlural("boxes");
+        roughDraft.setAbbreviation("box");
+        unitRepository.saveAndFlush(roughDraft);
+    }
+
+    private void seedFdcData() {
         // PBJ Food items
         FoodDTO peanutButterDTO = foodService.create(fdcService.getFoodByFdcId("358350"));
         FoodDTO jellyDTO = foodService.create(fdcService.getFoodByFdcId("386995"));

@@ -2,13 +2,16 @@ Feature: Prepare schemas
 	Scenario: Prepare schemas
 		* def schemas = {}
 
+		# unit.draft should also be unit but seems can't nest recursively like that
 		* set schemas.unit =
 		"""
 		{
             id: '##number',
+            isDraft: '##boolean',
             singular: '##string',
             plural: '##string',
-            abbreviation: '##string'
+            abbreviation: '##string',
+            draft: '#ignore'
 		}
 		"""
 
