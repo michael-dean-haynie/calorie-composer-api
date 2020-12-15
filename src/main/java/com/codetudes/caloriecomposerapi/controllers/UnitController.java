@@ -58,4 +58,12 @@ public class UnitController {
         log.info("Successfully deleted unit with id {}.", id);
         return new ResponseEntity(HttpStatus.OK);
     }
+
+    @GetMapping("/draft/count")
+    ResponseEntity<Long> getDraftCount() {
+        log.info("Received request to get unit draft count");
+        Long count = this.unitService.getDraftCount();
+        log.info("Successfully returned unit draft count of {}", count);
+        return new ResponseEntity(count, HttpStatus.OK);
+    }
 }

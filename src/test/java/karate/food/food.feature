@@ -9,6 +9,7 @@ Feature: Tests crud operations for Food type
   # Create
   # ---------------------------------------------
 
+  @focus
   Scenario: Create a food item
     Given path 'food'
     And request createFoodPayload

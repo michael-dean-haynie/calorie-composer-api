@@ -75,6 +75,7 @@ public class BrandedFoodMapper {
     private UnitDTO createUnitDTO(String value){
         UnitDTO unitDTO = new UnitDTO();
         unitDTO.setAbbreviation(value);
+        unitDTO.setIsDraft(false);
         return unitDTO;
     }
 }

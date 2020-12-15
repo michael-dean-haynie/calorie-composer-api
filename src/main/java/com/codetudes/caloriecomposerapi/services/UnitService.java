@@ -38,4 +38,11 @@ public interface UnitService {
      * @return A UnitDTO for the token unit
      */
     UnitDTO createTokenUnitDTO(TokenUnit tokenUnit);
+
+    /**
+     * Returns the number of existing drafts
+     * @return
+     */
+    Long getDraftCount();
+
 }

@@ -12,4 +12,6 @@ public interface UnitRepository extends JpaRepository<Unit, Long> {
     Unit findFirstByUserAndAbbreviationAndDraftOfIsNull(User user, String abbreviation);
 
     List<Unit> findByUserAndDraftOfIsNull(User user);
+
+    Long countByIsDraftTrue();
 }

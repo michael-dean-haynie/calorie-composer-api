@@ -85,6 +85,11 @@ public class UnitServiceImpl implements UnitService {
     }
 
     @Override
+    public Long getDraftCount() {
+        return this.unitRepository.countByIsDraftTrue();
+    }
+
+    @Override
     public Unit createEntity(Unit unit) {
         unit.setUser(userService.getCurrentUser());
         if (unit.getDraft() != null) {
@@ -122,6 +127,7 @@ public class UnitServiceImpl implements UnitService {
     @Override
     public UnitDTO createTokenUnitDTO(TokenUnit tokenUnit) {
         UnitDTO unitDTO = new UnitDTO();
+        unitDTO.setIsDraft(false);
         unitDTO.setSingular(tokenUnit.name());
         unitDTO.setPlural(tokenUnit.name());
         unitDTO.setAbbreviation(tokenUnit.name());

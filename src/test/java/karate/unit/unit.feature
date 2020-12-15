@@ -1,4 +1,4 @@
-@focus
+
 Feature: Tests crud operations for Unit type
 
   Background:
