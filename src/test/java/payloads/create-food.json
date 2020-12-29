@@ -4,31 +4,31 @@
   "brandOwner": "Brand A",
   "ingredients": "Ingredients A",
   "ssrDisplayUnit": {
-    "singular": "singular",
-    "plural": "plural",
-    "abbreviation": "abbreviation"
+    "singular": "gram",
+    "plural": "grams",
+    "abbreviation": "g"
   },
   "csrDisplayUnit": {
-    "singular": "singular",
-    "plural": "plural",
-    "abbreviation": "abbreviation"
+    "singular": "milliliter",
+    "plural": "milliliters",
+    "abbreviation": "ml"
   },
   "nutrients": [
     {
-      "name": "Name A",
+      "name": "Nutrient A",
       "unit": {
-        "singular": "singular",
-        "plural": "plural",
-        "abbreviation": "abbreviation"
+        "singular": "gram",
+        "plural": "grams",
+        "abbreviation": "g"
       },
       "amount": "56.78"
     },
     {
-      "name": "Name B",
+      "name": "Nutrient B",
       "unit": {
-        "singular": "singular",
-        "plural": "plural",
-        "abbreviation": "abbreviation"
+        "singular": "milliliter",
+        "plural": "millileters",
+        "abbreviation": "ml"
       },
       "amount": "90.12"
     }

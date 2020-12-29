@@ -106,6 +106,11 @@ public class UnitServiceImpl implements UnitService {
             return null;
         }
 
+        // default isDraft to false
+        if (unit.getIsDraft() == null)  {
+            unit.setIsDraft(false);
+        }
+
         if (unit.getId() == null) {
             // are there any existing units that are the "same"?
             Unit matchingUnit = this.findMatchingUnit(unit);

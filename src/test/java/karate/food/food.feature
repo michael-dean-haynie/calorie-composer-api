@@ -1,3 +1,4 @@
+@focus
 Feature: Tests crud operations for Food type
 
   Background:
@@ -9,7 +10,6 @@ Feature: Tests crud operations for Food type
   # Create
   # ---------------------------------------------
 
-  @focus
   Scenario: Create a food item
     Given path 'food'
     And request createFoodPayload
@@ -51,37 +51,23 @@ Feature: Tests crud operations for Food type
       | brandOwner                             | utils.rs(5) |
       | ingredients                            | utils.rs(5) |
       # display units
-      | ssrDisplayUnit.singular                | utils.rs(5) |
-      | ssrDisplayUnit.plural                  | utils.rs(5) |
       | ssrDisplayUnit.abbreviation            | utils.rs(5) |
-      | csrDisplayUnit.singular                | utils.rs(5) |
-      | csrDisplayUnit.plural                  | utils.rs(5) |
       | csrDisplayUnit.abbreviation            | utils.rs(5) |
       # nested nutrients
       | nutrients[0].name                      | utils.rs(5) |
-      | nutrients[0].unit.singular             | utils.rs(5) |
-      | nutrients[0].unit.plural               | utils.rs(5) |
       | nutrients[0].unit.abbreviation         | utils.rs(5) |
       | nutrients[1].amount                    | utils.rd()  |
       # nested conversionRatios
       | conversionRatios[0].amountA            | utils.rd()  |
-      | conversionRatios[0].unitA.singular     | utils.rs(5) |
-      | conversionRatios[0].unitA.plural       | utils.rs(5) |
       | conversionRatios[0].unitA.abbreviation | utils.rs(5) |
       | conversionRatios[0].freeFormValueA     | utils.rs(5) |
       | conversionRatios[0].amountB            | utils.rd()  |
-      | conversionRatios[0].unitB.singular     | utils.rs(5) |
-      | conversionRatios[0].unitB.plural       | utils.rs(5) |
       | conversionRatios[0].unitB.abbreviation | utils.rs(5) |
       | conversionRatios[0].freeFormValueB     | utils.rs(5) |
       | conversionRatios[1].amountA            | utils.rd()  |
-      | conversionRatios[1].unitA.singular     | utils.rs(5) |
-      | conversionRatios[1].unitA.plural       | utils.rs(5) |
       | conversionRatios[1].unitA.abbreviation | utils.rs(5) |
       | conversionRatios[1].freeFormValueA     | utils.rs(5) |
       | conversionRatios[1].amountB            | utils.rd()  |
-      | conversionRatios[1].unitB.singular     | utils.rs(5) |
-      | conversionRatios[1].unitB.plural       | utils.rs(5) |
       | conversionRatios[1].unitB.abbreviation | utils.rs(5) |
       | conversionRatios[1].freeFormValueB     | utils.rs(5) |
 
