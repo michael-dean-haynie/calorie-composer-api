@@ -125,6 +125,18 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<configuration>
+					<excludes>
+						<exclude>karate/**/*.java</exclude>
+					</excludes>
+					<includes>
+						<include>com/**/*.java</include>
+					</includes>
+				</configuration>
+			</plugin>
 		</plugins>
 <!--		<resources>-->
 <!--			<resource>-->
