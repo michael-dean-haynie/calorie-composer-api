@@ -55,7 +55,7 @@ public class SeedOnStartup {
 
 
     @EventListener
-    public void onContextRefreshd(ContextRefreshedEvent event){
+    public void onContextRefreshed(ContextRefreshedEvent event){
         LOG.info("db-seeding.seed-on-startup: {}", seedOnStartup);
         if (seedOnStartup){
             LOG.info("db-seeding.truncate-tables-first: {}", truncateTablesFirst);

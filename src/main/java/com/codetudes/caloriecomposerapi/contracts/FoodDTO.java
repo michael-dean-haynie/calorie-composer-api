@@ -3,8 +3,6 @@ package com.codetudes.caloriecomposerapi.contracts;
 import lombok.Data;
 
 import javax.validation.Valid;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Size;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,17 +10,14 @@ import java.util.List;
 public class FoodDTO {
     private Long id;
 
-    @Size(max=10)
+    private Boolean isDraft;
+
     private String fdcId;
 
-    @NotBlank
-    @Size(max = 100)
     private String description;
 
-    @Size(max = 100)
     private String brandOwner;
 
-    @Size(max = 10000)
     private String ingredients;
 
     private UnitDTO ssrDisplayUnit;
@@ -34,4 +29,7 @@ public class FoodDTO {
 
     @Valid
     private List<ConversionRatioDTO> conversionRatios = new ArrayList();
+
+    @Valid
+    private FoodDTO draft;
 }

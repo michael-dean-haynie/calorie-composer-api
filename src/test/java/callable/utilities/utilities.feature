@@ -11,3 +11,11 @@ Feature: Utilities
       * set utils.rd = function(){ return Math.floor(Math.random() * 10000) / 100 }
 
       * set utils.getById = function(array, id){ return array.find(function(item){return item.id === id}); }
+
+      * set utils.removeId =
+      """
+      function(obj) {
+        delete obj.id;
+        return obj;
+      }
+      """

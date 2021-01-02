@@ -58,6 +58,21 @@ public class FoodMerger {
             cvRat.setUnitB(unitService.resolveUnit(cvRat.getUnitB()));
         });
 
+        // Merge nested food draft if exists
+        if (foodDTO.getDraft() != null) {
+            food.setDraft(merge(foodDTO.getDraft(), food.getDraft()));
+            // draft owns the relationship. set it here
+            food.getDraft().setDraftOf(food);
+        }
+
+        // detach existing draft if dto specifies it as null (should be cleaned up as orphan?)
+        else {
+            if (food.getDraft() != null) {
+                food.getDraft().setDraftOf(null);
+                food.setDraft(null);
+            }
+        }
+
         return food;
     }
 }

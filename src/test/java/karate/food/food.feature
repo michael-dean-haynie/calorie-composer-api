@@ -129,24 +129,24 @@ Feature: Tests crud operations for Food type
     When call read('classpath:callable/crud/food/delete-food.feature') { id: '#(response.id)'}
 
     Examples:
-      | fieldName                              | fieldValue  |
-      | fdcId                                  | utils.rs(5) |
-      | description                            | utils.rs(5) |
-      | brandOwner                             | utils.rs(5) |
-      | ingredients                            | utils.rs(5) |
+      | fieldName                          | fieldValue  |
+      | fdcId                              | utils.rs(5) |
+      | description                        | utils.rs(5) |
+      | brandOwner                         | utils.rs(5) |
+      | ingredients                        | utils.rs(5) |
       # units themselves not meant to be updated via this endpoint
       # nested nutrients
-      | nutrients[0].name                      | utils.rs(5) |
-      | nutrients[1].amount                    | utils.rd()  |
+      | nutrients[0].name                  | utils.rs(5) |
+      | nutrients[1].amount                | utils.rd()  |
       # nested conversionRatios
-      | conversionRatios[0].amountA            | utils.rd()  |
-      | conversionRatios[0].freeFormValueA     | utils.rs(5) |
-      | conversionRatios[0].amountB            | utils.rd()  |
-      | conversionRatios[0].freeFormValueB     | utils.rs(5) |
-      | conversionRatios[1].amountA            | utils.rd()  |
-      | conversionRatios[1].freeFormValueA     | utils.rs(5) |
-      | conversionRatios[1].amountB            | utils.rd()  |
-      | conversionRatios[1].freeFormValueB     | utils.rs(5) |
+      | conversionRatios[0].amountA        | utils.rd()  |
+      | conversionRatios[0].freeFormValueA | utils.rs(5) |
+      | conversionRatios[0].amountB        | utils.rd()  |
+      | conversionRatios[0].freeFormValueB | utils.rs(5) |
+      | conversionRatios[1].amountA        | utils.rd()  |
+      | conversionRatios[1].freeFormValueA | utils.rs(5) |
+      | conversionRatios[1].amountB        | utils.rd()  |
+      | conversionRatios[1].freeFormValueB | utils.rs(5) |
 
 
   Scenario: Update a food item by removing a nutrient
@@ -228,8 +228,130 @@ Feature: Tests crud operations for Food type
     * set createFoodResult.response.conversionRatios[1] = responseCopy.conversionRatios[0]
 
     When call read('classpath:callable/crud/food/update-food.feature') { request: '#(createFoodResult.response)'}
+    # TODO: make assertions
 
   # TODO: Tests adding / removing conversionRatios too.
+
+  Scenario: Update a food item by adding a draft to it
+    # Create what will be the "existing food item"
+    When def existingResult = call read('classpath:callable/crud/food/create-food.feature') { request: '#(createFoodPayload)'}
+    * copy updatePayload = existingResult.response
+
+    # Add a draft to the existing food item
+    * copy draft =  existingResult.response
+    * set draft.isDraft = true
+    * remove draft.id
+    * karate.map(draft.conversionRatios, utils.removeId)
+    * karate.map(draft.nutrients, utils.removeId)
+    * set updatePayload.draft = draft
+
+    When def updateResult = call read('classpath:callable/crud/food/update-food.feature') { request: '#(updatePayload)'}
+
+    # Assert draft set up correctly
+    * match updateResult.response.draft contains { id: '#notnull' }
+    * match updateResult.response.draft.id != updateResult.response.id
+
+    # Assert draft values after separate GET request
+    When def getResult = call read('classpath:callable/crud/food/read-food.feature') { id: '#(updateResult.response.id)'}
+    * match getResult.response.draft contains { id: '#notnull' }
+    * match getResult.response.draft.id != getResult.response.id
+
+    # clean up
+    When call read('classpath:callable/crud/food/delete-food.feature') { id: '#(getResult.response.id)'}
+
+  Scenario: Update a food item by removing its draft
+    # Create what will be the "existing food item"
+    When def existingResult = call read('classpath:callable/crud/food/create-food.feature') { request: '#(createFoodPayload)'}
+    * copy updatePayload = existingResult.response
+
+    # Add a draft to the existing food item
+    * copy draft =  existingResult.response
+    * set draft.isDraft = true
+    * remove draft.id
+    * karate.map(draft.conversionRatios, utils.removeId)
+    * karate.map(draft.nutrients, utils.removeId)
+    * set updatePayload.draft = draft
+    When def updateResult = call read('classpath:callable/crud/food/update-food.feature') { request: '#(updatePayload)'}
+
+    # Remove draft
+    * remove updateResult.response.draft
+    When def updateResult2 = call read('classpath:callable/crud/food/update-food.feature') { request: '#(updateResult.response)'}
+
+    # Assert draft removed
+    * match updateResult2.response contains { draft: '#null' }
+
+    # Assert draft values after separate GET request
+    When def getResult = call read('classpath:callable/crud/food/read-food.feature') { id: '#(updateResult2.response.id)'}
+    * match getResult.response contains { draft: '#null' }
+
+    # clean up
+    When call read('classpath:callable/crud/food/delete-food.feature') { id: '#(getResult.response.id)'}
+
+  Scenario Outline: Update a food item's draft and validate '<fieldName>' set appropriately
+    # create food with draft
+    * copy initialPayload = createFoodPayload
+    * copy draft = createFoodPayload
+    * set draft.isDraft = true
+    * set initialPayload.draft = draft
+
+    When def createFoodResult = call read('classpath:callable/crud/food/create-food.feature') { request: '#(initialPayload)'}
+
+    # stash initial value
+    * copy initialFood = createFoodResult.response
+
+    # apply change
+    * copy payload = createFoodResult.response
+    * set payload.<fieldName> = <fieldValue>
+
+    # update
+    Given path 'food'
+    And request payload
+    When method put
+    Then status 200
+
+    # assert updated value in create response
+    * match response.<fieldName> == payload.<fieldName>
+
+    # assert other values didn't change
+    * copy almstInitial = initialFood
+    * set almstInitial.<fieldName> = '#ignore'
+    * match response == almstInitial
+
+    # assert update value in separate read response
+    Given path 'food', response.id
+    When method get
+    Then status 200
+
+    # assert updated value in get response
+    * match response.<fieldName> == payload.<fieldName>
+
+    # assert other values didn't change
+    * match response == almstInitial
+
+    # clean up
+    When call read('classpath:callable/crud/food/delete-food.feature') { id: '#(response.id)'}
+
+    Examples:
+      | fieldName                                | fieldValue  |
+      | draft.fdcId                              | utils.rs(5) |
+      | draft.description                        | utils.rs(5) |
+      | draft.brandOwner                         | utils.rs(5) |
+      | draft.ingredients                        | utils.rs(5) |
+      # units themselves not meant to be updated via this endpoint
+      # nested nutrients
+      | draft.nutrients[0].name                  | utils.rs(5) |
+      | draft.nutrients[1].amount                | utils.rd()  |
+      # nested conversionRatios
+      | draft.conversionRatios[0].amountA        | utils.rd()  |
+      | draft.conversionRatios[0].freeFormValueA | utils.rs(5) |
+      | draft.conversionRatios[0].amountB        | utils.rd()  |
+      | draft.conversionRatios[0].freeFormValueB | utils.rs(5) |
+      | draft.conversionRatios[1].amountA        | utils.rd()  |
+      | draft.conversionRatios[1].freeFormValueA | utils.rs(5) |
+      | draft.conversionRatios[1].amountB        | utils.rd()  |
+      | draft.conversionRatios[1].freeFormValueB | utils.rs(5) |
+
+
 
   # ---------------------------------------------
   # Delete
@@ -246,3 +368,5 @@ Feature: Tests crud operations for Food type
     Given path 'food', createFoodResult.response.id
     When method get
     Then status 404
+
+    #TODO confirm orphaned things such as drafts and conversion ratios and nutrients are deleted?

@@ -1,3 +1,4 @@
+@ignore
 Feature: Tests crud operations for ComboFood type
 
   Background:

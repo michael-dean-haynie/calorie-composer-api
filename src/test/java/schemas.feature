@@ -42,18 +42,21 @@ Feature: Prepare schemas
 		}
 		"""
 
+		# food.draft should also be a food but seems can't nest recursively like that
 		* set schemas.food =
 		"""
 		{
 			id: '##number',
+			isDraft: '##boolean',
 			fdcId: '##string',
-			description: '#string',
+			description: '##string',
 			brandOwner: '##string',
 			ingredients: '##string',
 			ssrDisplayUnit: '##(schemas.unit)',
 			csrDisplayUnit: '##(schemas.unit)',
 			nutrients: '##[] schemas.nutrient',
-			conversionRatios: '##[] schemas.conversionRatio'
+			conversionRatios: '##[] schemas.conversionRatio',
+			draft: '#ignore'
 		}
 		"""
 

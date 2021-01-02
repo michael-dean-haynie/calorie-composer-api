@@ -41,31 +41,14 @@ public class FoodServiceImpl implements FoodService {
 
     @Override
     public FoodDTO create(FoodDTO foodDTO) {
-        Food food = modelMapper.map(foodDTO, Food.class);
-
-        food.setSsrDisplayUnit(unitService.resolveUnit(food.getSsrDisplayUnit()));
-        food.setCsrDisplayUnit(unitService.resolveUnit(food.getCsrDisplayUnit()));
-
-
-        food.getNutrients().forEach(nutrient -> {
-            // Nutrients logically and physically own the relationship. Set it here.
-            nutrient.setFood(food);
-
-            // Resolve units for nutrients
-            nutrient.setUnit(unitService.resolveUnit(nutrient.getUnit()));
-        });
-
-
-        food.getConversionRatios().forEach(cvRat -> {
-            // Conversion ratios logically and physically own the relationship. Set it here.
-            cvRat.setFood(food);
-
-            // Resolve units for conversion ratios
-            cvRat.setUnitA(unitService.resolveUnit(cvRat.getUnitA()));
-            cvRat.setUnitB(unitService.resolveUnit(cvRat.getUnitB()));
-        });
+        Food food = foodMerger.merge(foodDTO, new Food());
 
         food.setUser(getUser());
+        if (food.getDraft() != null) {
+            if(food.getDraft().getUser() == null){
+                food.getDraft().setUser(food.getUser());
+            }
+        }
 
         Food savedFood = foodRepository.save(food);
         return modelMapper.map(savedFood, FoodDTO.class);
@@ -85,6 +68,12 @@ public class FoodServiceImpl implements FoodService {
         throw404IfNull(existingFood);
 
         Food mergedFood = foodMerger.merge(foodDTO, existingFood);
+
+        if (mergedFood.getDraft() != null) {
+            if(mergedFood.getDraft().getUser() == null){
+                mergedFood.getDraft().setUser(mergedFood.getUser());
+            }
+        }
 
         Food updatedFood = foodRepository.save(mergedFood);
 

@@ -53,6 +53,8 @@ CREATE TABLE `unit` (
 CREATE TABLE `food` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `user_id` int(11) NOT NULL,
+  `is_draft` int(11) DEFAULT false,
+  `draft_of` int(11) DEFAULT NULL,
   `fdc_id` varchar(10) DEFAULT NULL,
   `description` varchar(100) DEFAULT NULL,
   `brand_owner` varchar(100) DEFAULT NULL,
@@ -62,6 +64,7 @@ CREATE TABLE `food` (
   PRIMARY KEY (`id`),
   KEY `food_user_id_idx` (`user_id`),
   CONSTRAINT `food_user_id` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE CASCADE,
+  CONSTRAINT `food_draft_of` FOREIGN KEY (`draft_of`) REFERENCES `food` (`id`) ON DELETE CASCADE,
   CONSTRAINT `food_ssr_display_unit_id` FOREIGN KEY (`ssr_display_unit_id`) REFERENCES `unit` (`id`),
   CONSTRAINT `food_csr_display_unit_id` FOREIGN KEY (`csr_display_unit_id`) REFERENCES `unit` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;

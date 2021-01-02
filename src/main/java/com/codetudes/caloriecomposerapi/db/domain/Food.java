@@ -4,9 +4,7 @@ import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.Valid;
-import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,20 +23,23 @@ public class Food {
     @JoinColumn(name="user_id")
     private User user;
 
-    @Size(max = 10)
+    @Column(name="is_draft")
+    private Boolean isDraft;
+
+    @ToString.Exclude
+    @ManyToOne
+    @JoinColumn(name="draft_of")
+    private Food draftOf;
+
     @Column(name="fdc_id")
     private String fdcId;
 
-    @Size(max = 100)
-    @NotBlank
     @Column(name="description")
     private String description;
 
-    @Size(max = 100)
     @Column(name="brand_owner")
     private String brandOwner;
 
-    @Size(max = 10000)
     @Column(name="ingredients")
     private String ingredients;
 
@@ -63,6 +64,9 @@ public class Food {
     @OneToMany(mappedBy="food", cascade = CascadeType.ALL, orphanRemoval = true)
     // default to empty array list to appease hibernate state management voodoo
     private List<ConversionRatio> conversionRatios = new ArrayList();
+
+    @OneToOne(mappedBy="draftOf", fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
+    private Food draft;
 
     // opt to swap out contents instead of re-assigning collection
     // this to appease the hibernate state management voodoo
