@@ -10,14 +10,17 @@ import com.codetudes.caloriecomposerapi.db.repositories.UserRepository;
 import com.codetudes.caloriecomposerapi.services.ComboFoodService;
 import com.codetudes.caloriecomposerapi.services.FdcService;
 import com.codetudes.caloriecomposerapi.services.FoodService;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.context.event.EventListener;
+import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Component;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,12 +31,22 @@ public class SeedOnStartup {
 
     @Value("${db-seeding.seed-on-startup:false}")
     private Boolean seedOnStartup;
-
     @Value("${db-seeding.truncate-tables-first:false}")
     private Boolean truncateTablesFirst;
-
     @Value("${db-seeding.seed-fdc-data:false}")
     private Boolean seedFdcData;
+    @Value("${db-seeding.seed-json-data:false}")
+    private Boolean seedJsonData;
+
+    @Autowired
+    ObjectMapper objectMapper;
+
+    @Value("classpath:seeding-data/peanut-butter.json")
+    Resource peanutButterJson;
+    @Value("classpath:seeding-data/jelly.json")
+    Resource jellyJson;
+    @Value("classpath:seeding-data/bread.json")
+    Resource breadJson;
 
     @Autowired
     private UserRepository userRepository;
@@ -63,12 +76,26 @@ public class SeedOnStartup {
                 truncateTables();
             }
 
-            seedUser();
-            seedUnits();
+            if (userRepository.count() == 0){
+                seedUser();
+            }
+
+            if (unitRepository.count() == 0) {
+                seedUnits();
+            }
 
             LOG.info("db-seeding.seed-fdc-data: {}", seedFdcData);
             if (seedFdcData){
                 seedFdcData();
+            }
+
+            LOG.info("db-seeding.seed-json-data: {}", seedFdcData);
+            if (seedJsonData){
+                try {
+                    seedJsonData();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
         }
     }
@@ -169,5 +196,17 @@ public class SeedOnStartup {
 //        constituents.add(breadCst);
 //
 //        comboFoodService.create(pbjDTO);
+    }
+
+    // seed from json files copied from seeding from fdc way
+    private void seedJsonData() throws IOException {
+        FoodDTO peanutButterDTO = objectMapper.readValue(peanutButterJson.getInputStream(), FoodDTO.class);
+        foodService.create(peanutButterDTO);
+
+        FoodDTO jellyDTO = objectMapper.readValue(jellyJson.getInputStream(), FoodDTO.class);
+        foodService.create(jellyDTO);
+
+        FoodDTO breadDTO = objectMapper.readValue(breadJson.getInputStream(), FoodDTO.class);
+        foodService.create(breadDTO);
     }
 }
