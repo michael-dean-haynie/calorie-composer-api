@@ -123,7 +123,7 @@ public class UnitServiceImpl implements UnitService {
             Unit existingUnit = unitRepository.findById(unit.getId()).orElse(null);
             if (existingUnit == null) {
                 throw new ResponseStatusException(HttpStatus.NOT_FOUND,
-                        "Unit not found.");
+                        "Unit '" + unit.getAbbreviation() + "' not found.");
             }
             return existingUnit;
         }

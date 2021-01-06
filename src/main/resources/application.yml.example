@@ -9,9 +9,12 @@ spring:
 foodDataCentral:
   apiEndpoint: https://api.nal.usda.gov/fdc/v1/
   apiKey: <api key>
+#  apiKey: DEMO_KEY
 
 db-seeding:
   seed-on-startup: false
+  seed-fdc-data: false
+  seed-json-data: false
   truncate-tables-first: false
 
 ---
@@ -27,3 +30,7 @@ feign:
 # SQL Logging
 logging.level.org.hibernate.SQL: DEBUG
 logging.level.org.hibernate.type: TRACE
+---
+# Enable to serve on local network for mobile testing
+server.address: 0.0.0.0
+server.port: 8080

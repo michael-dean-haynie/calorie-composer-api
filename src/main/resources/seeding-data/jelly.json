@@ -1,0 +1,255 @@
+{
+  "isDraft": null,
+  "fdcId": "386995",
+  "description": "GREAT VALUE, JELLY, CONCORD GRAPE",
+  "brandOwner": "Wal-Mart Stores, Inc.",
+  "ingredients": "CONCORD GRAPE JUICE (WATER, CONCORD GRAPE JUICE CONCENTRATE), CORN SYRUP, HIGH FRUCTOSE CORN SYRUP, PECTIN, CITRIC ACID, SODIUM CITRATE.",
+  "ssrDisplayUnit": null,
+  "csrDisplayUnit": null,
+  "nutrients": [
+    {
+      "name": "Fatty acids, total trans",
+      "unit": {
+        "isDraft": false,
+        "singular": null,
+        "plural": null,
+        "abbreviation": "g",
+        "draft": null
+      },
+      "amount": 0.00
+    },
+    {
+      "name": "Carbohydrate, by difference",
+      "unit": {
+        "isDraft": false,
+        "singular": null,
+        "plural": null,
+        "abbreviation": "g",
+        "draft": null
+      },
+      "amount": 65.00
+    },
+    {
+      "name": "Energy",
+      "unit": {
+        "isDraft": false,
+        "singular": null,
+        "plural": null,
+        "abbreviation": "kcal",
+        "draft": null
+      },
+      "amount": 250.00
+    },
+    {
+      "name": "Protein",
+      "unit": {
+        "isDraft": false,
+        "singular": null,
+        "plural": null,
+        "abbreviation": "g",
+        "draft": null
+      },
+      "amount": 0.00
+    },
+    {
+      "name": "Sugars, total including NLEA",
+      "unit": {
+        "isDraft": false,
+        "singular": null,
+        "plural": null,
+        "abbreviation": "g",
+        "draft": null
+      },
+      "amount": 40.00
+    },
+    {
+      "name": "Fatty acids, total monounsaturated",
+      "unit": {
+        "isDraft": false,
+        "singular": null,
+        "plural": null,
+        "abbreviation": "g",
+        "draft": null
+      },
+      "amount": 0.00
+    },
+    {
+      "name": "Sodium, Na",
+      "unit": {
+        "isDraft": false,
+        "singular": null,
+        "plural": null,
+        "abbreviation": "mg",
+        "draft": null
+      },
+      "amount": 25.00
+    },
+    {
+      "name": "Fatty acids, total polyunsaturated",
+      "unit": {
+        "isDraft": false,
+        "singular": null,
+        "plural": null,
+        "abbreviation": "g",
+        "draft": null
+      },
+      "amount": 0.00
+    },
+    {
+      "name": "Potassium, K",
+      "unit": {
+        "isDraft": false,
+        "singular": null,
+        "plural": null,
+        "abbreviation": "mg",
+        "draft": null
+      },
+      "amount": 0.00
+    },
+    {
+      "name": "Vitamin C, total ascorbic acid",
+      "unit": {
+        "isDraft": false,
+        "singular": null,
+        "plural": null,
+        "abbreviation": "mg",
+        "draft": null
+      },
+      "amount": 0.00
+    },
+    {
+      "name": "Vitamin A, IU",
+      "unit": {
+        "isDraft": false,
+        "singular": null,
+        "plural": null,
+        "abbreviation": "IU",
+        "draft": null
+      },
+      "amount": 0.00
+    },
+    {
+      "name": "Cholesterol",
+      "unit": {
+        "isDraft": false,
+        "singular": null,
+        "plural": null,
+        "abbreviation": "mg",
+        "draft": null
+      },
+      "amount": 0.00
+    },
+    {
+      "name": "Calcium, Ca",
+      "unit": {
+        "isDraft": false,
+        "singular": null,
+        "plural": null,
+        "abbreviation": "mg",
+        "draft": null
+      },
+      "amount": 0.00
+    },
+    {
+      "name": "Fiber, total dietary",
+      "unit": {
+        "isDraft": false,
+        "singular": null,
+        "plural": null,
+        "abbreviation": "g",
+        "draft": null
+      },
+      "amount": 0.00
+    },
+    {
+      "name": "Fatty acids, total saturated",
+      "unit": {
+        "isDraft": false,
+        "singular": null,
+        "plural": null,
+        "abbreviation": "g",
+        "draft": null
+      },
+      "amount": 0.00
+    },
+    {
+      "name": "Iron, Fe",
+      "unit": {
+        "isDraft": false,
+        "singular": null,
+        "plural": null,
+        "abbreviation": "mg",
+        "draft": null
+      },
+      "amount": 0.00
+    },
+    {
+      "name": "Total lipid (fat)",
+      "unit": {
+        "isDraft": false,
+        "singular": null,
+        "plural": null,
+        "abbreviation": "g",
+        "draft": null
+      },
+      "amount": 0.00
+    }
+  ],
+  "conversionRatios": [
+    {
+      "amountA": 1.00,
+      "unitA": {
+        "isDraft": false,
+        "singular": "CONSTITUENTS_SIZE_REF",
+        "plural": "CONSTITUENTS_SIZE_REF",
+        "abbreviation": "CONSTITUENTS_SIZE_REF",
+        "draft": null
+      },
+      "freeFormValueA": null,
+      "amountB": 100.00,
+      "unitB": {
+        "isDraft": false,
+        "singular": null,
+        "plural": null,
+        "abbreviation": "g",
+        "draft": null
+      },
+      "freeFormValueB": null
+    },
+    {
+      "amountA": 1.00,
+      "unitA": {
+        "isDraft": false,
+        "singular": "SERVING_SIZE_REF",
+        "plural": "SERVING_SIZE_REF",
+        "abbreviation": "SERVING_SIZE_REF",
+        "draft": null
+      },
+      "freeFormValueA": null,
+      "amountB": 20.00,
+      "unitB": {
+        "isDraft": false,
+        "singular": null,
+        "plural": null,
+        "abbreviation": "g",
+        "draft": null
+      },
+      "freeFormValueB": null
+    },
+    {
+      "amountA": 1.00,
+      "unitA": {
+        "isDraft": false,
+        "singular": "SERVING_SIZE_REF",
+        "plural": "SERVING_SIZE_REF",
+        "abbreviation": "SERVING_SIZE_REF",
+        "draft": null
+      },
+      "freeFormValueA": null,
+      "amountB": null,
+      "unitB": null,
+      "freeFormValueB": "1 Tbsp"
+    }
+  ],
+  "draft": null
+}

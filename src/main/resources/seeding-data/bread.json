@@ -1,0 +1,277 @@
+{
+  "isDraft": null,
+  "fdcId": "406269",
+  "description": "WONDER, ENRICHED BREAD",
+  "brandOwner": "WONDER",
+  "ingredients": "UNBLEACHED ENRICHED FLOUR (WHEAT FLOUR, MALTED BARLEY FLOUR, NIACIN, REDUCED IRON, THIAMIN MONONITRATE, RIBOFLAVIN, FOLIC ACID), WATER, HIGH FRUCTOSE CORN SYRUP, CONTAINS 2% OR LESS OF EACH OF THE FOLLOWING: YEAST, SALT, SOYBEAN OIL, WHEAT GLUTEN, DOUGH CONDITIONERS (CONTAINS ONE OR MORE OF THE FOLLOWING: SODIUM STEAROYL LACTYLATE, CALCIUM STEAROYL LACTYLATE, MONOGLYCERIDES AND/OR DIGLYCERIDES, CALCIUM PEROXIDE, CALCIUM IODITE, DATEM, ETHOXYLATED MONO- AND DIGLYCERIDES, ENZYMES), SOY FLOUR, YEAST FOOD (AMMONIUM SULFATE), MONOCALCIUM PHOSPHATE, CALCIUM SULFATE, SOY LECITHIN, CALCIUM PROPIONATE (TO RETARD SPOILAGE).",
+  "ssrDisplayUnit": null,
+  "csrDisplayUnit": null,
+  "nutrients": [
+    {
+      "name": "Fiber, total dietary",
+      "unit": {
+        "isDraft": false,
+        "singular": null,
+        "plural": null,
+        "abbreviation": "g",
+        "draft": null
+      },
+      "amount": 2.00
+    },
+    {
+      "name": "Sugars, total including NLEA",
+      "unit": {
+        "isDraft": false,
+        "singular": null,
+        "plural": null,
+        "abbreviation": "g",
+        "draft": null
+      },
+      "amount": 6.12
+    },
+    {
+      "name": "Protein",
+      "unit": {
+        "isDraft": false,
+        "singular": null,
+        "plural": null,
+        "abbreviation": "g",
+        "draft": null
+      },
+      "amount": 8.16
+    },
+    {
+      "name": "Carbohydrate, by difference",
+      "unit": {
+        "isDraft": false,
+        "singular": null,
+        "plural": null,
+        "abbreviation": "g",
+        "draft": null
+      },
+      "amount": 53.06
+    },
+    {
+      "name": "Fatty acids, total polyunsaturated",
+      "unit": {
+        "isDraft": false,
+        "singular": null,
+        "plural": null,
+        "abbreviation": "g",
+        "draft": null
+      },
+      "amount": 2.04
+    },
+    {
+      "name": "Fatty acids, total trans",
+      "unit": {
+        "isDraft": false,
+        "singular": null,
+        "plural": null,
+        "abbreviation": "g",
+        "draft": null
+      },
+      "amount": 0.00
+    },
+    {
+      "name": "Sodium, Na",
+      "unit": {
+        "isDraft": false,
+        "singular": null,
+        "plural": null,
+        "abbreviation": "mg",
+        "draft": null
+      },
+      "amount": 531.00
+    },
+    {
+      "name": "Fatty acids, total monounsaturated",
+      "unit": {
+        "isDraft": false,
+        "singular": null,
+        "plural": null,
+        "abbreviation": "g",
+        "draft": null
+      },
+      "amount": 0.00
+    },
+    {
+      "name": "Energy",
+      "unit": {
+        "isDraft": false,
+        "singular": null,
+        "plural": null,
+        "abbreviation": "kcal",
+        "draft": null
+      },
+      "amount": 265.00
+    },
+    {
+      "name": "Total lipid (fat)",
+      "unit": {
+        "isDraft": false,
+        "singular": null,
+        "plural": null,
+        "abbreviation": "g",
+        "draft": null
+      },
+      "amount": 3.06
+    },
+    {
+      "name": "Vitamin C, total ascorbic acid",
+      "unit": {
+        "isDraft": false,
+        "singular": null,
+        "plural": null,
+        "abbreviation": "mg",
+        "draft": null
+      },
+      "amount": 0.00
+    },
+    {
+      "name": "Cholesterol",
+      "unit": {
+        "isDraft": false,
+        "singular": null,
+        "plural": null,
+        "abbreviation": "mg",
+        "draft": null
+      },
+      "amount": 0.00
+    },
+    {
+      "name": "Iron, Fe",
+      "unit": {
+        "isDraft": false,
+        "singular": null,
+        "plural": null,
+        "abbreviation": "mg",
+        "draft": null
+      },
+      "amount": 2.94
+    },
+    {
+      "name": "Vitamin A, IU",
+      "unit": {
+        "isDraft": false,
+        "singular": null,
+        "plural": null,
+        "abbreviation": "IU",
+        "draft": null
+      },
+      "amount": 0.00
+    },
+    {
+      "name": "Thiamin",
+      "unit": {
+        "isDraft": false,
+        "singular": null,
+        "plural": null,
+        "abbreviation": "mg",
+        "draft": null
+      },
+      "amount": 0.00
+    },
+    {
+      "name": "Fatty acids, total saturated",
+      "unit": {
+        "isDraft": false,
+        "singular": null,
+        "plural": null,
+        "abbreviation": "g",
+        "draft": null
+      },
+      "amount": 0.00
+    },
+    {
+      "name": "Riboflavin",
+      "unit": {
+        "isDraft": false,
+        "singular": null,
+        "plural": null,
+        "abbreviation": "mg",
+        "draft": null
+      },
+      "amount": 0.28
+    },
+    {
+      "name": "Calcium, Ca",
+      "unit": {
+        "isDraft": false,
+        "singular": null,
+        "plural": null,
+        "abbreviation": "mg",
+        "draft": null
+      },
+      "amount": 41.00
+    },
+    {
+      "name": "Niacin",
+      "unit": {
+        "isDraft": false,
+        "singular": null,
+        "plural": null,
+        "abbreviation": "mg",
+        "draft": null
+      },
+      "amount": 4.08
+    }
+  ],
+  "conversionRatios": [
+    {
+      "amountA": 1.00,
+      "unitA": {
+        "isDraft": false,
+        "singular": "CONSTITUENTS_SIZE_REF",
+        "plural": "CONSTITUENTS_SIZE_REF",
+        "abbreviation": "CONSTITUENTS_SIZE_REF",
+        "draft": null
+      },
+      "freeFormValueA": null,
+      "amountB": 100.00,
+      "unitB": {
+        "isDraft": false,
+        "singular": null,
+        "plural": null,
+        "abbreviation": "g",
+        "draft": null
+      },
+      "freeFormValueB": null
+    },
+    {
+      "amountA": 1.00,
+      "unitA": {
+        "isDraft": false,
+        "singular": "SERVING_SIZE_REF",
+        "plural": "SERVING_SIZE_REF",
+        "abbreviation": "SERVING_SIZE_REF",
+        "draft": null
+      },
+      "freeFormValueA": null,
+      "amountB": 49.00,
+      "unitB": {
+        "isDraft": false,
+        "singular": null,
+        "plural": null,
+        "abbreviation": "g",
+        "draft": null
+      },
+      "freeFormValueB": null
+    },
+    {
+      "amountA": 1.00,
+      "unitA": {
+        "isDraft": false,
+        "singular": "SERVING_SIZE_REF",
+        "plural": "SERVING_SIZE_REF",
+        "abbreviation": "SERVING_SIZE_REF",
+        "draft": null
+      },
+      "freeFormValueA": null,
+      "amountB": null,
+      "unitB": null,
+      "freeFormValueB": "1.7 ONZ"
+    }
+  ],
+  "draft": null
+}
