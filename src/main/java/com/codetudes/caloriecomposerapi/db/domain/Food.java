@@ -44,12 +44,12 @@ public class Food {
     private String ingredients;
 
     @Valid
-    @ManyToOne(fetch=FetchType.LAZY)
+    @ManyToOne()
     @JoinColumn(name="ssr_display_unit_id")
     private Unit ssrDisplayUnit;
 
     @Valid
-    @ManyToOne(fetch=FetchType.LAZY)
+    @ManyToOne()
     @JoinColumn(name="csr_display_unit_id")
     private Unit csrDisplayUnit;
 

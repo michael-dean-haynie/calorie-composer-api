@@ -10,57 +10,70 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.util.stream.Collectors;
+import java.util.ArrayList;
+import java.util.List;
 
 @Component
 public class FoodMerger {
 
     @Autowired
-    ModelMapper modelMapper;
+    private ModelMapper modelMapper;
     @Autowired
-    MergeMapper mergeMapper;
+    private MergeMapper mergeMapper;
 
     @Autowired
-    UnitService unitService;
+    private UnitService unitService;
+    @Autowired
+    private UnitMerger unitMerger;
+    @Autowired
+    private NutrientMerger nutrientMerger;
+    @Autowired
+    private ConversionRatioMerger conversionRatioMerger;
 
-    public Food  merge(FoodDTO foodDTO, Food food) {
-        mergeMapper.map(foodDTO, food);
+    public Food merge(FoodDTO foodDTO, Food food) {
 
-        food.setSsrDisplayUnit(unitService.resolveUnit(food.getSsrDisplayUnit()));
-        food.setCsrDisplayUnit(unitService.resolveUnit(food.getCsrDisplayUnit()));
+        // simple top level properties
+        food.setIsDraft(foodDTO.getIsDraft());
+        food.setFdcId(foodDTO.getFdcId());
+        food.setDescription(foodDTO.getDescription());
+        food.setBrandOwner(foodDTO.getBrandOwner());
+        food.setIngredients(foodDTO.getIngredients());
 
-        // Clear and re-create nutrient entities
+        // top level units
+        food.setSsrDisplayUnit(unitMerger.merge(foodDTO.getSsrDisplayUnit(), food.getSsrDisplayUnit()));
+        food.setCsrDisplayUnit(unitMerger.merge(foodDTO.getCsrDisplayUnit(), food.getCsrDisplayUnit()));
+
+        // Nutrients
+        List<Nutrient> oldNutrients = new ArrayList<>(food.getNutrients());
         food.getNutrients().clear();
-        food.setNutrients(foodDTO.getNutrients().stream()
-                .map(nutrientDTO -> modelMapper.map(nutrientDTO, Nutrient.class))
-                .collect(Collectors.toList()));
-
-        food.getNutrients().forEach(nutrient -> {
-            // Nutrients logically and physically own the relationship. Set it here.
-            nutrient.setFood(food);
-
-            // Resolve units for nutrients
-            nutrient.setUnit(unitService.resolveUnit(nutrient.getUnit()));
+        foodDTO.getNutrients().forEach(nutrientDTO -> {
+            Nutrient oldEntity = oldNutrients.stream()
+                    .filter(nutrient -> {
+                        return nutrientDTO.getId() != null && nutrientDTO.getId().equals(nutrient.getId());
+                    }).findFirst().orElse(null);
+            Nutrient newEntity = nutrientMerger.merge(nutrientDTO, oldEntity, food);
+            food.getNutrients().add(newEntity);
         });
 
-        // Clear and re-create conversion ratio entities
+        // Conversion Ratios
+        List<ConversionRatio> oldCvRats = new ArrayList<>(food.getConversionRatios());
         food.getConversionRatios().clear();
-        food.setConversionRatios(foodDTO.getConversionRatios().stream()
-                .map(conversionRatioDTO -> modelMapper.map(conversionRatioDTO, ConversionRatio.class))
-                .collect(Collectors.toList()));
-
-        food.getConversionRatios().forEach(cvRat -> {
-            // Conversion ratios logically and physically own the relationship. Set it here.
-            cvRat.setFood(food);
-
-            // Resolve units for conversion ratios
-            cvRat.setUnitA(unitService.resolveUnit(cvRat.getUnitA()));
-            cvRat.setUnitB(unitService.resolveUnit(cvRat.getUnitB()));
+        foodDTO.getConversionRatios().forEach(cvRatDTO -> {
+            ConversionRatio oldEntity = oldCvRats.stream()
+                    .filter(cvRat -> {
+                        return cvRatDTO.getId() != null && cvRatDTO.getId().equals(cvRat.getId());
+                    }).findFirst().orElse(null);
+            ConversionRatio newEntity = conversionRatioMerger.merge(cvRatDTO, oldEntity, food);
+            food.getConversionRatios().add(newEntity);
         });
 
         // Merge nested food draft if exists
         if (foodDTO.getDraft() != null) {
+            if (food.getDraft() == null){
+                food.setDraft(new Food());
+            }
             food.setDraft(merge(foodDTO.getDraft(), food.getDraft()));
+            food.getDraft().setIsDraft(true);
             // draft owns the relationship. set it here
             food.getDraft().setDraftOf(food);
         }

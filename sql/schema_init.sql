@@ -97,7 +97,7 @@ CREATE TABLE `nutrient` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `food_id` int(11) DEFAULT NULL,
   `name` varchar(45) NOT NULL,
-  `unit_id` int(11) NOT NULL,
+  `unit_id` int(11) DEFAULT NULL,
   `amount` decimal(5,2) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `nutrient_food_id_idx` (`food_id`),
