@@ -96,9 +96,9 @@ CREATE TABLE `conversion_ratio` (
 CREATE TABLE `nutrient` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `food_id` int(11) DEFAULT NULL,
-  `name` varchar(45) NOT NULL,
+  `name` varchar(45) DEFAULT NULL,
   `unit_id` int(11) DEFAULT NULL,
-  `amount` decimal(5,2) NOT NULL,
+  `amount` decimal(5,2) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `nutrient_food_id_idx` (`food_id`),
   CONSTRAINT `nutrient_food_id` FOREIGN KEY (`food_id`) REFERENCES `food` (`id`) ON DELETE CASCADE,

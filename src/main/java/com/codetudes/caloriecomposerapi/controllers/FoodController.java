@@ -53,6 +53,14 @@ public class FoodController {
         return new ResponseEntity(HttpStatus.OK);
     }
 
+    @GetMapping("/drafts")
+    ResponseEntity readDrafts() {
+        LOG.info("Received request to read foods that have a draft");
+        List<FoodDTO> foodDTOs = foodService.readDrafts();
+        LOG.info("Successfully read foods that have a draft (count: {})", foodDTOs.size());
+        return new ResponseEntity(foodDTOs, HttpStatus.OK);
+    }
+
     @GetMapping("/search")
     ResponseEntity search(@RequestParam String searchQuery) {
         LOG.info("Received search request with search query '{}'", searchQuery);

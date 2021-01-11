@@ -13,5 +13,11 @@ public interface FoodService {
 
     void delete(Long id);
 
+    /**
+     * Returns a list of foods that have a draft or are a draft but not of an existing food
+     * @return
+     */
+    List<FoodDTO> readDrafts();
+
     List<FoodDTO> search(String query);
 }

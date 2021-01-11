@@ -89,6 +89,12 @@ public class FoodServiceImpl implements FoodService {
     }
 
     @Override
+    public List<FoodDTO> readDrafts() {
+        Type targetListType = new TypeToken<List<FoodDTO>>() {}.getType();
+        return modelMapper.map(foodRepository.findDrafts(), targetListType);
+    }
+
+    @Override
     public List<FoodDTO> search(String query){
         Pageable pageable = PageRequest.of(0, 5);
         Type targetListType = new TypeToken<List<FoodDTO>>() {}.getType();
