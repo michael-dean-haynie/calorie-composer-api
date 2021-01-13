@@ -89,6 +89,12 @@ public class FoodServiceImpl implements FoodService {
     }
 
     @Override
+    public List<FoodDTO> readAllFoods() {
+        Type targetListType = new TypeToken<List<FoodDTO>>() {}.getType();
+        return modelMapper.map(foodRepository.findAllFoods(), targetListType);
+    }
+
+    @Override
     public List<FoodDTO> readDrafts() {
         Type targetListType = new TypeToken<List<FoodDTO>>() {}.getType();
         return modelMapper.map(foodRepository.findDrafts(), targetListType);

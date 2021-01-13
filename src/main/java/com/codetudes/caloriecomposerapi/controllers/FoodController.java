@@ -53,6 +53,14 @@ public class FoodController {
         return new ResponseEntity(HttpStatus.OK);
     }
 
+    @GetMapping
+    ResponseEntity readAllFoods() {
+        LOG.info("Received request to read all foods");
+        List<FoodDTO> foodDTOs = foodService.readAllFoods();
+        LOG.info("Successfully read all foods (count: {})", foodDTOs.size());
+        return new ResponseEntity(foodDTOs, HttpStatus.OK);
+    }
+
     @GetMapping("/drafts")
     ResponseEntity readDrafts() {
         LOG.info("Received request to read foods that have a draft");
