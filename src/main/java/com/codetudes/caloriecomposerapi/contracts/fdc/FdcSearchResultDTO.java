@@ -12,5 +12,5 @@ public class FdcSearchResultDTO {
 
     private Long currentPage;
 
-    private List<FdcFoodDTO> foods;
+    private List<FdcSearchResultFoodDTO> foods;
 }

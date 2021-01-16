@@ -20,8 +20,8 @@ public interface FdcClient {
     FdcSearchResultDTO search(
             @RequestParam(value="query") String query,
             @RequestParam(value="dataType") String dataType,
-            @RequestParam(value="pageSize") Long pageSize,
-            @RequestParam(value="pageNumber") Long pageNumber);
+            @RequestParam(value="pageSize") Integer pageSize,
+            @RequestParam(value="pageNumber") Integer pageNumber);
 
     @GetMapping("/foods")
     List<LinkedHashMap<String, Object>> getFoodsByFdcIds(@RequestParam(value="fdcIds") String fdcIds);
