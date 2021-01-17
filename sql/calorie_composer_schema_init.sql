@@ -15,13 +15,13 @@ DROP TABLE IF EXISTS `nutrient`;
 DROP TABLE IF EXISTS `conversion_ratio`;
 DROP TABLE IF EXISTS `food`;
 DROP TABLE IF EXISTS `unit`;
-DROP TABLE IF EXISTS `user`;
+DROP TABLE IF EXISTS `cc_user`;
 
 --
 -- Table structure for table `user`
 --
 
-CREATE TABLE `user` (
+CREATE TABLE `cc_user` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `username` varchar(45) NOT NULL,
   PRIMARY KEY (`id`),
@@ -42,7 +42,7 @@ CREATE TABLE `unit` (
   `plural_name` varchar(45) DEFAULT NULL,
   `abbreviation` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`id`),
-  CONSTRAINT `unit_user_id` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE CASCADE,
+  CONSTRAINT `unit_user_id` FOREIGN KEY (`user_id`) REFERENCES `cc_user` (`id`) ON DELETE CASCADE,
   CONSTRAINT `unit_draft_of` FOREIGN KEY (`draft_of`) REFERENCES `unit` (`id`) ON DELETE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
@@ -63,7 +63,7 @@ CREATE TABLE `food` (
   `csr_display_unit_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `food_user_id_idx` (`user_id`),
-  CONSTRAINT `food_user_id` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE CASCADE,
+  CONSTRAINT `food_user_id` FOREIGN KEY (`user_id`) REFERENCES `cc_user` (`id`) ON DELETE CASCADE,
   CONSTRAINT `food_draft_of` FOREIGN KEY (`draft_of`) REFERENCES `food` (`id`) ON DELETE CASCADE,
   CONSTRAINT `food_ssr_display_unit_id` FOREIGN KEY (`ssr_display_unit_id`) REFERENCES `unit` (`id`),
   CONSTRAINT `food_csr_display_unit_id` FOREIGN KEY (`csr_display_unit_id`) REFERENCES `unit` (`id`)
@@ -105,63 +105,63 @@ CREATE TABLE `nutrient` (
   CONSTRAINT `nutrient_unit_id` FOREIGN KEY (`unit_id`) REFERENCES `unit` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
---
--- Table structure for table `combo_food`
---
+-- --
+-- -- Table structure for table `combo_food`
+-- --
 
-CREATE TABLE `combo_food` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `user_id` int(11) DEFAULT NULL,
-  `is_draft` int(11) NOT NULL,
-  `draft_of_combo_food_id` int(11) DEFAULT NULL,
-  `description` varchar(100) NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `combo_food_user_id_idx` (`user_id`),
-  CONSTRAINT `combo_food_user_id` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE CASCADE,
-  CONSTRAINT `combo_food_draft_of_combo_food_id` FOREIGN KEY (`draft_of_combo_food_id`) REFERENCES `combo_food` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+-- CREATE TABLE `combo_food` (
+--   `id` int(11) NOT NULL AUTO_INCREMENT,
+--   `user_id` int(11) DEFAULT NULL,
+--   `is_draft` int(11) NOT NULL,
+--   `draft_of_combo_food_id` int(11) DEFAULT NULL,
+--   `description` varchar(100) NOT NULL,
+--   PRIMARY KEY (`id`),
+--   KEY `combo_food_user_id_idx` (`user_id`),
+--   CONSTRAINT `combo_food_user_id` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE CASCADE,
+--   CONSTRAINT `combo_food_draft_of_combo_food_id` FOREIGN KEY (`draft_of_combo_food_id`) REFERENCES `combo_food` (`id`) ON DELETE CASCADE
+-- ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
---
--- Table structure for table `combo_food_conversion_ratio`
---
+-- --
+-- -- Table structure for table `combo_food_conversion_ratio`
+-- --
 
-CREATE TABLE `combo_food_conversion_ratio` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `combo_food_id` int(11) DEFAULT NULL,
-  `amount_a` decimal(5,2) DEFAULT NULL,
-  `unit_a` varchar(45) DEFAULT NULL,
-  `amount_b` decimal(5,2) DEFAULT NULL,
-  `unit_b` varchar(45) DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `combo_food_conversion_ratio_combo_food_id_idx` (`combo_food_id`),
-  CONSTRAINT `combo_food_conversion_ratio_combo_food_id` FOREIGN KEY (`combo_food_id`) REFERENCES `combo_food` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+-- CREATE TABLE `combo_food_conversion_ratio` (
+--   `id` int(11) NOT NULL AUTO_INCREMENT,
+--   `combo_food_id` int(11) DEFAULT NULL,
+--   `amount_a` decimal(5,2) DEFAULT NULL,
+--   `unit_a` varchar(45) DEFAULT NULL,
+--   `amount_b` decimal(5,2) DEFAULT NULL,
+--   `unit_b` varchar(45) DEFAULT NULL,
+--   PRIMARY KEY (`id`),
+--   KEY `combo_food_conversion_ratio_combo_food_id_idx` (`combo_food_id`),
+--   CONSTRAINT `combo_food_conversion_ratio_combo_food_id` FOREIGN KEY (`combo_food_id`) REFERENCES `combo_food` (`id`) ON DELETE CASCADE
+-- ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
---
--- Table structure for table `combo_food_constituent`
---
+-- --
+-- -- Table structure for table `combo_food_constituent`
+-- --
 
-CREATE TABLE `combo_food_constituent` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `combo_food_id` int(11) DEFAULT NULL,
-  `food_id` int(11) DEFAULT NULL,
-  `amount` decimal(5,2) DEFAULT NULL,
-  `unit` varchar(45) DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `combo_food_constituent_combo_food_id_idx` (`combo_food_id`),
-  KEY `combo_food_constituent_food_id_idx` (`food_id`),
-  CONSTRAINT `combo_food_constituent_combo_food_id` FOREIGN KEY (`combo_food_id`) REFERENCES `combo_food` (`id`) ON DELETE CASCADE,
-  CONSTRAINT `combo_food_constituent_food_id` FOREIGN KEY (`food_id`) REFERENCES `food` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+-- CREATE TABLE `combo_food_constituent` (
+--   `id` int(11) NOT NULL AUTO_INCREMENT,
+--   `combo_food_id` int(11) DEFAULT NULL,
+--   `food_id` int(11) DEFAULT NULL,
+--   `amount` decimal(5,2) DEFAULT NULL,
+--   `unit` varchar(45) DEFAULT NULL,
+--   PRIMARY KEY (`id`),
+--   KEY `combo_food_constituent_combo_food_id_idx` (`combo_food_id`),
+--   KEY `combo_food_constituent_food_id_idx` (`food_id`),
+--   CONSTRAINT `combo_food_constituent_combo_food_id` FOREIGN KEY (`combo_food_id`) REFERENCES `combo_food` (`id`) ON DELETE CASCADE,
+--   CONSTRAINT `combo_food_constituent_food_id` FOREIGN KEY (`food_id`) REFERENCES `food` (`id`)
+-- ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
---
--- Table structure for table `plan`
---
+-- --
+-- -- Table structure for table `plan`
+-- --
 
-CREATE TABLE `plan` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `date` date DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+-- CREATE TABLE `plan` (
+--   `id` int(11) NOT NULL AUTO_INCREMENT,
+--   `date` date DEFAULT NULL,
+--   PRIMARY KEY (`id`)
+-- ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 

@@ -3,11 +3,10 @@ package com.codetudes.caloriecomposerapi.util;
 import com.codetudes.caloriecomposerapi.contracts.FoodDTO;
 import com.codetudes.caloriecomposerapi.db.domain.Unit;
 import com.codetudes.caloriecomposerapi.db.domain.User;
-import com.codetudes.caloriecomposerapi.db.repositories.ComboFoodRepository;
 import com.codetudes.caloriecomposerapi.db.repositories.FoodRepository;
 import com.codetudes.caloriecomposerapi.db.repositories.UnitRepository;
 import com.codetudes.caloriecomposerapi.db.repositories.UserRepository;
-import com.codetudes.caloriecomposerapi.services.ComboFoodService;
+//import com.codetudes.caloriecomposerapi.services.ComboFoodService;
 import com.codetudes.caloriecomposerapi.services.FdcService;
 import com.codetudes.caloriecomposerapi.services.FoodService;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -52,8 +51,8 @@ public class SeedOnStartup {
     private UserRepository userRepository;
     @Autowired
     private FoodRepository foodRepository;
-    @Autowired
-    private ComboFoodRepository comboFoodRepository;
+//    @Autowired
+//    private ComboFoodRepository comboFoodRepository;
     @Autowired
     private UnitRepository unitRepository;
 
@@ -61,8 +60,8 @@ public class SeedOnStartup {
     private FdcService fdcService;
     @Autowired
     private FoodService foodService;
-    @Autowired
-    private ComboFoodService comboFoodService;
+//    @Autowired
+//    private ComboFoodService comboFoodService;
 
     private List<User> seededUsers = new ArrayList<>();
 
@@ -106,8 +105,8 @@ public class SeedOnStartup {
         // food, nutrient, conversion_ratio
         foodRepository.deleteAll();
 
-        // combo_food, combo_food_conversion_ratio, combo_food_constituent
-        comboFoodRepository.deleteAll();
+//        // combo_food, combo_food_conversion_ratio, combo_food_constituent
+//        comboFoodRepository.deleteAll();
 
         // units
         unitRepository.deleteAll();
