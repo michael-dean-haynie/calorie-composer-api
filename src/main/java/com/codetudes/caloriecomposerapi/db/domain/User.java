@@ -9,7 +9,7 @@ import javax.validation.constraints.Size;
 @Data
 @Entity
 // Temporary, to distinguish between codetudes user table on same server
-@Table(name = "cc_user")
+@Table(name = "user")
 public class User {
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
